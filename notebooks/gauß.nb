@@ -1,0 +1,382 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16014,        374]
+NotebookOptionsPosition[     15623,        360]
+NotebookOutlinePosition[     15965,        375]
+CellTagsIndexPosition[     15922,        372]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gau\[SZ]TabelleHelfer", "[", 
+    RowBox[{"formel_", ",", " ", "fehler_", ",", " ", "werte_"}], "]"}], " ", 
+   ":=", "\n", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", " ", "b", ",", " ", "c"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"a", " ", "=", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{"formel", ",", " ", 
+         RowBox[{"fehler", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"b", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"a", "^", "2"}], ")"}], " ", "/.", " ", "werte"}]}], ";", 
+      "\n", "    ", 
+      RowBox[{"c", " ", "=", " ", 
+       RowBox[{"b", " ", "*", " ", 
+        RowBox[{
+         RowBox[{"fehler", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "^", "2"}]}]}], ";", "\n", "    ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"TraditionalForm", "@", 
+         RowBox[{"fehler", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+        RowBox[{"TraditionalForm", "@", "a"}], ",", " ", 
+        RowBox[{"NumberForm", "[", 
+         RowBox[{"b", ",", " ", "4"}], "]"}], ",", " ", 
+        RowBox[{"NumberForm", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"fehler", "[", 
+            RowBox[{"[", "2", "]"}], "]"}], "^", "2"}], ",", " ", "4"}], 
+         "]"}], ",", " ", 
+        RowBox[{"NumberForm", "[", 
+         RowBox[{"c", ",", " ", "4"}], "]"}]}], "}"}]}]}], "\n", "]"}]}], 
+  "\n", " "}], "\n", 
+ RowBox[{
+  RowBox[{"Clear", "[", "Gau\[SZ]Tabelle", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Gau\[SZ]Tabelle", "[", 
+     RowBox[{"formel_", ",", " ", "fehler_", ",", " ", "werte_"}], "]"}], " ",
+     ":=", "\n", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"createRow", ",", " ", "result"}], "}"}], ",", "\n", "\t", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"createRow", "[", "fe_", "]"}], " ", ":=", " ", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"a", ",", " ", "b", ",", " ", "c"}], "}"}], ",", "\n", 
+          "\t\t", 
+          RowBox[{
+           RowBox[{"a", " ", "=", " ", 
+            RowBox[{"D", "[", 
+             RowBox[{"formel", ",", " ", 
+              RowBox[{"fe", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", "\n", "\t\t", 
+           RowBox[{"b", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"a", "^", "2"}], ")"}], " ", "/.", " ", "werte"}]}], 
+           ";", "\n", "\t\t", 
+           RowBox[{"c", " ", "=", " ", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"b", " ", "*", " ", 
+               RowBox[{"fe", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], ")"}], "^", "2"}]}], ";", 
+           "\n", "\t\t", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"TraditionalForm", "@", 
+              RowBox[{"fe", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+             RowBox[{"TraditionalForm", "@", "a"}], ",", " ", 
+             RowBox[{"EngineeringForm", "[", 
+              RowBox[{
+               RowBox[{"N", "@", "b"}], ",", " ", "4"}], "]"}], ",", " ", 
+             RowBox[{"EngineeringForm", "[", 
+              RowBox[{
+               RowBox[{"N", "[", 
+                RowBox[{
+                 RowBox[{"fe", "[", 
+                  RowBox[{"[", "2", "]"}], "]"}], "^", "2"}], "]"}], ",", " ",
+                "4"}], "]"}], ",", " ", 
+             RowBox[{"EngineeringForm", "[", 
+              RowBox[{
+               RowBox[{"N", "@", "c"}], ",", " ", "4"}], "]"}]}], "}"}]}]}], 
+         "\n", "\t", "]"}]}], ";", "\n", "    ", 
+       RowBox[{"result", " ", "=", " ", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"createRow", "[", "#", "]"}], "&"}], ")"}], ",", " ", 
+          "fehler"}], "]"}]}], ";", "\n", "    ", 
+       RowBox[{"Grid", "[", 
+        RowBox[{
+         RowBox[{"Prepend", "[", 
+          RowBox[{"result", ",", "\n", "\t\t", 
+           RowBox[{"{", "\n", "\t\t\t", 
+            RowBox[{
+            "\"\<\\!\\(x\\)\>\"", ",", "\n", "\t\t\t", 
+             "\"\<\\!\\(\\*SubscriptBox[\\(\[PartialD]\\), \\(x\\)]\\)f\>\"", 
+             ",", "\n", "\t\t\t", 
+             "\"\<(\\!\\(\\*SubscriptBox[\\(\[PartialD]\\), \
+\\(x\\)]\\)f\\!\\(\\*SubscriptBox[\\(|\\), \
+\\(x\\)]\\)\\!\\(\\*SuperscriptBox[\\()\\), \\(2\\)]\\)\>\"", ",", " ", "\n", 
+             "\t\t\t", 
+             "\"\<\\!\\(\\*SubsuperscriptBox[\\(u\\), \\(xi\\), \\(2\\)]\\)\>\
+\"", ",", "\n", "\t\t\t", 
+             "\"\<(\\!\\(\\*SubscriptBox[\\(\[PartialD]\\), \
+\\(xi\\)]\\)f\\!\\(\\*SubscriptBox[\\(|\\), \
+\\(x\\)]\\)\\!\\(\\*SuperscriptBox[\\()\\), \
+\\(2\\)]\\)*\\!\\(\\*SubsuperscriptBox[\\(u\\), \\(xi\\), \\(2\\)]\\)\>\""}], 
+            "\n", "\t\t", "}"}]}], "\n", "\t", "]"}], ",", " ", 
+         RowBox[{"Frame", "->", "All"}]}], "]"}]}]}], "\n", "]"}]}], ";"}], 
+  "\n", " "}], "\n", 
+ RowBox[{
+  RowBox[{"Clear", "[", "Gau\[SZ]Helfer", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "[", "Gau\[SZ]Helfer", "]"}], " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<PrintRow\>\"", " ", "->", " ", "False"}], ",", " ", 
+     RowBox[{"\"\<PrintTableOverview\>\"", " ", "\[Rule]", " ", "False"}]}], 
+    "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gau\[SZ]Helfer", "[", 
+    RowBox[{"formel_", ",", " ", "fehler_", ",", " ", "werte_", ",", " ", 
+     RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], " ", ":=", "\n", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", " ", "b", ",", " ", "c"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"a", " ", "=", " ", 
+       RowBox[{"D", "[", 
+        RowBox[{"formel", ",", " ", 
+         RowBox[{"fehler", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"b", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"a", "^", "2"}], ")"}], " ", "/.", " ", "werte"}]}], ";", 
+      "\n", "    ", 
+      RowBox[{"c", " ", "=", " ", 
+       RowBox[{"b", " ", "*", " ", 
+        RowBox[{
+         RowBox[{"fehler", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], "^", "2"}]}]}], ";", "\n", "    ", 
+      RowBox[{
+       RowBox[{"M", "[", "x_", "]"}], " ", ":=", " ", 
+       RowBox[{"N", "[", 
+        RowBox[{"x", ",", " ", "3"}], "]"}]}], ";", "\n", "    ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"OptionValue", "[", "\"\<verbose\>\"", "]"}], ",", "\n", 
+        "        ", 
+        RowBox[{
+         RowBox[{"Print", "[", "\n", "            ", 
+          RowBox[{
+           RowBox[{"StringForm", "[", 
+            RowBox[{
+            "\"\<\\!\\(\\*SubscriptBox[\\(\[PartialD]\\), \\(`1`\\)]\\) f = \
+`2` \\n\>\"", ",", " ", 
+             RowBox[{"TraditionalForm", "@", 
+              RowBox[{"fehler", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+             RowBox[{"TraditionalForm", "@", "a"}]}], "]"}], ",", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{"Partielle", " ", "Ableitung"}], " ", "*)"}], "\n", 
+           "            ", 
+           RowBox[{"StringForm", "[", 
+            RowBox[{
+            "\"\<(\\!\\(\\*SubscriptBox[\\(\[PartialD]\\), \\(`1`\\)]\\) f\\!\
+\\(\\*SuperscriptBox[\\()\\), \\(2\\)]\\)\\!\\(\\*SubscriptBox[\\(|\\), \
+SubscriptBox[\\(x\\), \\(i\\)]]\\) = `2` \[TildeTilde] `3` \\n\>\"", ",", " ", 
+             RowBox[{"TraditionalForm", "@", 
+              RowBox[{"fehler", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+             RowBox[{"TraditionalForm", "@", "b"}], ",", " ", 
+             RowBox[{"N", "@", "b"}]}], "]"}], ",", " ", 
+           RowBox[{"(*", " ", 
+            RowBox[{"Partielle", " ", "Ableitung", " ", "ausgewertet"}], 
+            "*)"}], "\n", "            ", 
+           RowBox[{"StringForm", "[", 
+            RowBox[{
+            "\"\<\\!\\(\\*SubsuperscriptBox[\\(u\\), \\(`1`\\), \\(2\\)]\\) = \
+`2` \[TildeTilde] `3` \\n\>\"", ",", " ", 
+             RowBox[{"TraditionalForm", "@", 
+              RowBox[{"fehler", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+             RowBox[{"TraditionalForm", "@", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"fehler", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}], "^", "2"}], ")"}]}], ",", 
+             " ", 
+             RowBox[{
+              RowBox[{"N", "@", 
+               RowBox[{"fehler", "[", 
+                RowBox[{"[", "2", "]"}], "]"}]}], "^", "2"}]}], "]"}], ",", 
+           " ", 
+           RowBox[{"(*", " ", "Unsicherheitsquadrat", " ", "*)"}], "\n", 
+           "            ", 
+           RowBox[{"StringForm", "[", 
+            RowBox[{
+            "\"\<(\\!\\(\\*SubscriptBox[\\(\[PartialD]\\), \\(`1`\\)]\\) f\\!\
+\\(\\*SuperscriptBox[\\()\\), \\(2\\)]\\)\\!\\(\\*SubscriptBox[\\(|\\), \
+SubscriptBox[\\(x\\), \\(i\\)]]\\)*\\!\\(\\*SubsuperscriptBox[\\(u\\), \\(`1`\
+\\), \\(2\\)]\\) = `2` \[TildeTilde] `3` \\n\>\"", ",", " ", 
+             RowBox[{"TraditionalForm", "@", 
+              RowBox[{"fehler", "[", 
+               RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", 
+             RowBox[{"TraditionalForm", "@", "c"}], ",", " ", 
+             RowBox[{"N", "@", "c"}]}], "]"}]}], " ", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "Endwert", " ", "f\[UDoubleDot]r", " ", "die", " ", "Summation"}], 
+           " ", "*)"}], "\n", "        ", "]"}], ";"}]}], "     ", "\n", 
+       "    ", "]"}], ";", "\n", "    ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"OptionValue", "[", "\"\<PrintTableOverview\>\"", "]"}], ",", 
+        " ", "Gau\[SZ]Tabelle"}], "]"}], ";", "\n", "    ", "c"}]}], "\n", 
+    "]"}]}], "\n", " "}], "\n", 
+ RowBox[{
+  RowBox[{"Clear", "[", "Gau\[SZ]", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Options", "[", "Gau\[SZ]", "]"}], " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"\"\<verbose\>\"", " ", "->", " ", "False"}], ",", " ", 
+     RowBox[{"\"\<table\>\"", " ", "->", " ", "False"}]}], "}"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Gau\[SZ]", "[", 
+    RowBox[{"formel_", ",", " ", "fehler_", ",", " ", "werte_", ",", " ", 
+     RowBox[{"OptionsPattern", "[", "]"}]}], "]"}], " ", ":=", "\n", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"sum", ",", " ", "u"}], "}"}], ",", "\n", "    ", 
+     RowBox[{
+      RowBox[{"sum", " ", "=", " ", 
+       RowBox[{"Total", "[", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Gau\[SZ]Helfer", "[", 
+             RowBox[{"formel", ",", " ", "#", ",", " ", "werte", ",", " ", 
+              RowBox[{"\"\<verbose\>\"", "->", " ", 
+               RowBox[{"OptionValue", "[", "\"\<verbose\>\"", "]"}]}]}], 
+             "]"}], "&"}], ")"}], ",", " ", "fehler"}], "]"}], "]"}]}], ";", 
+      "\n", "    ", 
+      RowBox[{"u", " ", "=", " ", 
+       RowBox[{"Sqrt", "[", "sum", "]"}]}], ";", "\n", "    ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"OptionValue", "[", "\"\<verbose\>\"", "]"}], ",", " ", 
+        RowBox[{"Print", "[", 
+         RowBox[{"StringForm", "[", 
+          RowBox[{
+          "\"\<\\!\\(\\*SubscriptBox[\\(u\\), \\(f\\)]\\) = `1` \[TildeTilde] \
+`2`\>\"", ",", " ", "u", ",", " ", 
+           RowBox[{"N", "@", "u"}]}], "]"}], "]"}]}], "]"}], ";", "\n", 
+      "    ", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"OptionValue", "[", "\"\<table\>\"", "]"}], ",", " ", 
+        RowBox[{"Gau\[SZ]Tabelle", "[", 
+         RowBox[{"formel", ",", " ", "fehler", ",", " ", "werte"}], "]"}]}], 
+       "]"}], ";", "  ", "\n", "    ", "u"}]}], "  ", "\n", "]"}]}], 
+  ";"}]}], "Code",
+ CellChangeTimes->{{3.7395082967456994`*^9, 3.7395084867522507`*^9}, {
+   3.7395085177962785`*^9, 3.7395085850311193`*^9}, {3.739508624556386*^9, 
+   3.7395087267970133`*^9}, {3.739508782804189*^9, 3.739508820593031*^9}, {
+   3.7395089375092955`*^9, 3.7395089604550095`*^9}, 3.7395090798715324`*^9, {
+   3.739511157194364*^9, 3.739511158443805*^9}, {3.739518854682885*^9, 
+   3.7395188716637383`*^9}, {3.7395189109309487`*^9, 3.739518982488838*^9}, {
+   3.7395193801446733`*^9, 3.7395193893483515`*^9}, {3.73951942444637*^9, 
+   3.739519459353407*^9}, {3.739519641406893*^9, 3.7395196663797927`*^9}, {
+   3.7395197740130568`*^9, 3.7395197936490746`*^9}, {3.739519831696919*^9, 
+   3.739519886392443*^9}, {3.7395199244534254`*^9, 3.7395199714441714`*^9}, {
+   3.7395200539177094`*^9, 3.73952012375365*^9}, {3.7395205148331127`*^9, 
+   3.739520632359867*^9}, {3.739520859489703*^9, 3.7395209149846773`*^9}, {
+   3.739520951484852*^9, 3.7395210101574526`*^9}, {3.7395210664366355`*^9, 
+   3.7395210791459217`*^9}, {3.7395211561310825`*^9, 
+   3.7395211985056076`*^9}, {3.7395213035033507`*^9, 
+   3.7395213395853405`*^9}, {3.7395214661833215`*^9, 
+   3.7395215184787884`*^9}, {3.7395215628994303`*^9, 
+   3.7395216155313015`*^9}, {3.73952165142813*^9, 3.7395218021415043`*^9}, {
+   3.739522239197409*^9, 3.7395222401295233`*^9}, {3.739522293148966*^9, 
+   3.739522322547035*^9}, {3.739522417077039*^9, 3.739522474361108*^9}, {
+   3.7395225128291683`*^9, 3.7395226965001616`*^9}, {3.739522751222707*^9, 
+   3.739522788251237*^9}, {3.739522898372619*^9, 3.7395229060713034`*^9}, {
+   3.739522942935692*^9, 3.7395230710107117`*^9}, {3.7395236848895025`*^9, 
+   3.7395236850728335`*^9}, {3.73955589882652*^9, 3.7395559446102657`*^9}, 
+   3.7396950478275557`*^9, {3.7396953129651546`*^9, 3.7396953575057316`*^9}, {
+   3.7396954145864105`*^9, 3.739695557257582*^9}, {3.7396956038937926`*^9, 
+   3.739695609528698*^9}, {3.7396957298935394`*^9, 3.739695744493413*^9}, {
+   3.739695801093212*^9, 3.7396958452430935`*^9}, {3.739696176187191*^9, 
+   3.739696177038941*^9}, {3.739696357819823*^9, 3.739696415840907*^9}, {
+   3.739696451713581*^9, 3.7396964619191446`*^9}, {3.739696495186536*^9, 
+   3.739696497859397*^9}, {3.7396965311034575`*^9, 3.7396965516345825`*^9}, {
+   3.739696733254305*^9, 3.7396967399588547`*^9}, {3.739696921522718*^9, 
+   3.7396969613045616`*^9}, {3.739697558242774*^9, 3.7396975964243307`*^9}, {
+   3.7396976272519884`*^9, 3.739697643275259*^9}, {3.7396977323267565`*^9, 
+   3.7396978154620094`*^9}, {3.7396978688125486`*^9, 
+   3.7396978992605777`*^9}, {3.739697980949897*^9, 3.739697981894352*^9}, {
+   3.7396980838990297`*^9, 3.739698098047458*^9}, {3.739698469915456*^9, 
+   3.739698494016037*^9}, {3.7396986037626514`*^9, 3.739698668650344*^9}, {
+   3.739699270240597*^9, 3.739699276200529*^9}, 3.7397001762375784`*^9, {
+   3.7397928726736784`*^9, 
+   3.7397928740320787`*^9}},ExpressionUUID->"c9cade08-501d-45e7-a0a7-\
+5237399c51c8"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.7396965053982005`*^9, 
+  3.739696525192305*^9}},ExpressionUUID->"8e308db4-ca5c-4e3f-b425-\
+da251c8284b3"]
+},
+WindowSize->{1904, 997},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 14904, 333, 1095, "Code",ExpressionUUID->"c9cade08-501d-45e7-a0a7-5237399c51c8"],
+Cell[15465, 355, 154, 3, 28, "Input",ExpressionUUID->"8e308db4-ca5c-4e3f-b425-da251c8284b3"]
+}
+]
+*)
+
