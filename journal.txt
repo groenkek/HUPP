@@ -1,0 +1,9 @@
+31/05/2018
+==========
+
+Gestern gab es Anmerkungen zu den Plotaussehen auf unserem GPR Blatt, man solle die Grafiken viel beschreiben, rechts und unten beschriften und einen skalenrahmen hinzufügen.
+Bin auf PlotTheme gestoßen, und dass man eigene erstellen kann ( https://mathematica.stackexchange.com/questions/54545/is-it-possible-to-define-a-new-plottheme )
+Hab dementsprechend eins erstellt, es scheiter aber an der Beschriftung. Ich habe mich entschieden einen Umweg zu machen, indem eine Funktion aufgerufen werden soll, welchen den
+Beschriftungstext einstellt, welches das Theme dann benutzt um ein DisplayFunction mit Labeled zu machen.
+
+Weiterhin habe ich eine Lösung gemacht für das semiautomatische Speichern von den Grafiken, indem einerseits die Grafik mit Zeitstempel und ohne Zeitstempel abgespeichert wird. 
