@@ -1,4 +1,4 @@
-BeginPackage["hu-gpr`", {"Notation`"}]
+BeginPackage["hugpr`", {"Notation`"}]
 
 PrettyPrint::usage = "Prints the given variable and its Value in a new cell"
 SetPrettyPrint::usage = "Prints the given variable and its then assigned value in a new cell"
