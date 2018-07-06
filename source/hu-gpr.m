@@ -1,4 +1,4 @@
-BeginPackage["KP`", {"Notation`"}]
+BeginPackage["hu-gpr`", {"Notation`"}]
 
 PrettyPrint::usage = "Prints the given variable and its Value in a new cell"
 SetPrettyPrint::usage = "Prints the given variable and its then assigned value in a new cell"
@@ -157,7 +157,6 @@ Clear[Gauß];
 Options[Gauß] = {"PrintRowOverview" -> False, "PrintTableOverview" -> False};
 Gauß[formel_, fehler_, werte_, OptionsPattern[]] :=
 Module[{sum, u,results, helfer, gridOutput},
-	
 	gridOutput = If[OptionValue["PrintTableOverview"],
 			{{
 				"\!\(x\)",
@@ -179,7 +178,7 @@ Module[{sum, u,results, helfer, gridOutput},
 				StringForm["\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f = `2` \n", TraditionalForm@fe[[1]], TraditionalForm@a], (* Partielle Ableitung *)
 				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SuperscriptBox[\()\), \(2\)]\)\!\(\*SubscriptBox[\(|\), SubscriptBox[\(x\), \(i\)]]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@b, N@b], (* Partielle Ableitung ausgewertet*)
 				StringForm["\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fe[[1]], TraditionalForm@(fe[[2]]^2), N@fe[[2]]^2], (* Unsicherheitsquadrat *)
-				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SuperscriptBox[\()\), \(2\)]\)\!\(\*SubscriptBox[\(|\), SubscriptBox[\(x\), \(i\)]]\)*\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@c, N@c] (* Endwert für die Summation *)
+				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) \!\(\*SuperscriptBox[\(f)\), \(2\)]\)\!\(\*SubscriptBox[\(|\), \(X\)]\)*\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@c, N@c] (* Endwert für die Summation *)
 			];     
 		];
 		If[OptionValue["PrintTableOverview"],
