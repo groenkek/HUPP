@@ -1,0 +1,7 @@
+LIST
+====
+
+(1) ADD PRETTY EXPORT OF EXPERIMENT DATA TO LATEX
+    - Multiple Columnnsupport
+    - Simple Tableoutput
+    - Add Shadowing of Digits
