@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      4592,        123]
-NotebookOptionsPosition[      4292,        110]
-NotebookOutlinePosition[      4640,        125]
-CellTagsIndexPosition[      4597,        122]
+NotebookDataLength[      4617,        118]
+NotebookOptionsPosition[      4318,        105]
+NotebookOutlinePosition[      4665,        120]
+CellTagsIndexPosition[      4622,        117]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -59,6 +59,12 @@ Cell[BoxData[{
               "]"}]}], "\n", "\t\t\t", ")"}], "&"}], ",", "\n", "\t\t\t", 
           "newFileList"}], "\n", "\t\t", "]"}]}], "\n", "\t", "]"}]}], ";", 
      "\n", "\t", 
+     RowBox[{"Print", "[", 
+      RowBox[{
+      "\"\<Current Wolfram Mathematica Character Encoding: \>\"", ",", " ", 
+       "$CharacterEncoding", ",", " ", 
+       "\"\< ; Is it utf8? Otherwise please note that you have to open this \
+package with utf8-encoding, contact ((me))\>\""}], "]"}], ";", "\n", "\t", 
      RowBox[{"SetDirectory", "[", 
       RowBox[{"StringJoin", "[", 
        RowBox[{
@@ -72,44 +78,33 @@ Cell[BoxData[{
       "\"\<These are the files to be copied: \>\"", ",", " ", "newFileList", 
        ",", " ", "\"\<, which are inside of \>\"", ",", " ", 
        RowBox[{"Directory", "[", "]"}]}], "]"}], ";", "\n", "\t", 
-     RowBox[{"(*", " ", 
-      RowBox[{
+     RowBox[{"Row", "[", 
+      RowBox[{"{", 
        RowBox[{
-        RowBox[{
-         RowBox[{
-         "Show", " ", "list", " ", "of", " ", "current", " ", "source", " ", 
-          "files"}], " ", ".."}], "/", "sources"}], "/"}], " ", "*)"}], "\n", 
-     "\t", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Show", " ", "list", " ", "of", " ", "installed", " ", "files"}], " ", 
-      "*)"}], "\n", "\t", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-      "Ask", " ", "for", " ", "target", " ", "directory", " ", "$UserBaseDir",
-        " ", "or", " ", "whatever"}], " ", "*)"}], "\n", "\t", 
-     RowBox[{"(*", " ", 
-      RowBox[{
-       RowBox[{"Show", " ", "Button"}], ",", " ", 
-       RowBox[{
-       "which", " ", "will", " ", "delete", " ", "any", " ", "old", " ", 
-        "file"}], ",", " ", 
-       RowBox[{
-       "and", " ", "copy", " ", "all", " ", "new", " ", "files", " ", "into", 
-        " ", "$target"}]}], " ", "*)"}], "\n", "\t", 
-     RowBox[{"Button", "[", 
-      RowBox[{"\"\<Install!\>\"", ",", " ", 
-       RowBox[{"DoInstall", "[", "]"}]}], "]"}]}]}], "\n", "]"}]}], "\n", 
+        RowBox[{"Button", "[", 
+         RowBox[{"\"\<Install!\>\"", ",", " ", 
+          RowBox[{"DoInstall", "[", "]"}]}], "]"}], ",", " ", 
+        RowBox[{"Button", "[", 
+         RowBox[{"\"\<Clear output\>\"", ",", " ", 
+          RowBox[{"NotebookDelete", "[", 
+           RowBox[{"Cells", "[", 
+            RowBox[{
+             RowBox[{"EvaluationNotebook", "[", "]"}], ",", " ", 
+             RowBox[{"GeneratedCell", " ", "->", " ", "True"}]}], "]"}], 
+           "]"}]}], "  ", "]"}]}], "}"}], "]"}]}]}], "\n", "]"}]}], "\n", 
  RowBox[{"ShowGUI", "[", "]"}]}], "Code",
  CellChangeTimes->{{3.739879657243961*^9, 3.7398796788062963`*^9}, {
   3.739879728148366*^9, 3.7398797605876155`*^9}, {3.739879830658298*^9, 
   3.7398798307410936`*^9}, {3.7398799189299655`*^9, 3.7398799292790747`*^9}, {
-  3.7398832739070673`*^9, 3.7398832771928234`*^9}},
+  3.7398832739070673`*^9, 3.7398832771928234`*^9}, {3.7398853129181395`*^9, 
+  3.7398854318067446`*^9}, {3.7398855767710323`*^9, 3.7398856399967737`*^9}, {
+  3.739885694772564*^9, 3.7398857289824533`*^9}, {3.7398858866291504`*^9, 
+  3.7398859155591946`*^9}},
  EmphasizeSyntaxErrors->
   True,ExpressionUUID->"86ddd298-e430-4d5f-9f2a-b59280653213"]
 },
-WindowSize->{1920, 997},
-WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+WindowSize->{1904, 997},
+WindowMargins->{{-8, Automatic}, {Automatic, 0}},
 FrontEndVersion->"11.2 for Microsoft Windows (64-bit) (September 10, 2017)",
 StyleDefinitions->"Default.nb"
 ]
@@ -124,7 +119,7 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[558, 20, 3730, 88, 429, "Code",ExpressionUUID->"86ddd298-e430-4d5f-9f2a-b59280653213"]
+Cell[558, 20, 3756, 83, 375, "Code",ExpressionUUID->"86ddd298-e430-4d5f-9f2a-b59280653213"]
 }
 ]
 *)

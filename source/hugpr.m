@@ -7,6 +7,8 @@ SetKLabel::usage = "s"
 GetKLabel::usage = "g"
 KSave::usage = "todo"
 
+Gauß::usage = "Calculates the propagated error of uncorrelated normal errors using the gauß formula. Usage: Gauß[ expression,  {{Symbol, Variance}, ...}, {Symbol->Mean, ...}]. Options are PrintTableOverview and PrintRowOverview." 
+
 
 Begin["`Private`"]
 
@@ -141,7 +143,7 @@ Block[
 	Export[backupfilepath, g];
 	Export[StringJoin [{localdirectory, filename, fileending}], g];
 	"Saved!"
-]
+];
 
 
 (* Propagate uncorrelated gauß errors and return the resulting error
@@ -197,8 +199,6 @@ Module[{sum, u,results, helfer, gridOutput},
     If[OptionValue["PrintTableOverview"], Print[Grid[gridOutput, Frame->All, Spacings->{1, 1}]]];  
     u  
 ];
-
-
 
 End[];
 EndPackage[];
