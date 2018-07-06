@@ -144,6 +144,62 @@ Block[
 ]
 
 
+(* Propagate uncorrelated gauß errors and return the resulting error
+	Arg1: Expression to be propagated
+	Arg2: List of {symbol, normal error}
+	Arg3: List of mean values, {symbol->mean, symbol2->mean}
+	
+	Options:
+	PrintRowOverview -> Boolean: Prints the derivatives, the square of their evaluated value,
+		the given error squared, and the final summand under the square root
+	PrintTableOverview -> Boolean: Like RowOverview, but in a table*)
+Clear[Gauß];
+Options[Gauß] = {"PrintRowOverview" -> False, "PrintTableOverview" -> False};
+Gauß[formel_, fehler_, werte_, OptionsPattern[]] :=
+Module[{sum, u,results, helfer, gridOutput},
+	
+	gridOutput = If[OptionValue["PrintTableOverview"],
+			{{
+				"\!\(x\)",
+				"\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f",
+				"(\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(x\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)", 
+				"\!\(\*SubsuperscriptBox[\(u\), \(x\), \(2\)]\)",
+				"(\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(x\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)*\!\(\*SubsuperscriptBox[\(u\), \(x\), \(2\)]\)"
+			}},
+			{}
+		];
+
+	helfer[fe_] :=
+	Module[{a, b, c},
+		a = D[formel, fe[[1]]];
+		b = (a^2) /. werte;
+		c = b * fe[[2]]^2;
+		If[OptionValue["PrintRowOverview"],
+			Print[
+				StringForm["\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f = `2` \n", TraditionalForm@fe[[1]], TraditionalForm@a], (* Partielle Ableitung *)
+				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SuperscriptBox[\()\), \(2\)]\)\!\(\*SubscriptBox[\(|\), SubscriptBox[\(x\), \(i\)]]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@b, N@b], (* Partielle Ableitung ausgewertet*)
+				StringForm["\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fe[[1]], TraditionalForm@(fe[[2]]^2), N@fe[[2]]^2], (* Unsicherheitsquadrat *)
+				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SuperscriptBox[\()\), \(2\)]\)\!\(\*SubscriptBox[\(|\), SubscriptBox[\(x\), \(i\)]]\)*\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@c, N@c] (* Endwert für die Summation *)
+			];     
+		];
+		If[OptionValue["PrintTableOverview"],
+			AppendTo[gridOutput, {TraditionalForm@fe[[1]], TraditionalForm@a, NumberForm[b, 4], NumberForm[fe[[2]]^2, 4], NumberForm[c, 4]}]
+		];
+		c
+	];	
+	
+	results = Map[(helfer[#]&), fehler];
+	sum = Total[results];
+	u = Sqrt[sum];
+	If[OptionValue["PrintRowOverview"],
+		Print[StringForm["\!\(\(u\) = `1` \[TildeTilde] `2`\)", formel/.werte, N[formel/.werte]]];
+		Print[StringForm["\!\(\*SubscriptBox[\(u\), \(f\)]\) = `1` \[TildeTilde] `2`", u, N@u]]
+    ];
+    If[OptionValue["PrintTableOverview"], Print[Grid[gridOutput, Frame->All, Spacings->{1, 1}]]];  
+    u  
+];
+
+
 
 End[];
 EndPackage[];
