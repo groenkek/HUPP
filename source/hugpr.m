@@ -3,25 +3,14 @@ BeginPackage["hugpr`", {"Notation`"}]
 PrettyPrint::usage = "Prints the given variable and its Value in a new cell"
 SetPrettyPrint::usage = "Prints the given variable and its then assigned value in a new cell"
 
-SetKLabel::usage = "s"
-GetKLabel::usage = "g"
-KSave::usage = "todo"
+MySave::usage = "Bla bla missing description"
 
 Gauß::usage = "Calculates the propagated error of uncorrelated normal errors using the gauß formula. Usage: Gauß[ expression,  {{Symbol, Variance}, ...}, {Symbol->Mean, ...}]. Options are PrintTableOverview and PrintRowOverview." 
+Größtfehler::usage = "Bla"
 
+StatError::usage = "Assumes something about t-factor and such, and should be upgraded"
 
 Begin["`Private`"]
-
-
-(* Add compatibility for datasets to directly work with linearfits by automatically converting it to list of lists *)
-
-Dataset;
-Unprotect[Dataset];
-Dataset /: LinearModelFit[ds_Dataset?Dataset`ValidDatasetQ, rest___] :=
-  LinearModelFit[Normal@ds, rest]
-Protect[Dataset];
-
-
 
 
 
@@ -100,48 +89,37 @@ AddInputAlias[
 ];
 
 
-Clear[SetKLabel];
-SetKLabel[lx_String, ly_String] := Block[{}, KP`klabel = {lx, ly}];
-Clear[GetKLabel];
-GetKLabel[] := KP`klabel;
-
-
-Begin["System`PlotThemeDump`"];
-	Themes`ThemeRules;(*preload Theme system*)(*Define the base theme*)
-	resolvePlotTheme["Gpr", def:_String] := 
-		Themes`SetWeight[Join[
-			{Axes -> True},
-			{Frame -> True},
-			{ImageSizeRaw -> {360, 360}, AxesLabel},
-			{DisplayFunction -> (Labeled[#,GetKLabel[], {Bottom, Left}, RotateLabel->True, ImageMargins -> {10}]&)}
-		],
-		Themes`$DesignWeight
-	];
-End[];
-
-
-Clear[KSave]
-KSave[g_, filename_String] :=
+Clear[MySave]
+Options[MySave] = {"FileEnding" -> "png", "DoBackup" -> True, "BackupPath" -> "backup"}
+MySave[g_, filename_String, OptionsPattern[]] :=
 Block[
 {
 	backupdirectory,
 	backupfilepath,
 	localdirectory,
-	fileending = ".png"
+	result
 },
 	localdirectory = NotebookDirectory[];
-	backupdirectory = StringJoin[{localdirectory, "backup\\"}];
-	If[ \[Not] DirectoryQ[backupdirectory], CreateDirectory[backupdirectory]];
+	
+	If[OptionValue["DoBackup"],
+		backupdirectory = StringJoin[{localdirectory, OptionValue["BackupPath"], "\\"}];
+		If[ \[Not] DirectoryQ[backupdirectory], CreateDirectory[backupdirectory]];
+		If[ \[Not] DirectoryQ[backupdirectory], Print["Could not create Backupdir!"]];
  		
-	backupfilepath = StringJoin[{backupdirectory, filename, "-",
-   		DateString[{"Year", "-", "Month", "-",  "Day", "-", "Hour", "-", 
-   		"Minute", "-", "Second"}],
-   		fileending}
-   	];
+		backupfilepath = StringJoin[{backupdirectory, filename, "-",
+   			DateString[{"Year", "-", "Month", "-",  "Day", "-", "Hour", "-", 
+   			"Minute", "-", "Second"}],
+   			".",
+   			OptionValue["FileEnding"]}
+   		];
 		
-	Print[backupfilepath];
-	Export[backupfilepath, g];
-	Export[StringJoin [{localdirectory, filename, fileending}], g];
+		Print@StringJoin["Backuppath: ", backupfilepath];
+		result = Export[backupfilepath, g];
+		If[result === $Failed, Print@"Export return $Failed, backup-path correct?", Print@StringJoin["saved to ", ToString@result]]
+	];
+	
+	result = Export[StringJoin [{localdirectory, filename, ".", OptionValue["FileEnding"]}], g];
+	If[result === $Failed, Print@"Export returned $Failed, path correct?", Print@StringJoin["saved to ", ToString@result]]; 
 	"Saved!"
 ];
 
@@ -163,7 +141,7 @@ Module[{sum, u,results, helfer, gridOutput},
 			{{
 				"\!\(x\)",
 				"\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f",
-				"(\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(x\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)", 
+				"(\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(X\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)", 
 				"\!\(\*SubsuperscriptBox[\(u\), \(x\), \(2\)]\)",
 				"(\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(x\)]\)\!\(\*SuperscriptBox[\()\), \(2\)]\)*\!\(\*SubsuperscriptBox[\(u\), \(x\), \(2\)]\)"
 			}},
@@ -178,7 +156,7 @@ Module[{sum, u,results, helfer, gridOutput},
 		If[OptionValue["PrintRowOverview"],
 			Print[
 				StringForm["\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f = `2` \n", TraditionalForm@fe[[1]], TraditionalForm@a], (* Partielle Ableitung *)
-				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SuperscriptBox[\()\), \(2\)]\)\!\(\*SubscriptBox[\(|\), SubscriptBox[\(x\), \(i\)]]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@b, N@b], (* Partielle Ableitung ausgewertet*)
+				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SuperscriptBox[\()\), \(2\)]\)\!\(\*SubscriptBox[\(|\), SubscriptBox[\(x\), \(i\)]]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fe[[1]], TraditionalForm@b, N@b], (* Partielle Ableitung ausgewertet*)
 				StringForm["\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fe[[1]], TraditionalForm@(fe[[2]]^2), N@fe[[2]]^2], (* Unsicherheitsquadrat *)
 				StringForm["(\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) \!\(\*SuperscriptBox[\(f)\), \(2\)]\)\!\(\*SubscriptBox[\(|\), \(X\)]\)*\!\(\*SubsuperscriptBox[\(u\), \(`1`\), \(2\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@c, N@c] (* Endwert für die Summation *)
 			];     
@@ -199,6 +177,62 @@ Module[{sum, u,results, helfer, gridOutput},
     If[OptionValue["PrintTableOverview"], Print[Grid[gridOutput, Frame->All, Spacings->{1, 1}]]];  
     u  
 ];
+
+
+Clear[Größtfehler];
+Options[Größtfehler] = {"PrintRowOverview" -> False, "PrintTableOverview" -> False};
+Größtfehler[formel_, fehler_, werte_, OptionsPattern[]] :=
+Module[{sum, u,results, helfer, gridOutput},
+	gridOutput = If[OptionValue["PrintTableOverview"],
+			{{
+				"\!\(x\)",
+				"\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f",
+				"\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(X\)]\)", 
+				"\!\(\*SubscriptBox[\(u\), \(x\)]\)",
+				"\!\(\*SubscriptBox[\(\[PartialD]\), \(x\)]\)f\!\(\*SubscriptBox[\(|\), \(x\)]\)*\!\(\*SubscriptBox[\(u\), \(x\)]\)"
+			}},
+			{}
+		];
+
+	helfer[fe_] :=
+	Module[{a, b, c},
+		a = D[formel, fe[[1]]];
+		b = Abs[a /. werte];
+		c = Abs[b * fe[[2]]];
+		If[OptionValue["PrintRowOverview"],
+			Print[
+				StringForm["\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f = `2` \n", TraditionalForm@fe[[1]], TraditionalForm@a], (* Partielle Ableitung *)
+				StringForm["\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f \!\(\*SubscriptBox[\(|\), \(X\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fe[[1]], TraditionalForm@b, N@b], (* Partielle Ableitung ausgewertet*)
+				StringForm["\!\(\*SubscriptBox[\(u\), \(`1`\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fe[[1]], TraditionalForm@Abs@(fe[[2]]), Abs@N@fe[[2]]], (* Unsicherheitsbetrag *)
+				StringForm["\!\(\*SubscriptBox[\(\[PartialD]\), \(`1`\)]\) f\!\(\*SubscriptBox[\(|\), \(X\)]\)*\!\(\*SubscriptBox[\(u\), \(`1`\)]\) = `2` \[TildeTilde] `3` \n", TraditionalForm@fehler[[1]], TraditionalForm@c, N@c] (* Endwert für die Summation *)
+			];     
+		];
+		If[OptionValue["PrintTableOverview"],
+			AppendTo[gridOutput, {TraditionalForm@fe[[1]], TraditionalForm@a, NumberForm[b, 4], NumberForm[fe[[2]], 4], NumberForm[c, 4]}]
+		];
+		c
+	];	
+	
+	results = Map[(helfer[#]&), fehler];
+	sum = Total[results];
+	u = sum;
+	If[OptionValue["PrintRowOverview"],
+		Print[StringForm["\!\(\(u\) = `1` \[TildeTilde] `2`\)", formel/.werte, N[formel/.werte]]];
+		Print[StringForm["\!\(\*SubscriptBox[\(u\), \(f\)]\) = `1` \[TildeTilde] `2`", u, N@u]]
+    ];
+    If[OptionValue["PrintTableOverview"], Print[Grid[gridOutput, Frame->All, Spacings->{1, 1}]]];  
+    u  
+];
+
+
+
+
+StatError[list_List] := 
+Module[{n}, 
+	n = Length[list];
+	StandardDeviation[list]/(n*n-n)^0.5
+]
+
 
 End[];
 EndPackage[];

@@ -6,4 +6,34 @@ Bin auf PlotTheme gestoßen, und dass man eigene erstellen kann ( https://mathem
 Hab dementsprechend eins erstellt, es scheiter aber an der Beschriftung. Ich habe mich entschieden einen Umweg zu machen, indem eine Funktion aufgerufen werden soll, welchen den
 Beschriftungstext einstellt, welches das Theme dann benutzt um ein DisplayFunction mit Labeled zu machen.
 
-Weiterhin habe ich eine Lösung gemacht für das semiautomatische Speichern von den Grafiken, indem einerseits die Grafik mit Zeitstempel und ohne Zeitstempel abgespeichert wird. 
+Weiterhin habe ich eine Lösung gemacht für das semiautomatische Speichern von den Grafiken, indem einerseits die Grafik mit Zeitstempel und ohne Zeitstempel abgespeichert wird.
+
+08/07/2018
+==========
+
+Nebenbei: Dies ist kein Markdown Dokument. Nun, da das nötigste erstmal kreiert ist, ist nun die Frage, wie das ganze Projekt von seiner Richtung weitergehen sollte. Ich hatte überlegt, ob man eine OOP-Ansatz,
+wo man in Messungsobjekten Messinstrumentobjekte zuweisen kann, woraus systematischer Restfehler usw. für Berechnungen herangezogen werden können, sodass die Fehlerabschätzung komplett funktional geregelt ist, 
+aber das macht in Mathematica an sich kaum Sinn in einem Standardmodell von internen Methoden und privaten Daten mit Getter Setter. Eher wäre es Sinnvoll ein Term mit einen besonderen Head herumzuschieben, und
+für diesen Head Funktionen zu definieren. Sowas wie
+
+
+  -> MessQ[Mess[werte_List, instr_Messinstrument]] = True;
+  -> MessQ[___]=False; 
+  
+   und darauf operatoren zu defineren:
+   
+   Overbar[Mess[ ... ]] := Mean[werte];
+   Subscript[ \[sigma], Mess[ ... ]] := (n^2-n)^-0.5 StandardDeviation[werte];
+   
+   
+usw.
+
+
+
+Ein anderer Punkt, kann man eventuell eine globale Variable anlegen, die dann allg. Sachen wie Vertrauensbereich angibt, womit dann gerechnet werden kann? Dann kann jede Funktion eine Option entgegennehmen,
+die eine solche Sache bescheibt, oder standardmäßig auf einen Standard zurückgreift. Als Head bietet sich vielleicht Associatin an, damit an sich wieder ein Fallback auf Global programmieren kann
+
+  -> GetFromAssociation[optionname_String, env_Environment, fallback_Environment mit default wert] := If[optionname in env,   env[[optionname]] ELSE fallback[[optionname]] ]
+  
+
+Erstmal heute nochmal aus der Schnelle noch Statfehler[Liste_List] := ... hinzugefügt.    
