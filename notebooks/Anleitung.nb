@@ -1,0 +1,3552 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    139546,       3544]
+NotebookOptionsPosition[    115683,       3206]
+NotebookOutlinePosition[    116027,       3221]
+CellTagsIndexPosition[    115984,       3218]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Einleitung", "Section",ExpressionUUID->"e402c5e4-1e01-44f6-a771-4db803306e67"],
+
+Cell["\<\
+Dieses package ist die Weiterentwicklung des alten SimpleHUPhysicsPractical` \
+f\[UDoubleDot]r das Grundpraktikum der Physik an der HU.
+Es ist deutlich besser und angenehmer zu benutzen als das alte und \
+hoffentlich hilft es euch noch mehr als das alte ^^
+Wie immer gilt, dass ihr Fehler bei meiner Email melden k\[ODoubleDot]nnt. Es \
+gilt vorallem, dass ich dieses Package noch nicht so ausgiebig testen konnte \
+wie das Alte also deckt mich zu ^^ 
+Schaut auch hin und wieder mal, ob Updates vorhanden sind.\
+\>", "Text",ExpressionUUID->"2e97b840-8da1-43b7-bfd4-194bd1803388"],
+
+Cell["Julien.Kluge@gmail.com", "Subitem",ExpressionUUID->"d24e7f09-93b0-49b9-a216-4efbd467b1ea"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Installation", "Section",ExpressionUUID->"c4acb469-8b19-4699-97f3-3c82084f89c2"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Zur Installation, m\[UDoubleDot]sst ihr nur die folgende Zeile ausf\
+\[UDoubleDot]hren. Hat alles geklappt, wird folgendes ausgegeben:\
+\>", "Subsubsection",ExpressionUUID->"1345a082-ac57-4118-b32e-5ae2f52f588d"],
+
+Cell[BoxData[
+ StyleBox["\<\"Installiert!\"\>",
+  StripOnInput->False,
+  FontSize->16,
+  FontWeight->Bold,
+  FontColor->RGBColor[0, 
+    Rational[2, 3], 0]]], "Print",ExpressionUUID->"f6a8f418-2140-4c35-b8e3-\
+41fde3bdd161"],
+
+Cell["\<\
+______________________________________________________________________________\
+______\
+\>", "Text",ExpressionUUID->"56809576-9d03-4efc-bd91-679017aa3be4"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Floor", "[", "$VersionNumber", "]"}], "<", "11"}], ",", 
+    RowBox[{"Print", "[", 
+     RowBox[{"Style", "[", 
+      RowBox[{
+      "\"\<Das Package funktioniert nur auf Mathematica 11 oder \
+h\[ODoubleDot]her!\>\"", ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"FontColor", "\[Rule]", "Red"}], ",", 
+         RowBox[{"FontSize", "\[Rule]", "16"}]}], "}"}]}], "]"}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"FileExistsQ", "[", 
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<HUPP.m\>\""}], 
+         "}"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"DirectoryQ", "[", "$UserBaseDirectory", "]"}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Block", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"endDir", "=", 
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"$UserBaseDirectory", ",", "\"\<Applications\>\""}], 
+               "}"}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"Not", "@", 
+               RowBox[{"DirectoryQ", "[", "endDir", "]"}]}], ",", 
+              RowBox[{
+               RowBox[{"Print", "[", 
+                RowBox[{
+                "endDir", "<>", 
+                 "\"\< existiert nicht. Es wird erstellt...\>\""}], "]"}], 
+               ";", 
+               RowBox[{"CreateDirectory", "[", "endDir", "]"}]}]}], "]"}], 
+            ";", "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"FileExistsQ", "[", 
+               RowBox[{"FileNameJoin", "[", 
+                RowBox[{"{", 
+                 RowBox[{"endDir", ",", "\"\<HUPP.m\>\""}], "}"}], "]"}], 
+               "]"}], ",", 
+              RowBox[{
+               RowBox[{
+               "Print", "[", 
+                "\"\<HUPP.m existiert bereits. Es wird \
+\[UDoubleDot]berschrieben...\>\"", "]"}], ";", 
+               RowBox[{"DeleteFile", "[", 
+                RowBox[{"FileNameJoin", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"endDir", ",", "\"\<HUPP.m\>\""}], "}"}], "]"}], 
+                "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"CopyFile", "[", 
+             RowBox[{
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"NotebookDirectory", "[", "]"}], ",", 
+                 "\"\<HUPP.m\>\""}], "}"}], "]"}], ",", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{"endDir", ",", "\"\<HUPP.m\>\""}], "}"}], "]"}]}], 
+             "]"}], ";", "\[IndentingNewLine]", 
+            RowBox[{"Print", "[", 
+             RowBox[{"Style", "[", 
+              RowBox[{"\"\<Installiert!\>\"", ",", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"FontSize", "\[Rule]", "16"}], ",", 
+                 RowBox[{"FontColor", "\[Rule]", 
+                  RowBox[{"Darker", "[", "Green", "]"}]}], ",", 
+                 RowBox[{"FontWeight", "\[Rule]", "Bold"}]}], "}"}]}], "]"}], 
+             "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+        "\[IndentingNewLine]", ",", 
+        RowBox[{
+        "Print", "[", "\"\<Es existiert kein vorhandener User-Base-Pfad\>\"", 
+         "]"}]}], "]"}], "\[IndentingNewLine]", ",", 
+      RowBox[{"Print", "[", "\"\<HUPP.m nicht gefunden!\>\"", "]"}]}], 
+     "]"}]}], "\[IndentingNewLine]", "]"}], ";"}]], "Input",ExpressionUUID->\
+"8fa9e2a3-03f3-45ca-89a6-f6a7ae6228c2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Nach der Installation: Computer neu starten!", "Subsection",ExpressionUUID->"8f0ed924-8fd6-4cab-87d6-55c4904ad5e5"],
+
+Cell[CellGroupData[{
+
+Cell["Optional: Load-Befehl", "Subsubsection",ExpressionUUID->"39b2b4ca-f7aa-4c4d-864d-3456e908dc5d"],
+
+Cell["\<\
+Optional k\[ODoubleDot]nnt ihr zus\[ADoubleDot]tzlich auch folgenden Code \
+ausf\[UDoubleDot]hren, der euch den Befehl HUPP[] in Mathematica einf\
+\[UDoubleDot]gt. So k\[ODoubleDot]nnt ihr das Package deutlich bequemer laden.\
+\>", "Text",ExpressionUUID->"91b4d605-e63c-4c2f-a483-b521d5d45fec"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"DirectoryQ", "[", 
+     RowBox[{"FileNameJoin", "[", 
+      RowBox[{"{", 
+       RowBox[{"$UserBaseDirectory", ",", "\"\<Kernel\>\""}], "}"}], "]"}], 
+     "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"FileExistsQ", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "$UserBaseDirectory", ",", "\"\<Kernel\>\"", ",", 
+           "\"\<init.m\>\""}], "}"}], "]"}], "]"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Block", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"fileContent", "=", 
+             RowBox[{"ReadString", "[", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{
+                "$UserBaseDirectory", ",", "\"\<Kernel\>\"", ",", 
+                 "\"\<init.m\>\""}], "}"}], "]"}], "]"}]}], ",", 
+            "fileStream"}], "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"StringContainsQ", "[", 
+              RowBox[{"fileContent", ",", "\"\<HUPP[]:=\>\""}], "]"}], ",", 
+             RowBox[{
+             "Print", "[", 
+              "\"\<Das init.m File enth\[ADoubleDot]lt bereits eine \
+Definition des HUPP[] Befehls\>\"", "]"}], ",", "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"fileStream", "=", 
+               RowBox[{"OpenAppend", "[", 
+                RowBox[{"FileNameJoin", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                  "$UserBaseDirectory", ",", "\"\<Kernel\>\"", ",", 
+                   "\"\<init.m\>\""}], "}"}], "]"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"WriteString", "[", 
+               RowBox[{
+               "fileStream", ",", 
+                "\"\<\\n\\nHUPP[]:=(ClearAll[\\\"HUPP`*\\\"];Needs[\\\"HUPP`\\\
+\"])\\n\>\""}], "]"}], ";", "\[IndentingNewLine]", 
+              RowBox[{"Close", "[", "fileStream", "]"}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Print", "[", 
+               RowBox[{"Style", "[", 
+                RowBox[{"\"\<Befehl hinzugef\[UDoubleDot]gt!\>\"", ",", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"FontSize", "\[Rule]", "16"}], ",", 
+                   RowBox[{"FontColor", "\[Rule]", 
+                    RowBox[{"Darker", "[", "Green", "]"}]}], ",", 
+                   RowBox[{"FontWeight", "\[Rule]", "Bold"}]}], "}"}]}], 
+                "]"}], "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+       RowBox[{
+       "Print", "[", 
+        "\"\<Die Kernel initialization Datei existiert nicht.\>\"", "]"}]}], 
+      "]"}], ";"}], "\[IndentingNewLine]", ",", 
+    RowBox[{"Print", "[", "\"\<Der Kernelpfad existiert nicht.\>\"", "]"}]}], 
+   "]"}], ";"}]], "Input",ExpressionUUID->"4d6e65fa-b401-4ed0-a1d4-\
+6691de4dccf9"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Laden", "Section",ExpressionUUID->"7eb38455-e089-4403-8b0c-5aa7e398b494"],
+
+Cell["\<\
+Um das Package zu laden, muss der Needs[] Befehl ausgef\[UDoubleDot]hrt \
+werden. (Ignoriert hier mal das ClearAll[])\
+\>", "Text",ExpressionUUID->"42d576ce-ebaf-4a32-9935-ba248ecb66eb"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "\"\<HUPP`*\>\"", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<HUPP`\>\"", "]"}]}], "Input",ExpressionUUID->\
+"141dc490-18cf-46eb-b0d2-bc40d9237b5b"],
+
+Cell["\<\
+Es muss auf Gro\[SZ]/Kleinschreibung geachtet werden und dass es auf das \
+Gravis Zeichen (`) endet.\
+\>", "Text",ExpressionUUID->"7d761fdd-a5f5-4e7c-a1e0-0bd6d05d078e"],
+
+Cell[CellGroupData[{
+
+Cell["Oder Alternativ mit Befehl", "Subsection",ExpressionUUID->"b897de66-80b9-4577-9b1f-bcffaa54f2a0"],
+
+Cell[BoxData[
+ RowBox[{"HUPP", "[", "]"}]], "Input",ExpressionUUID->"b7000c90-319c-40c6-b87c-8e41f446c34f"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["HUPPHelp", "Section",ExpressionUUID->"9cd0f225-51f7-40b2-9760-166c6c2b038d"],
+
+Cell["\<\
+Der erste Befehl listet alle Befehle und Optionen des Packages auf :\
+\>", "Text",ExpressionUUID->"5e65a0b4-9e2e-403f-a668-b23db6eb99ab"],
+
+Cell[BoxData[
+ RowBox[{"?", "HUPPHelp"}]], "Input",ExpressionUUID->"4ee4ff5d-fdfc-422c-bbbf-5ff61e85c1be"],
+
+Cell[BoxData[
+ RowBox[{"HUPPHelp", "[", "]"}]], "Input",ExpressionUUID->"a9239e79-f539-4300-aeb8-cff972c5fde7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["PythagoreanSum", "Section",ExpressionUUID->"bcee0cd1-3f02-41cb-9504-2ae0bb17ce0b"],
+
+Cell[BoxData[
+ RowBox[{"?", "PythagoreanSum"}]], "Input",ExpressionUUID->"f80c63b4-0cfb-432b-bd81-c194ea8cf230"],
+
+Cell["\<\
+Wie der Name schon sagt, l\[ADoubleDot]sst sich mit diesem Befehl pythagor\
+\[ADoubleDot]isch addieren.
+Beispielsweise :   \
+\>", "Text",ExpressionUUID->"103358ec-f26c-43bf-970b-823a00f56f85"],
+
+Cell[BoxData[
+ RowBox[{"PythagoreanSum", "[", 
+  RowBox[{"a", ",", "b", ",", "c"}], "]"}]], "Input",ExpressionUUID->\
+"cda7f82b-27b4-49ee-99be-e0154f5a79e0"],
+
+Cell["\<\
+Dabei nimmt der Befehl auch Listen entgegen und ignoriert verschachtelungen :\
+\>", "Text",ExpressionUUID->"5bb8442e-7e85-4221-8ec3-f0ef85cd7644"],
+
+Cell[BoxData[
+ RowBox[{"PythagoreanSum", "[", 
+  RowBox[{"{", 
+   RowBox[{"a", ",", "b", ",", 
+    RowBox[{"{", 
+     RowBox[{"c", ",", 
+      RowBox[{"{", "d", "}"}]}], "}"}]}], "}"}], "]"}]], "Input",ExpressionUUI\
+D->"a755f32a-7087-4a86-be92-a9ab5749d64c"],
+
+Cell[BoxData[
+ RowBox[{"PythagoreanSum", "[", 
+  RowBox[{"{", 
+   RowBox[{"a", ",", 
+    RowBox[{"{", "a", "}"}], ",", "b"}], "}"}], "]"}]], "Input",ExpressionUUID\
+->"6e916f3b-4832-4a36-8cd6-eb3db5773027"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ConfidenceSigma & InverseConfidenceSigma", "Section",ExpressionUUID->"671a1073-989a-4afb-a673-9ad4fcde351d"],
+
+Cell[BoxData[
+ RowBox[{"?", "ConfidenceSigma"}]], "Input",ExpressionUUID->"d64c6c05-c450-4b97-a4b3-af95ee66a832"],
+
+Cell["\<\
+ConfidenceSigma rechnet Standardabweichungen in statistische \
+Wahrscheinlichkeit um\
+\>", "Text",ExpressionUUID->"42b2a8ca-9b3a-4109-8fde-88f29995f90b"],
+
+Cell[BoxData[
+ RowBox[{"ConfidenceSigma", "[", "1.0", "]"}]], "Input",ExpressionUUID->"b5c4b006-cd94-437f-b000-d5103932680c"],
+
+Cell["\<\
+Dabei gilt mit Vorsicht, dass exakte Argumente auch exakt ausgewertet werden :\
+\>", "Text",ExpressionUUID->"f77f1a02-8534-452b-8ccf-8e0e4e1d0547"],
+
+Cell[BoxData[{
+ RowBox[{"ConfidenceSigma", "[", "2", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"N", "[", 
+  RowBox[{"ConfidenceSigma", "[", "2", "]"}], "]"}]}], "Input",ExpressionUUID-\
+>"3dc6edb2-195e-46bf-a499-0a1d30ec1a77"],
+
+Cell[BoxData[
+ RowBox[{"?", "InverseConfidenceSigma"}]], "Input",ExpressionUUID->"37930949-0098-4b76-a9fe-99eb5bef3f81"],
+
+Cell["\<\
+InverseConfidenceSigma ist die Umkehrfunktion zu ConfidenceSigma. Es \
+berechnet also statistische Prozent in Standardabweichungen um.\
+\>", "Text",ExpressionUUID->"1ac87560-cd78-460e-a10d-13fbb85c6f10"],
+
+Cell[BoxData[
+ RowBox[{"InverseConfidenceSigma", "[", "0.9545", "]"}]], "Input",ExpressionUU\
+ID->"ec3c9bcc-3025-4560-8671-0340d48ac0f2"],
+
+Cell[BoxData[
+ RowBox[{"InverseConfidenceSigma", "[", 
+  RowBox[{"ConfidenceSigma", "[", "3.0", "]"}], "]"}]], "Input",ExpressionUUID\
+->"7d8c739a-6c9a-4705-9469-07cab6931737"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ErrorMean", "Section",ExpressionUUID->"5a29f6ae-0fad-4798-a4a7-85b43196ffff"],
+
+Cell[BoxData[
+ RowBox[{"?", "ErrorMean"}]], "Input",ExpressionUUID->"56f087c1-8aaa-4942-a820-9b393c20658d"],
+
+Cell["\<\
+In der einfachen Variante berechnet ErrorMean den Mittelwert von \
+Unsicherheiten (pytagor\[ADoubleDot]ische Addition durch anzahl der Werte)\
+\>", "Text",ExpressionUUID->"1b1f1d19-3368-4951-bab9-d9b3db4d690d"],
+
+Cell[BoxData[
+ RowBox[{"ErrorMean", "[", 
+  RowBox[{"{", 
+   RowBox[{"a", ",", "b", ",", "c"}], "}"}], "]"}]], "Input",ExpressionUUID->\
+"a61943ee-557a-4120-b30f-7025f194b0d7"],
+
+Cell[BoxData[
+ RowBox[{"ErrorMean", "[", 
+  RowBox[{"{", 
+   RowBox[{"5", ",", "6", ",", "7", ",", "8", ",", "7", ",", "6", ",", "5"}], 
+   "}"}], "]"}]], "Input",ExpressionUUID->"c4bc9238-e9bc-454d-aa55-\
+d0f0c96bc31d"],
+
+Cell[BoxData[
+ RowBox[{"In", " ", "der", " ", "Doppellistenvariante", " ", "berechnet", " ",
+   "ErrorMean", " ", "den", " ", "Mittelwert", " ", "der", " ", "Werte", " ", 
+  SubscriptBox["v", "i"], " ", "und", " ", "der", " ", "Unsicherheiten", " ", 
+  SubscriptBox["e", "i"], " ", 
+  RowBox[{"aus", "."}]}]], "Text",ExpressionUUID->"39e48a87-fe61-444c-a16c-\
+8f8a8c899270"],
+
+Cell[BoxData[
+ RowBox[{"ErrorMean", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"5", ",", "0.5"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"6", ",", "0.4"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"5.2", ",", "0.45"}], "}"}]}], "}"}], "]"}]], "Input",ExpressionU\
+UID->"21678167-3d9a-4558-a03a-bbada5c06d9e"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["StudentTValue", "Section",ExpressionUUID->"ba93ea96-7ed3-4019-a73d-6e65ba32758d"],
+
+Cell[BoxData[
+ RowBox[{"?", "StudentTValue"}]], "Input",ExpressionUUID->"4738a933-7bbb-4926-9ebc-10d92069f02c"],
+
+Cell["\<\
+Wie der Name schon vermuten l\[ADoubleDot]sst, berechnet StudentTValue den \
+Student - T Wert d\[UDoubleDot]r die Freiheitsgrade und optional auch \
+Standardabweichungen.
+
+ACHTUNG: Der Befehl nimmt nur Ganzzahlargumente. Das f\[UDoubleDot]hrt zu \
+einer exakten Auswertung, die eine seltsame Darstellung hat:\
+\>", "Text",ExpressionUUID->"dcffbd44-0d63-4c9d-a442-91ef3d15ef34"],
+
+Cell[BoxData[
+ RowBox[{"StudentTValue", "[", "15", "]"}]], "Input",ExpressionUUID->"47b7d5e4-9697-4e89-88ef-202ef2a84851"],
+
+Cell["Das l\[ADoubleDot]sst sich aber leicht numerisch berechnen :", "Text",ExpressionUUID->"2d9c0929-10c1-462f-b4af-a09775aac195"],
+
+Cell[BoxData[
+ RowBox[{"N", "[", 
+  RowBox[{"StudentTValue", "[", "15", "]"}], "]"}]], "Input",ExpressionUUID->\
+"135b70dc-3f0a-4dec-a2bb-c6fe03834d42"],
+
+Cell["In zwei Standardabweichungen :", "Text",ExpressionUUID->"676ea6eb-16ef-4c21-aedc-dff617762580"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"StudentTValue", "[", 
+   RowBox[{"15", ",", "2"}], "]"}], "//", "N"}]], "Input",ExpressionUUID->\
+"3d6ce39c-31a2-48f9-ba05-35cb441a1bc4"],
+
+Cell["\<\
+Da \[Sigma] nicht exakt sein muss, l\[ADoubleDot]sst sich hier auch die \
+numerische Auswertung erzwingen.\
+\>", "Text",ExpressionUUID->"17b151d8-7f7e-4d17-9f37-eade6601963e"],
+
+Cell[BoxData[
+ RowBox[{"StudentTValue", "[", 
+  RowBox[{"15", ",", "2.0"}], "]"}]], "Input",ExpressionUUID->"835d4218-0369-\
+4034-b659-763d82d30b68"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ConfidenceInterval & ConfidenceIntervalHU", "Section",ExpressionUUID->"24559985-bfd7-4d42-8b95-9b8fd1efc71c"],
+
+Cell[BoxData[
+ RowBox[{"?", "ConfidenceInterval"}]], "Input",ExpressionUUID->"b61f6012-7933-4042-bb5e-dcb9951266ab"],
+
+Cell["\<\
+ConfidenceInterval berechnet den, mit dem Student - T Wert skalierten, \
+Vertrauensbereich.\
+\>", "Text",ExpressionUUID->"2a84b30c-10fa-49e5-9e9e-ba531398b6a1"],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["s", "_"], "=", 
+  RowBox[{"t", "\[CenterDot]", 
+   FractionBox["s", 
+    SqrtBox["n"]]}]}]], "DisplayFormula",ExpressionUUID->"e2c7857c-0a72-4f99-\
+b7a3-e712cdc5b894"],
+
+Cell[BoxData[
+ RowBox[{"ConfidenceInterval", "[", 
+  RowBox[{"{", 
+   RowBox[{
+   "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+   "}"}], "]"}]], "Input",ExpressionUUID->"ab4ca28b-a229-4c71-927b-\
+7e1828ecaa1b"],
+
+Cell[BoxData[
+ RowBox[{"?", "ConfidenceIntervalHU"}]], "Input",ExpressionUUID->"8396c041-251d-4d26-8965-0bccbbd81a4a"],
+
+Cell["\<\
+ConfidenceIntervalHU berechnet den Vertrauensbereich, wie er im HU Physik \
+Praktikum definiert wurde.\
+\>", "Text",ExpressionUUID->"b7b90255-6e87-4d77-88db-fdd7df27e8db"],
+
+Cell[BoxData[
+ RowBox[{
+  OverscriptBox["s", "_"], "=", 
+  TagBox[GridBox[{
+     {"\[Piecewise]", GridBox[{
+        {
+         FractionBox["s", 
+          SqrtBox["n"]], 
+         RowBox[{"n", "\[GreaterEqual]", "6"}]},
+        {
+         RowBox[{
+          SubscriptBox["max", "i"], "|", 
+          RowBox[{
+           OverscriptBox["x", "_"], "-", 
+           SubscriptBox["x", "i"]}], "|"}], 
+         RowBox[{"n", "<", "6"}]}
+       },
+       AllowedDimensions->{2, Automatic},
+       Editable->True,
+       GridBoxAlignment->{
+        "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}},
+          "RowsIndexed" -> {}},
+       GridBoxItemSize->{
+        "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+         "RowsIndexed" -> {}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[0.84]}, 
+           Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}, "RowsIndexed" -> {}},
+       Selectable->True]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}},
+    GridBoxItemSize->{
+     "Columns" -> {{Automatic}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+      "RowsIndexed" -> {}},
+    GridBoxSpacings->{"Columns" -> {
+        Offset[0.27999999999999997`], {
+         Offset[0.35]}, 
+        Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+        Offset[0.2], {
+         Offset[0.4]}, 
+        Offset[0.2]}, "RowsIndexed" -> {}}],
+   "Piecewise",
+   DeleteWithContents->True,
+   Editable->False,
+   SelectWithContents->True,
+   Selectable->False]}]], "DisplayFormula",ExpressionUUID->"942f6835-d521-\
+49ff-ab28-c11513739503"],
+
+Cell[BoxData[
+ RowBox[{"ConfidenceIntervalHU", "[", 
+  RowBox[{"{", 
+   RowBox[{
+   "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+   "}"}], "]"}]], "Input",ExpressionUUID->"9d4388ee-4e3b-4e65-928f-\
+7b36191b5b96"],
+
+Cell[BoxData[
+ RowBox[{"ConfidenceIntervalHU", "[", 
+  RowBox[{"{", 
+   RowBox[{"5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05"}], "}"}], 
+  "]"}]], "Input",ExpressionUUID->"6b402f5b-10f4-4a93-91b5-17d1b31c3d05"],
+
+Cell["\<\
+Eine Beispielsberechnung zwischen ConfidenceInterval und ConfidenceIntervalHU\
+\>", "Text",ExpressionUUID->"94b0bff8-be34-49d5-94ef-6889a1de8620"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"data", "=", 
+    RowBox[{"RandomVariate", "[", 
+     RowBox[{
+      RowBox[{"NormalDistribution", "[", 
+       RowBox[{"0", ",", "1"}], "]"}], ",", "50"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"zuf\[ADoubleDot]llige", " ", "Daten", " ", "erzeugen"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"ListLinePlot", "[", 
+  RowBox[{
+   RowBox[{"Transpose", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"ConfidenceInterval", "[", 
+         RowBox[{"data", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ";;", "#"}], "]"}], "]"}], "]"}], ",", 
+        RowBox[{"ConfidenceIntervalHU", "[", 
+         RowBox[{"data", "[", 
+          RowBox[{"[", 
+           RowBox[{"1", ";;", "#"}], "]"}], "]"}], "]"}]}], "}"}], "&"}], "/@", 
+     RowBox[{"Range", "[", 
+      RowBox[{"3", ",", "50"}], "]"}]}], "]"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+   RowBox[{"PlotTheme", "\[Rule]", "\"\<Detailed\>\""}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", "Large"}], ",", 
+   RowBox[{"PlotLegends", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<ConfidenceInterval\>\"", ",", "\"\<ConfidenceIntervalHU\>\""}], 
+     "}"}]}]}], "]"}]}], "Input",ExpressionUUID->"1e2e2434-f100-4ddf-8d2a-\
+d9241de7ebc7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["CalculateMeasurement & CalculateMeasurementHU", "Section",ExpressionUUID->"bf8b068a-9c91-4d77-a37e-a1a12b897d53"],
+
+Cell[BoxData[
+ RowBox[{"?", "CalculateMeasurement"}]], "Input",ExpressionUUID->"c38893fb-5fc3-4967-8290-a0791f7e2b22"],
+
+Cell[BoxData[
+ RowBox[{"?", "CalculateMeasurementHU"}]], "Input",ExpressionUUID->"8a1c47c7-1b21-44d6-8b02-835d4963b817"],
+
+Cell["\<\
+CalculateMeasurement ist die drittwichtigste Funktion in diesem Package \
+(zumindest meiner Meinung nach).
+Es berechnet einen Messwert unter voller Berechnung der angegebenen \
+Unsicherheiten, der statistischen Unsicherheit (Vertrauensbereich) und evtl. \
+dem systematischen Fehler.
+Aber fangen wir kleinschrittig an:
+
+Die kleinste Form des Befehls nimmt nur Messwerte entgegen, berechnet den \
+Mittelwert und nur die statistische Unsicherheit (Vertrauensbereich).\
+\>", "Text",ExpressionUUID->"06ba22ef-d182-49b9-bff0-980997dd55c2"],
+
+Cell[BoxData[{
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{"{", 
+   RowBox[{
+   "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+   "}"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+    "}"}], ",", 
+   RowBox[{"{", "}"}]}], "]"}]}], "Input",ExpressionUUID->"8328cf74-1e90-437c-\
+8a12-b6347b0770c9"],
+
+Cell["\<\
+Man kann in der zweiten Liste nun eine konstante Unsicherheit einf\
+\[UDoubleDot]hren (z.B. Ableseunsicherheit) .
+Hier eine konstante Unsicherheit von 0.5:\
+\>", "Text",ExpressionUUID->"7530fccc-a9e2-44bf-b940-c6c9bb88c28f"],
+
+Cell[BoxData[
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+    "}"}], ",", 
+   RowBox[{"{", "0.5", "}"}]}], "]"}]], "Input",ExpressionUUID->"92df2d59-\
+eb68-4e40-b802-f6ce59fb2044"],
+
+Cell["Gleiches Beispiel, mehrere Unsicherheiten (0.5,1.5,0.75):", "Text",ExpressionUUID->"442d7ce3-8c65-4cec-a45c-0df729cfe2b2"],
+
+Cell[BoxData[
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5", ",", "1.5", ",", "0.75"}], "}"}]}], "]"}]], "Input",Express\
+ionUUID->"6c270604-6cfa-4d94-b72e-bead0b45ca0f"],
+
+Cell[TextData[{
+ "Manche Unsicherheiten, wie zum Beispiel Ger\[ADoubleDot]teunsicherheiten \
+von digitalen Messger\[ADoubleDot]ten, haben eine Prozentangabe vom \
+gemessenen Mittelwert. Dieser kann in der Liste mit dem Wert C angeben \
+werden.\nZum Beispiel: (konste Unsicherheit: 0.5 - \
+Ger\[ADoubleDot]teunsicherheit: 0.4+1%\[CenterDot]",
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["x", "_"], TraditionalForm]],ExpressionUUID->
+  "68df6e1d-3d70-41f7-b08d-6fff8cb2c8e7"],
+ ")"
+}], "Text",ExpressionUUID->"b2443374-bbe0-43b2-8708-eae6df121b54"],
+
+Cell[BoxData[
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5", ",", 
+     RowBox[{"0.4", "+", 
+      RowBox[{"0.01", "*", "C"}]}]}], "}"}]}], "]"}]], "Input",ExpressionUUID-\
+>"5e94cfe9-924d-4f4a-8731-0a82c15a2466"],
+
+Cell[TextData[{
+ "Man kann mit diesem Befehl ebenfalls einen systematische Fehler korrigieren \
+lassen.\nZum Beispiel: ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["u", "sys"], "="}], TraditionalForm]],ExpressionUUID->
+  "a96b8814-4b93-4f88-881c-a1ffa622fa51"],
+ "+0.6"
+}], "Text",ExpressionUUID->"63c1a40a-48ba-4aa9-8004-b13c7fc4a3b4"],
+
+Cell[BoxData[
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5", ",", 
+     RowBox[{"0.4", "+", 
+      RowBox[{"0.01", "*", "C"}]}]}], "}"}], ",", 
+   RowBox[{"+", "0.6"}]}], "]"}]], "Input",ExpressionUUID->"f9a2b6bc-d6a8-\
+4c54-aa2b-ad8bd823e0d4"],
+
+Cell["\<\
+CalculateMeasurement ist ebenfalls der erste Befehl, mit der Analyse - \
+Option, die eine genau Analyse der Daten anfertigt, die wichtig sind :\
+\>", "Text",ExpressionUUID->"3c015316-31c6-4a8f-9576-c3378df284be"],
+
+Cell[BoxData[
+ RowBox[{"CalculateMeasurement", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+    "5.1", ",", "5.0", ",", "4.9", ",", "4.8", ",", "5.05", ",", "5.1"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0.5", ",", 
+     RowBox[{"0.4", "+", 
+      RowBox[{"0.01", "*", "C"}]}]}], "}"}], ",", 
+   RowBox[{"+", "0.6"}], ",", 
+   RowBox[{"Analyze", "\[Rule]", "True"}]}], "]"}]], "Input",ExpressionUUID->\
+"f8c9001b-14c2-40ce-9d85-737eca47bee1"],
+
+Cell["\<\
+CalculateMeasurementHU ist der \[ADoubleDot]quivalente Befehl, der die \
+Definition des Vertrauensbereichs des HU Physik Praktikums benutzt.\
+\>", "Text",ExpressionUUID->"207f1e48-f713-42e6-92bd-755eb561cdc8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["WeightedMean", "Section",ExpressionUUID->"1f3184f4-97ae-4cc5-9298-ce5c28f25f2c"],
+
+Cell[BoxData[
+ RowBox[{"?", "WeightedMean"}]], "Input",ExpressionUUID->"2d0232f2-d84f-490a-8c30-e9957ae3d846"],
+
+Cell["\<\
+Dieser Befehl f\[UDoubleDot]hrt ein gewichtetes Mittel durch. Dabei muss dem \
+Befehl eine Liste \[UDoubleDot]bergeben werden. Jedes Element dieser Liste \
+ist wiederrum eine Liste mit zwei Eintr\[ADoubleDot]gen. Der erste Eintrag \
+ist der Wert, der zweite die zugeordnete Unsicherheit.
+Beispiel:\
+\>", "Text",
+ CellChangeTimes->{{3.6654314643958454`*^9, 3.665431476258417*^9}, {
+   3.6654315546771145`*^9, 3.665431615682833*^9}, 
+   3.665649311135887*^9},ExpressionUUID->"a4063382-c2ee-44b0-a1d8-\
+5565153e0a2f"],
+
+Cell[BoxData[{
+ RowBox[{
+  SubscriptBox["g", "1"], "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"9.81", "\[PlusMinus]", "0.03"}], ")"}], 
+   FractionBox["m", 
+    SuperscriptBox["s", "2"]]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["g", "2"], "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"9.79", "\[PlusMinus]", "0.11"}], ")"}], 
+   FractionBox["m", 
+    SuperscriptBox["s", "2"]]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["g", "3"], "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"9.80", "\[PlusMinus]", "0.04"}], ")"}], 
+   FractionBox["m", 
+    SuperscriptBox["s", "2"]]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  SubscriptBox["g", "4"], "=", 
+  RowBox[{
+   RowBox[{"(", 
+    RowBox[{"9.6", "\[PlusMinus]", "0.7"}], ")"}], 
+   FractionBox["m", 
+    SuperscriptBox["s", "2"]]}]}]}], "DisplayFormula",
+ CellChangeTimes->{{3.665431617999469*^9, 
+  3.6654317569909334`*^9}},ExpressionUUID->"5f091bb6-7c25-46da-95d8-\
+4ab14434ab93"],
+
+Cell[BoxData[
+ RowBox[{"WeightedMean", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"9.81", ",", "0.03"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"9.79", ",", "0.11"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"9.80", ",", "0.04"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"9.6", ",", "0.7"}], "}"}]}], "}"}], "]"}]], "Input",ExpressionUU\
+ID->"ae842f25-34db-42f0-bda8-96a1a6c195a5"],
+
+Cell["\<\
+Der Befehl warnt euch, wenn sich die Unsicherheitsintervalle nicht \
+\[UDoubleDot]berschneiden :\
+\>", "Text",ExpressionUUID->"a40acbcf-bf92-43b8-bb44-b23aadbe1754"],
+
+Cell[BoxData[
+ RowBox[{"WeightedMean", "[", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"9.81", ",", "0.03"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"9.59", ",", "0.11"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"9.80", ",", "0.04"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"9.6", ",", "0.7"}], "}"}]}], "}"}], "]"}]], "Input",ExpressionUU\
+ID->"4580dc8b-ac9f-42d2-893d-143d0f0cf201"],
+
+Cell["Auch dieser Befehl kennt die Analyse option :", "Text",ExpressionUUID->"efad0e1b-2fbf-44f8-aad6-16af01a94e5f"],
+
+Cell[BoxData[
+ RowBox[{"WeightedMean", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"9.81", ",", "0.03"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9.79", ",", "0.11"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9.80", ",", "0.04"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9.6", ",", "0.7"}], "}"}]}], "}"}], ",", 
+   RowBox[{"Analyze", "\[Rule]", "True"}]}], "]"}]], "Input",ExpressionUUID->\
+"caba7f9f-5446-4568-8e70-d4b5fa4a2d80"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["RoundedErrorForm", "Section",ExpressionUUID->"25d0d62f-4535-45fe-85cc-219f4175eb0f"],
+
+Cell[BoxData[
+ RowBox[{"?", "RoundedErrorForm"}]], "Input",ExpressionUUID->"4a615a9d-0c67-4a86-8445-dbffe5df4b4f"],
+
+Cell["\<\
+RoundedErrorForm berechnet die gerundete Darstellung eines Wertes mit seiner \
+Unsicherheit. Er achtet dabei auf signifikante Stellen und DIN. Die Ausgabe \
+erfolgt standartm\[ADoubleDot]\[SZ]ig als String.\
+\>", "Text",ExpressionUUID->"067e8b0b-ce50-4a38-80ac-fe962e9a2061"],
+
+Cell[BoxData[
+ RowBox[{"RoundedErrorForm", "[", 
+  RowBox[{"145.34", ",", "4.6"}], "]"}]], "Input",ExpressionUUID->"3e5a6501-\
+0374-406d-9b6e-a3d9ebcb172a"],
+
+Cell[BoxData[
+ RowBox[{"RoundedErrorForm", "[", 
+  RowBox[{"0.04567", ",", "0.00279"}], "]"}]], "Input",ExpressionUUID->\
+"f2f7ddff-1008-4c11-b93c-f166e088f0c3"],
+
+Cell["\<\
+Die Ausgabe kann in eine Liste mit numerischen Werten erfolgen:\
+\>", "Text",ExpressionUUID->"0f6db2d5-9b80-439a-9c94-c94cfab0cc0b"],
+
+Cell[BoxData[{
+ RowBox[{"RoundedErrorForm", "[", 
+  RowBox[{"0.04567", ",", "0.00279", ",", 
+   RowBox[{"Form", "\[Rule]", "Null"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"RoundedErrorForm", "[", 
+   RowBox[{"0.04567", ",", "0.00279", ",", 
+    RowBox[{"Form", "\[Rule]", "Null"}]}], "]"}], "//", "N"}]}], "Input",Expre\
+ssionUUID->"5051584a-2c6a-4ef6-b65e-5c97e4cab2e5"],
+
+Cell["Der Befehl kann auch LaTeX code ausgeben :", "Text",ExpressionUUID->"4ffca522-efe4-4d55-818a-06b477be6e35"],
+
+Cell[BoxData[
+ RowBox[{"RoundedErrorForm", "[", 
+  RowBox[{"0.04567", ",", "0.00279", ",", 
+   RowBox[{"Form", "\[Rule]", "\"\<latex\>\""}]}], "]"}]], "Input",ExpressionU\
+UID->"99378371-a56a-44dc-a893-9167c51b7648"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ErrorProbability", "Section",ExpressionUUID->"2e79085b-28f5-4d0c-a25f-016faa5c3232"],
+
+Cell[BoxData[
+ RowBox[{"?", "ErrorProbability"}]], "Input",ExpressionUUID->"58d06513-c8df-4fe8-b609-f1a0b58036bd"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+  "ErrorProbability", " ", "berechnet", " ", "die", " ", 
+   "Irrtumswahrscheinlichkeit", " ", "aus", " ", "den", " ", 
+   SuperscriptBox["\[Chi]", "2"]}], "-", 
+  RowBox[{"Test", " ", "und", " ", "den", " ", "Freiheitsgraden"}]}]], "Text",\
+ExpressionUUID->"200ffa88-3180-43f6-bb1e-f4c782e543df"],
+
+Cell[BoxData[{
+ RowBox[{"ErrorProbability", "[", 
+  RowBox[{"10", ",", "2.56"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"ErrorProbability", "[", 
+  RowBox[{"8", ",", "7.34"}], "]"}]}], "Input",ExpressionUUID->"564e8cf1-e950-\
+4cfd-94ba-158138c3e232"],
+
+Cell["Exakte Argumente werden auch exakt ausgewertet:", "Text",ExpressionUUID->"72914831-8e7c-49e4-b460-82d348ea9408"],
+
+Cell[BoxData[
+ RowBox[{"ErrorProbability", "[", 
+  RowBox[{"20", ",", "3"}], "]"}]], "Input",ExpressionUUID->"ed512e64-12d6-\
+4a60-b762-573b28c667b4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["GaussianErrorPropagation", "Section",ExpressionUUID->"00fff37d-608b-4eba-8366-f1af3646edd1"],
+
+Cell[BoxData[
+ RowBox[{"?", "GaussianErrorPropagation"}]], "Input",ExpressionUUID->"f6e02033-cd2b-4327-a661-b03f8a573893"],
+
+Cell["\<\
+Der zweitwichtigste Befehl in diesem Package. Die automatische Gau\[SZ]sche \
+Fehlerfortpflanzung.
+In der einfachsten Darstellung, berechnet der Befehl nur die Formel.\
+\>", "Text",ExpressionUUID->"ee76fbe2-4a70-49ef-8e73-e793ca051dc0"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{"a", "*", 
+    RowBox[{"x", "/", "c"}]}], "+", "d"}], "]"}]], "Input",ExpressionUUID->\
+"5d07a824-c846-47fd-ac63-c923e5476080"],
+
+Cell["\<\
+Im zweiten Argument, listet man die Variablen mit ihren Werten und \
+Unsicherheiten auf.\
+\>", "Text",ExpressionUUID->"88cedea3-0afb-4525-9c1a-067dc3c0985f"],
+
+Cell[BoxData[{
+ RowBox[{"a", "=", 
+  RowBox[{"(", 
+   RowBox[{"50.0", "\[PlusMinus]", "0.1"}], ")"}]}], "\n", 
+ RowBox[{"d", "=", 
+  RowBox[{"(", 
+   RowBox[{"8.1", "\[PlusMinus]", "0.9"}], ")"}]}]}], "DisplayFormula",Express\
+ionUUID->"3301eb58-9d21-4c1a-88e7-efe96e21a0ca"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{"a", "/", "d"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "50", ",", "0.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "8.1", ",", "0.9"}], "}"}]}], "}"}]}], "]"}]], "Input",\
+ExpressionUUID->"6d91544e-5b16-49b8-9360-4c54c4d7dcd4"],
+
+Cell["\<\
+Kovarianzen zwischen Variablen werden in einer Liste mit den zwei Variablen \
+und der Kovarianc angegeben.\
+\>", "Text",ExpressionUUID->"dd3142a5-7884-40e2-92bf-8f9cc55f281d"],
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["u", 
+   RowBox[{"a", ",", "d"}]], "=", "0.5"}]], "DisplayFormula",ExpressionUUID->\
+"1949bf6a-a34c-40bc-88d3-fd00f7f60674"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{"a", "/", "d"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "50", ",", "0.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "8.1", ",", "0.9"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "d", ",", "0.5"}], "}"}]}], "}"}]}], "]"}]], "Input",E\
+xpressionUUID->"0b06831c-6bb3-46a5-9892-601e3dbf0927"],
+
+Cell["\<\
+Keine der Listen muss v\[ODoubleDot]llig ausgef\[UDoubleDot]llt sein \
+(beachte, dass x keine Unsicherheitsbehaftet gr\[ODoubleDot]\[SZ]e ist, wenn \
+sie nicht explizit angegeben wird):\
+\>", "Text",ExpressionUUID->"325f2ebb-3f4d-4665-9282-f08509ed0658"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "/", "c"}]}], "+", "d"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"c", ",", "5", ",", "0.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "c"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "d", ",", "0.5"}], "}"}]}], "}"}]}], "]"}]], "Input",E\
+xpressionUUID->"af921d43-41fb-4306-a66c-c208d0e57a16"],
+
+Cell["Auch dieser Befehl, kennt die Analyse Option.", "Text",ExpressionUUID->"b7176dea-fb16-4a11-b5dc-858fbbe3a74d"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{"a", "/", "d"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"a", ",", "50", ",", "0.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "8.1", ",", "0.9"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "d", ",", "0.5"}], "}"}]}], "}"}], ",", 
+   RowBox[{"Analyze", "\[Rule]", "True"}]}], "]"}]], "Input",ExpressionUUID->\
+"211d68a7-b43f-4b9c-9238-991daae83a61"],
+
+Cell["\<\
+Der Befehl ist ebenfalls in der Lage, Daten aus FittedModel - Objekten zu \
+ziehen.
+Dazu m\[UDoubleDot]ssen zu allererst fits erstellt werden.\
+\>", "Text",ExpressionUUID->"9d333027-e564-4fa9-b99d-96220665e0b1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", "20"}], "*", 
+         RowBox[{"x", "^", "2"}]}], "-", "x", "+", "1", "+", 
+        RowBox[{"RandomReal", "[", "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "10", ",", "0.5"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"linearFit", "=", 
+  RowBox[{"LinearModelFit", "[", 
+   RowBox[{"data", ",", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x", "^", "2"}], ",", "x", ",", "1"}], "}"}], ",", "x"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"nonlinearFit", "=", 
+  RowBox[{"NonlinearModelFit", "[", 
+   RowBox[{"data", ",", 
+    RowBox[{
+     RowBox[{"a", "*", 
+      RowBox[{"x", "^", "2"}]}], "+", 
+     RowBox[{"b", "*", "x"}], "+", "c"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "x"}], "]"}]}]}], "Input",\
+ExpressionUUID->"c67b4850-68e9-4365-bdbb-f811c0ff152c"],
+
+Cell["\<\
+Wie erkl\[ADoubleDot]rt, erstellt Mathematica bei jedem Fit, ein FittedModel \
+- Objekt. Dabei ist wichtig anzumerken :
+LINEARE FITS UND NICHTLINEARE FITS ERZUEGEN UNTERSCHIEDLICHE FITTEDMODEL - \
+OBJEKTE
+Ich halte es kurz und sage nur, dass in Nichtlinearen-FittedModel-Objekte \
+Informationen \[UDoubleDot]ber Variablennamen halten.
+Dadurch kann der Befehl leicht diese Objekte benutzen.
+Es werden s\[ADoubleDot]mtliche Variablen und Kovarianzen \
+ber\[UDoubleDot]cksichtigt.\
+\>", "Text",ExpressionUUID->"ec5e77b3-8c7f-4aad-9e8a-c94002893bc3"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "/", "b"}], "+", "c"}], ",", 
+   RowBox[{"{", "nonlinearFit", "}"}]}], "]"}]], "Input",ExpressionUUID->\
+"ca5af45a-f4ec-4701-ab7e-c46c969d34e5"],
+
+Cell["\<\
+Bei linearen fits, muss noch die Variablenstruktur mit angegeben werden :\
+\>", "Text",ExpressionUUID->"584080c1-a50a-4f85-90c4-33e242124c9b"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "/", "b"}], "+", "c"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"linearFit", ",", 
+      RowBox[{"{", 
+       RowBox[{"a", ",", "b", ",", "c"}], "}"}]}], "}"}], "}"}]}], 
+  "]"}]], "Input",ExpressionUUID->"4f0cbd91-935c-4ba8-9130-3c61e8ad741d"],
+
+Cell["Das kann nat\[UDoubleDot]rlich auch gemischt angewendet werden.", "Text",ExpressionUUID->"9547ec9c-7645-4119-a8d5-1d3f46309ec5"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "/", "b"}], "+", 
+    RowBox[{"c", "^", "d"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"nonlinearFit", ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "2", ",", "0.1"}], "}"}]}], "}"}]}], "]"}]], "Input",E\
+xpressionUUID->"76511c2e-3e02-4f08-8ca8-ee1c2276d5b9"],
+
+Cell["Und auch analysiert werden", "Text",ExpressionUUID->"e0671b6c-8aec-4513-953e-537309119922"],
+
+Cell[BoxData[
+ RowBox[{"GaussianErrorPropagation", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"a", "/", "b"}], "+", 
+    RowBox[{"c", "^", "d"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"nonlinearFit", ",", 
+     RowBox[{"{", 
+      RowBox[{"d", ",", "2", ",", "0.1"}], "}"}]}], "}"}], ",", 
+   RowBox[{"Analyze", "\[Rule]", "True"}]}], "]"}]], "Input",ExpressionUUID->\
+"d93d4456-d747-457a-a58c-d61bb84cefc7"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["AdaptiveNonlinearModelFit", "Section",ExpressionUUID->"6fd93cca-41ec-4da4-a581-50437c999666"],
+
+Cell[BoxData[
+ RowBox[{"?", "AdaptiveNonlinearModelFit"}]], "Input",ExpressionUUID->"6b1c43c4-7c37-4e06-9428-9fbc5ce93023"],
+
+Cell["\<\
+Um einen nichtlinearen Fit in Mathematica auszuf\[UDoubleDot]hren, benutzt \
+man den Befehl NonlinearModelFit.
+Wie aber f\[UDoubleDot]r nichtlineare Fits \[UDoubleDot]blich, besteht die \
+Gefahr, dass diese Fits bei ungeeigneter Wahl der Startparameter nicht \
+konvergieren. 
+Nun w\[ADoubleDot]re es aber w\[UDoubleDot]nschenswert wenn die Funktion \
+selbstst\[ADoubleDot]ndig Startparameter w\[ADoubleDot]hlen \
+k\[ODoubleDot]nnte um den Fit zu beg\[UDoubleDot]nstigen. 
+Daf\[UDoubleDot]r enth\[ADoubleDot]lt dieses package den Befehl \
+AdaptiveNonlinearModelFit. Die Syntax ist die gleiche wie beim normalen \
+NonlinearModelFit.\
+\>", "Text",ExpressionUUID->"8b5b0583-e378-4064-bd38-2006f6acc491"],
+
+Cell[CellGroupData[{
+
+Cell["Achtung:", "Subsubsection",ExpressionUUID->"38bfd814-2f13-4f5e-826f-9e636c21276d"],
+
+Cell["\<\
+Dieser Befehl ist experimentell. Ich habe eine lange Zeit verbracht die \
+Methoden f\[UDoubleDot]r diesen Befehl zu generalisieren sodass sie m\
+\[ODoubleDot]glichst viele Fitmodelle verarbeiten k\[ODoubleDot]nnten. \
+Trotzdem ist das kein Garant daf\[UDoubleDot]r, dass der Fit konvergiert.
+Desweiteren muss beachtet werden, dass der Befehl im inneren massive \
+Algebraische Operationen ausf\[UDoubleDot]hrt. Demnach kann es sein, dass \
+diese Funktion mehrere Sekunden, Minuten oder sogar l\[ADoubleDot]nger \
+braucht. Die l\[ADoubleDot]ngste gemessene Zeit dieser Funktion liegt bei \
+ungef\[ADoubleDot]hr 10Minuten f\[UDoubleDot]r ein Fitmodell mit 6 Parametern \
+zur Bestimmung der Autokorrelationsfunktion einer Quantenkorrelation. \
+\[CapitalUDoubleDot]blich sind aber nur 2-3 Sekunden f\[UDoubleDot]r \
+einfachere Modelle.
+Trotzdem: seit bereit nichtsdestotrotz selber Startwerte f\[UDoubleDot]r \
+komplizierte Probleme bereitzustellen.\
+\>", "Text",ExpressionUUID->"b928f443-6cab-4b90-b635-4218f6c4cc4f"],
+
+Cell["\<\
+Zum testen erstellen wir drei Test-Datens\[ADoubleDot]tze (die nat\
+\[UDoubleDot]rlich so von mir gew\[ADoubleDot]hlt worden sind, dass \
+NonlinearModelFit ohne Wahl der Startparameter nicht konvergiert):\
+\>", "Text",ExpressionUUID->"bb46258e-65a0-4197-a679-1f0d7ebff306"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"adata1", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "10001.8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "10000.8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "9999.89"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "9999.53"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "9999.73"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"6", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"7", ",", "10000.3"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"8", ",", "10000.2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"9", ",", "9999.89"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"10", ",", "9999.8"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"11", ",", "9999.91"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"12", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"13", ",", "10000.2"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"14", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"15", ",", "9999.9"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"16", ",", "9999.88"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"17", ",", "9999.99"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"18", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"19", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"20", ",", "10000."}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"21", ",", "9999.92"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"22", ",", "9999.92"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"23", ",", "10000."}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"24", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"25", ",", "10000.1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"26", ",", "9999.97"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"27", ",", "9999.92"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"28", ",", "9999.95"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"29", ",", "10000."}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"30", ",", "10000.1"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"adata2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "3.01"}], ",", 
+       RowBox[{"-", "33"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.6"}], ",", 
+       RowBox[{"-", "34"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.2"}], ",", 
+       RowBox[{"-", "33"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.8"}], ",", 
+       RowBox[{"-", "26"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.7"}], ",", 
+       RowBox[{"-", "20"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.6"}], ",", 
+       RowBox[{"-", "12"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.5"}], ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.4"}], ",", "20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.3"}], ",", "61"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"wdata2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "6.98467", ",", "14.3664", ",", "6.90228", ",", "5.30757", ",", "4.61407",
+      ",", "6.94984", ",", "14.9547", ",", "14.4406", ",", "3.68319"}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"adata3", "=", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"#", "+", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "10000"}], "}"}]}], "&"}], ")"}], "/@", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0.1", ",", "0.0898647"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.2", ",", 
+        RowBox[{"-", "0.0535735"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.3", ",", 
+        RowBox[{"-", "0.148313"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.4", ",", "0.0846445"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.5", ",", "0.09901"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.6", ",", 
+        RowBox[{"-", "0.074521"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.7", ",", 
+        RowBox[{"-", "0.142624"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.8", ",", 
+        RowBox[{"-", "0.0864354"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"0.9", ",", 
+        RowBox[{"-", "0.0212738"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.", ",", "0.0221625"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.1", ",", "0.105401"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.2", ",", 
+        RowBox[{"-", "0.0966202"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.3", ",", "0.0877835"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.4", ",", "0.0789275"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.5", ",", "0.015885"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.6", ",", "0.118934"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.7", ",", "0.04146"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.8", ",", "0.0344122"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"1.9", ",", "0.054369"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.", ",", "0.127307"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.1", ",", "0.120975"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.2", ",", "0.0272045"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.3", ",", "0.102872"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.4", ",", "0.11786"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.5", ",", 
+        RowBox[{"-", "0.122479"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.6", ",", 
+        RowBox[{"-", "0.109226"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.7", ",", 
+        RowBox[{"-", "0.110917"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.8", ",", "0.0986023"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"2.9", ",", 
+        RowBox[{"-", "0.0694651"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.", ",", "0.084825"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.1", ",", "0.0369083"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.2", ",", "0.197759"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.3", ",", "0.138431"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.4", ",", "0.321953"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.5", ",", "0.360677"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.6", ",", "0.27348"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.7", ",", "0.441175"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.8", ",", "0.407004"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"3.9", ",", "0.359329"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.", ",", "0.418597"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.1", ",", "0.552704"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.2", ",", "0.525389"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.3", ",", "0.528137"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.4", ",", "0.224216"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.5", ",", "0.436397"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.6", ",", "0.389716"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.7", ",", "0.326866"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.8", ",", "0.108578"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"4.9", ",", "0.225344"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"5.", ",", "0.0938303"}], "}"}]}], "}"}]}]}], ";"}]}], "Input",\
+ExpressionUUID->"1c11c5d2-fbdf-48fc-998f-e451b776d706"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Beispieldatensatz 1: versetzte, abklingende Schwingung", "Subsubsection",ExpressionUUID->"2b7cadb6-d608-4cd0-a22b-22f3ecb8027f"],
+
+Cell["\<\
+Dieser Datensatz konvergiert in beiden F\[ADoubleDot]llen. \
+AdaptiveNonlinearModelFit kann aber von Anfang an, den c-Parameter w\
+\[ADoubleDot]hlen, wodurch die anderen Parameter nichtmehr gro\[SZ] schwanken \
+m\[UDoubleDot]ssen um ins globale Minimum zu konvergieren.
+NonlinearModelFit hingegen braucht sehr viele Schritte bis der c-Parameter \
+angepasst ist wodurch die Parameter a und b weit driften und die Funktion \
+somit in ein lokales Minimum konvergiert welches, wie im Plot zu sehen, aber \
+eine viel zu gro\[SZ]e Frequenz aufweist.\
+\>", "Text",ExpressionUUID->"9254142d-2b2a-4431-a4f4-58fe7d9af969"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fit1", "=", 
+   RowBox[{"NonlinearModelFit", "[", 
+    RowBox[{"adata1", ",", 
+     RowBox[{
+      RowBox[{"a", "*", 
+       RowBox[{
+        RowBox[{"Sin", "[", 
+         RowBox[{"b", "*", "x"}], "]"}], "/", "x"}]}], "+", "c"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "x"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"afit1", "=", 
+   RowBox[{"AdaptiveNonlinearModelFit", "[", 
+    RowBox[{"adata1", ",", 
+     RowBox[{
+      RowBox[{"a", "*", 
+       RowBox[{
+        RowBox[{"Sin", "[", 
+         RowBox[{"b", "*", "x"}], "]"}], "/", "x"}]}], "+", "c"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "x"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"adata1", ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"fit1", "[", "\"\<BestFit\>\"", "]"}], ",", 
+        RowBox[{"afit1", "[", "\"\<BestFit\>\"", "]"}]}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "1", ",", "30"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<NonlinearModelFit\>\"", ",", 
+        "\"\<AdaptiveNonlinearModelFit\>\""}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",ExpressionUUID->"924ef339-8976-4dce-8cc5-1478be489b79"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Beispieldatensatz 2: Photostrom im \[ADoubleDot]u\[SZ]eren \
+Photoeffekt", "Subsubsection",ExpressionUUID->"ccb662cc-5d06-484f-9276-\
+f5ab32328872"],
+
+Cell["\<\
+Dies ist ein Realer Datensatz vom Versuch A1-Photoeffekt. Man sieht leicht, \
+dass NonlinearModelFit sich in einem lokalen Minimum gefangen hat, dass \
+realisiert und eine Fehlermeldung ausgibt. 
+AdaptiveNonlinearModelFit kann von Anfang an aber a und b w\[ADoubleDot]hlen \
+wodurch nurnoch c gefunden werden muss.\
+\>", "Text",ExpressionUUID->"c3215140-8a8b-4bce-8b6e-a1f1af506b6b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fit2", "=", 
+   RowBox[{"NonlinearModelFit", "[", 
+    RowBox[{"adata2", ",", 
+     RowBox[{"a", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Exp", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"u", "-", "b"}], ")"}], "/", "c"}], "]"}], "-", "1"}], 
+       ")"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "u", ",", 
+     RowBox[{"Weights", "\[Rule]", 
+      RowBox[{"1", "/", 
+       RowBox[{"wdata2", "^", "2"}]}]}], ",", 
+     RowBox[{"MaxIterations", "\[Rule]", "10000"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"afit2", "=", 
+   RowBox[{"AdaptiveNonlinearModelFit", "[", 
+    RowBox[{"adata2", ",", 
+     RowBox[{"a", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Exp", "[", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"u", "-", "b"}], ")"}], "/", "c"}], "]"}], "-", "1"}], 
+       ")"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", "u", ",", 
+     RowBox[{"Weights", "\[Rule]", 
+      RowBox[{"1", "/", 
+       RowBox[{"wdata2", "^", "2"}]}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"adata2", ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"fit2", "[", "\"\<BestFit\>\"", "]"}], ",", 
+        RowBox[{"afit2", "[", "\"\<BestFit\>\"", "]"}]}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", 
+       RowBox[{"-", "3"}], ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<NonlinearModelFit\>\"", ",", 
+        "\"\<AdaptiveNonlinearModelFit\>\""}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",ExpressionUUID->"04f824b2-b9de-4c56-a413-b6e1c1362baa"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Beispieldatensatz 3: verschobene Normalverteilung mit stark rauschenden Daten\
+\>", "Subsubsection",ExpressionUUID->"53c58eba-0843-4d49-a5b5-36e890fb720a"],
+
+Cell["\<\
+Auch hier merkt NonlinearModelFit, dass es nicht konvergiert ist aber dagegen \
+nichts tun kann.
+AdaptiveNonlinearModelFit kann selbst aus diesen schlechten Daten die \
+Parameter A, x0 und o w\[ADoubleDot]hlen wodurch nurnoch eta gefunden werden \
+muss.\
+\>", "Text",ExpressionUUID->"2f419e3a-6cf2-49cf-836d-87cb40e654e8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fit3", "=", 
+   RowBox[{"NonlinearModelFit", "[", 
+    RowBox[{"adata3", ",", 
+     RowBox[{
+      RowBox[{"A", "*", 
+       RowBox[{"Exp", "[", 
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", "x0"}], ")"}], "^", "2"}]}], "/", "eta"}], 
+        "]"}]}], "+", "o"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", "x0", ",", "eta", ",", "o"}], "}"}], ",", "x", ",", 
+     RowBox[{"MaxIterations", "\[Rule]", "10000"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"afit3", "=", 
+   RowBox[{"AdaptiveNonlinearModelFit", "[", 
+    RowBox[{"adata3", ",", 
+     RowBox[{
+      RowBox[{"A", "*", 
+       RowBox[{"Exp", "[", 
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"x", "-", "x0"}], ")"}], "^", "2"}]}], "/", "eta"}], 
+        "]"}]}], "+", "o"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"A", ",", "x0", ",", "eta", ",", "o"}], "}"}], ",", "x"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"adata3", ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", "Black"}]}], "]"}], ",", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Evaluate", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"fit3", "[", "\"\<BestFit\>\"", "]"}], ",", 
+        RowBox[{"afit3", "[", "\"\<BestFit\>\"", "]"}]}], "}"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0", ",", "5"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+     RowBox[{"PlotLegends", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<NonlinearModelFit\>\"", ",", 
+        "\"\<AdaptiveNonlinearModelFit\>\""}], "}"}]}]}], "]"}]}], 
+  "]"}]}], "Input",ExpressionUUID->"87ab8bff-8e08-4b1c-943a-6ddd5973edb7"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FitPlot", "Section",ExpressionUUID->"7efe1af1-688a-4153-aab0-5c00e889070b"],
+
+Cell[BoxData[
+ RowBox[{"?", "FitPlot"}]], "Input",ExpressionUUID->"14ba7bb7-1e96-4601-89a9-438a615eb648"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Der Befehl, f\[UDoubleDot]r den dieses Package \[UDoubleDot]berhaupt existiert.
+
+Wir erzeugen erstmal Daten.\
+\>", "Subsubsection",ExpressionUUID->"06f8336a-d4f9-402f-a19f-d90ca7dcb75d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"xErrors", "=", 
+   RowBox[{"0.05", "+", 
+    RowBox[{"Abs", "@", 
+     RowBox[{"RandomVariate", "[", 
+      RowBox[{
+       RowBox[{"NormalDistribution", "[", 
+        RowBox[{"0", ",", "0.05"}], "]"}], ",", "n"}], "]"}]}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"yErrors", "=", 
+   RowBox[{"RandomVariate", "[", 
+    RowBox[{
+     RowBox[{"NormalDistribution", "[", 
+      RowBox[{"0", ",", "0.3"}], "]"}], ",", "n"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"data", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"i", "/", "n"}], "*", "5"}], ",", 
+       RowBox[{
+        RowBox[{"0.2", "*", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"i", "/", "n"}], "*", "5"}], ")"}], "^", "2"}]}], "-", 
+        RowBox[{"2", "*", 
+         RowBox[{"i", "/", "n"}], "*", "5"}], "+", 
+        RowBox[{"yErrors", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"yErrors", "=", 
+   RowBox[{"0.2", "+", 
+    RowBox[{"Abs", "@", "yErrors"}]}]}], ";"}]}], "Input",ExpressionUUID->\
+"62b89d68-5c13-4bdf-b5d2-b55af2a76543"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Nun benutzen wir den Befehl in seiner einfachsten Form:", \
+"Subsubsection",ExpressionUUID->"5444372c-c8f5-4862-82f2-519a55e3c0f9"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x"}], "]"}]], "Input",Expressio\
+nUUID->"95ceabfb-b9d6-4a2c-9ad7-8e0804eb8707"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Mit Fehlerbalken :", "Subsubsection",ExpressionUUID->"4cdf1711-00cd-4042-93ba-dd2aa171d585"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "xErrors", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x"}], "]"}]], "Input",Expressio\
+nUUID->"ae647591-53e7-446c-9b31-723e67bce519"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Und den restlichen Parametern", "Subsubsection",ExpressionUUID->"3fb5bfdd-bec2-4cdc-8f74-fe4d4668eaa2"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "xErrors", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\"\<x-Achse\>\"", 
+   ",", "\"\<y-Achse\>\"", ",", 
+   RowBox[{"{", 
+    RowBox[{"3.2", ",", "0.4"}], "}"}]}], "]"}]], "Input",ExpressionUUID->\
+"c1add577-4d03-4ee5-ae07-4bdd529bcfc4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Davon kann man sich erst erschlagen f\[UDoubleDot]hlen, aber wir fangen es \
+langsam an.
+Als erstes alle Standardparameter :\
+\>", "Subsubsection",ExpressionUUID->"e451c3a1-dd10-46c1-948a-e1ea8adc28b2"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   TagBox[
+    FrameBox["data"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Daten", " ", "die", " ", "gefittet", " ", "werden", " ", "sollen", " ", 
+     "in", " ", "Punktlisten", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["x", "1"], ",", 
+         SubscriptBox["y", "1"]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["x", "2"], ",", 
+         SubscriptBox["y", "2"]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["x", "3"], ",", 
+         SubscriptBox["y", "3"]}], "}"}], ",", "..."}], "}"}], " ", "oder", 
+     " ", "zu", " ", "mehreren", " ", "Fits", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["x", "1"], ",", 
+           SubscriptBox["y", "1"]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["x", "2"], ",", 
+           SubscriptBox["y", "2"]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["x", "3"], ",", 
+           SubscriptBox["y", "3"]}], "}"}], ",", "..."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["x", "1"], ",", 
+           SubscriptBox["y", "1"]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["x", "2"], ",", 
+           SubscriptBox["y", "2"]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           SubscriptBox["x", "3"], ",", 
+           SubscriptBox["y", "3"]}], "}"}], ",", "..."}], "}"}], ",", "..."}],
+       "}"}]}], "*)"}], "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["xErrors"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "die", " ", "x", " ", "Fehler", " ", "in", " ", "Einfachlisten", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["u", 
+        RowBox[{"x", ",", "1"}]], ",", 
+       SubscriptBox["u", 
+        RowBox[{"x", ",", "2"}]], ",", 
+       RowBox[{
+        SubscriptBox["u", 
+         RowBox[{"x", ",", "3"}]], "..."}]}], "}"}], " ", "oder", " ", 
+     "Mehrfachlisten", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "1"}]], ",", 
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "2"}]], ",", 
+         RowBox[{
+          SubscriptBox["u", 
+           RowBox[{"x", ",", "3"}]], "..."}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "1"}]], ",", 
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "2"}]], ",", 
+         RowBox[{
+          SubscriptBox["u", 
+           RowBox[{"x", ",", "3"}]], "..."}]}], "}"}], ",", "..."}], "}"}]}], 
+    "*)"}], "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["yErrors"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+    "die", " ", "y", " ", "Fehler", " ", "in", " ", "Einfachlisten", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       SubscriptBox["u", 
+        RowBox[{"x", ",", "1"}]], ",", 
+       SubscriptBox["u", 
+        RowBox[{"x", ",", "2"}]], ",", 
+       RowBox[{
+        SubscriptBox["u", 
+         RowBox[{"x", ",", "3"}]], "..."}]}], "}"}], " ", "oder", " ", 
+     "Mehrfachlisten", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "1"}]], ",", 
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "2"}]], ",", 
+         RowBox[{
+          SubscriptBox["u", 
+           RowBox[{"x", ",", "3"}]], "..."}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "1"}]], ",", 
+         SubscriptBox["u", 
+          RowBox[{"x", ",", "2"}]], ",", 
+         RowBox[{
+          SubscriptBox["u", 
+           RowBox[{"x", ",", "3"}]], "..."}]}], "}"}], ",", "..."}], "}"}]}], 
+    "*)"}], "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["equations"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"die", " ", "Gleichungen"}], ",", " ", 
+     RowBox[{"nach", " ", "denen", " ", "gefittet", " ", 
+      RowBox[{"wird", ".", " ", "Wenn"}], " ", "nur", " ", "eine", " ", 
+      "Gleichung", " ", "gefittet", " ", "wird"}], ",", " ", 
+     RowBox[{"braucht", " ", "es", " ", "keine", " ", "Liste"}]}], "*)"}], 
+   "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["variables"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"die", " ", "Funktionsvariablen", " ", "der", " ", 
+      RowBox[{"Gleichungen", ".", " ", "Wird"}], " ", "nur", " ", "ein", " ", 
+      "Fit", " ", "gemacht"}], ",", " ", 
+     RowBox[{"braucht", " ", "es", " ", "keine", " ", "Liste"}]}], "*)"}], 
+   "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["xLabel"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"das", " ", "x"}], "-", 
+     RowBox[{
+     "Achsenlabel", " ", "als", " ", "string", " ", "also", " ", "mit", " ", 
+      "Anf\[UDoubleDot]hrungszeichen"}]}], "*)"}], "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["yLabel"],
+    "Placeholder"], " ", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"das", " ", "y"}], "-", 
+     RowBox[{
+     "Achsenlabel", " ", "als", " ", "string", " ", "also", " ", "mit", " ", 
+      "Anf\[UDoubleDot]hrungszeichen"}]}], "*)"}], "\[IndentingNewLine]", ",", 
+   TagBox[
+    FrameBox["legendPosition"],
+    "Placeholder"]}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"die", " ", "Position", " ", "der", " ", 
+     RowBox[{"legende", ".", " ", "Eine"}], " ", "leere", " ", "Liste", " ", 
+     RowBox[{"{", "}"}], " ", "stellt", " ", "die", " ", "Legende", " ", 
+     "neben", " ", "den", " ", "Plot"}], ",", " ", 
+    RowBox[{
+    "Null", " ", "entfernt", " ", "sie", " ", "komplett", " ", "oder", " ", 
+     "ein", " ", "Punkt", " ", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "y"}], "}"}], " ", "positioniert", " ", "sie", " ", 
+     "mit", " ", "der", " ", "linken", " ", "oberen", " ", "Ecke", " ", "in", 
+     " ", "diesen", " ", "Punkt"}]}], "*)"}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"67782651-fdf1-4603-b8d5-68f3d3abf2d2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Was bedeutet nun also die Tabelle neben dem Plot? Das ist die \
+Auswertungstabelle.
+Hier nochmal :\
+\>", "Subsubsection",ExpressionUUID->"95539a20-921b-4108-a4ab-0f67c4dc7f15"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {
+     ItemBox[
+      StyleBox["\<\"regression\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     TemplateBox[{"\"polynomial linear\""},
+      "LineLegend",
+      DisplayFunction->(StyleBox[
+        StyleBox[
+         PaneBox[
+          TagBox[
+           GridBox[{{
+              TagBox[
+               GridBox[{{
+                  GraphicsBox[{{
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.368417, 0.506779, 0.709798], 
+                    Dashing[{}]], {
+                    LineBox[{{0, 10}, {40, 10}}]}}, {
+                    Directive[
+                    EdgeForm[
+                    Directive[
+                    Opacity[0.3], 
+                    GrayLevel[0]]], 
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    RGBColor[0.368417, 0.506779, 0.709798], 
+                    Dashing[{}]], {}}}, AspectRatio -> Full, 
+                   ImageSize -> {40, 10}, PlotRangePadding -> None, 
+                   ImagePadding -> Automatic, 
+                   BaselinePosition -> (Scaled[0.1] -> Baseline)], #}}, 
+                GridBoxAlignment -> {
+                 "Columns" -> {Center, Left}, "Rows" -> {{Baseline}}}, 
+                AutoDelete -> False, 
+                GridBoxDividers -> {
+                 "Columns" -> {{False}}, "Rows" -> {{False}}}, 
+                GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}}, 
+                GridBoxSpacings -> {"Columns" -> {{0.5}}, "Rows" -> {{0.8}}}],
+                "Grid"]}}, 
+            GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+            AutoDelete -> False, 
+            GridBoxItemSize -> {
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+            GridBoxSpacings -> {"Columns" -> {{1}}, "Rows" -> {{0}}}], 
+           "Grid"], Alignment -> Left, AppearanceElements -> None, 
+          ImageMargins -> {{5, 5}, {5, 5}}, ImageSizeAction -> "ResizeToFit"],
+          LineIndent -> 0, StripOnInput -> False], {FontFamily -> "Arial"}, 
+        Background -> Automatic, StripOnInput -> False]& ),
+      Editable->True,
+      InterpretationFunction:>(RowBox[{"LineLegend", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{"Directive", "[", 
+               RowBox[{"{", 
+                 RowBox[{
+                   InterpretationBox[
+                    ButtonBox[
+                    TooltipBox[
+                    GraphicsBox[{{
+                    GrayLevel[0], 
+                    RectangleBox[{0, 0}]}, {
+                    GrayLevel[0], 
+                    RectangleBox[{1, -1}]}, {
+                    RGBColor[0.368417, 0.506779, 0.709798], 
+                    RectangleBox[{0, -1}, {2, 1}]}}, AspectRatio -> 1, Frame -> 
+                    True, FrameStyle -> 
+                    RGBColor[
+                    0.24561133333333335`, 0.3378526666666667, 
+                    0.4731986666666667], FrameTicks -> None, PlotRangePadding -> 
+                    None, ImageSize -> 
+                    Dynamic[{
+                    Automatic, 
+                    1.35 (CurrentValue["FontCapHeight"]/AbsoluteCurrentValue[
+                    Magnification])}]], 
+                    "RGBColor[0.368417, 0.506779, 0.709798]"], Appearance -> 
+                    None, BaseStyle -> {}, BaselinePosition -> Baseline, 
+                    DefaultBaseStyle -> {}, ButtonFunction :> 
+                    With[{Typeset`box$ = EvaluationBox[]}, 
+                    If[
+                    Not[
+                    AbsoluteCurrentValue["Deployed"]], 
+                    SelectionMove[Typeset`box$, All, Expression]; 
+                    FrontEnd`Private`$ColorSelectorInitialAlpha = 1; 
+                    FrontEnd`Private`$ColorSelectorInitialColor = 
+                    RGBColor[0.368417, 0.506779, 0.709798]; 
+                    FrontEnd`Private`$ColorSelectorUseMakeBoxes = True; 
+                    MathLink`CallFrontEnd[
+                    FrontEnd`AttachCell[Typeset`box$, 
+                    FrontEndResource["RGBColorValueSelector"], {
+                    0, {Left, Bottom}}, {Left, Top}, 
+                    "ClosingActions" -> {
+                    "SelectionDeparture", "ParentChanged", 
+                    "EvaluatorQuit"}]]]], BaseStyle -> Inherited, Evaluator -> 
+                    Automatic, Method -> "Preemptive"], 
+                    RGBColor[0.368417, 0.506779, 0.709798], Editable -> False,
+                     Selectable -> False], ",", 
+                   RowBox[{"Dashing", "[", 
+                    RowBox[{"{", "}"}], "]"}]}], "}"}], "]"}], "}"}], ",", 
+           RowBox[{"{", #, "}"}]}], "]"}]& )]},
+    {
+     ItemBox[
+      StyleBox["\<\"equation\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     TagBox[
+      FormBox[
+       RowBox[{
+        RowBox[{"a", " ", 
+         SuperscriptBox["x", "2"]}], "+", 
+        RowBox[{"b", " ", "x"}], "+", "c"}],
+       TraditionalForm],
+      TraditionalForm,
+      Editable->True]},
+    {
+     ItemBox[
+      StyleBox["\<\"parameters\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     TagBox[GridBox[{
+        {
+         ItemBox["\<\"\"\>",
+          Background->GrayLevel[0.7],
+          
+          StripOnInput->
+           False], "\<\"value\"\>", "\<\"error\"\>", "\<\"p-value\"\>", 
+         ItemBox["\<\"\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False]},
+        {
+         ItemBox["c",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], "0.16769880545272278`", "0.177309199638122`", 
+         "0.35750164027030074`", 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"c\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False]},
+        {
+         ItemBox["b",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         RowBox[{"-", "2.116430920100143`"}], "0.1343738854934062`", 
+         "1.4236035915438942`*^-11", 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"b\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False]},
+        {
+         ItemBox["a",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], "0.21467301038664402`", 
+         "0.022266771420834625`", "2.638958061982966`*^-8", 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"a\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False]}
+       },
+       AutoDelete->False,
+       GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+           GrayLevel[1], 
+           RGBColor[1, 0.85, 0.85], 
+           RGBColor[0.88, 1, 0.88], 
+           RGBColor[0.88, 1, 0.88]}},
+       GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Grid"]},
+    {
+     ItemBox[
+      StyleBox["\<\"model-object\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     TagBox[
+      RowBox[{"FittedModel", "[", 
+       TagBox[
+        PanelBox[
+         TagBox[
+          RowBox[{"0.16769880545272278`", "\[VeryThinSpace]", "-", 
+           RowBox[{"2.116430920100143`", " ", "x"}], "+", 
+           RowBox[{"0.21467301038664402`", " ", 
+            SuperscriptBox["x", "2"]}]}],
+          Short[#, 2]& ],
+         FrameMargins->5],
+        Editable -> False], "]"}],
+      InterpretTemplate[
+      FittedModel[{
+        "Linear", {0.16769880545272278`, -2.116430920100143, 
+         0.21467301038664402`}, {{$CellContext`x}, {
+          1, $CellContext`x, $CellContext`x^2}}, {0, 0}}, {{2.84224537376535, 
+        2.5971118582524784`, 5.32941059188605, 16.507815819144867`, 
+        2.2240368662612644`, 4.453295530995301, 1.5767707852508221`, 
+        8.609904071573814, 5.219913037479493, 21.365966686494414`, 
+        4.46201526650708, 16.344729892151165`, 11.000891719947967`, 
+        2.1636009470638027`, 8.393271937075099, 4.443564417644479, 
+        2.1407973432042, 2.7474638962671643`, 24.0879913140634, 
+        20.529374200861657`}}, {{
+          Rational[1, 4], -0.09434360658241658}, {
+          Rational[1, 2], -1.3705184120031133`}, {
+          Rational[3, 4], -1.1543279667527215`}, {1, -1.8461246959477224`}, {
+          Rational[5, 4], -1.7169533316720011`}, {
+          Rational[3, 2], -2.2761299710563385`}, {
+          Rational[7, 4], -2.2911284848184303`}, {2, -3.3408009868200845`}, {
+          Rational[9, 4], -3.7251917554075793`}, {
+          Rational[5, 2], -3.7663409470542835`}, {
+          Rational[11, 4], -3.7140932193602407`}, {3, -4.247349550811395}, {
+          Rational[13, 4], -4.286000875755642}, {
+          Rational[7, 2], -5.029847364913279}, {
+          Rational[15, 4], -4.832671041438841}, {4, -5.074388617253758}, {
+          Rational[17, 4], -5.370958613863517}, {
+          Rational[9, 2], -5.353300941280749}, {
+          Rational[19, 4], -4.983749019640782}, {
+         5, -5.020704986006088}}, CompressedData["
+1:eJxTTMoPSmViYGAQAWJmBhj4YA+hL0DpDfao4g/Q5GHiL6D0IzRxXPQXKP0T
+TfwHlGZyQBX/A6EbONDEGaB8ATRxqH4HETRxFihfEk2cDapeDk0cZp8SmjgX
+hK+giibOA+E3aKCJ80HV66CJw9xtgCYuCOELGKGJC0HdaYImLgzhTzBDE4f5
+39IBAKVSM1U=
+        "], 
+        Function[Null, 
+         Internal`LocalizedBlock[{$CellContext`x}, #], {HoldAll}]]& ],
+      Editable->False,
+      SelectWithContents->True,
+      Selectable->True]},
+    {
+     ItemBox[
+      StyleBox["\<\"{\\!\\(\\*SuperscriptBox[\\(\[Chi]\\), \\(2\\)]\\)/dof,\
+\[Alpha]}\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     StyleBox[
+      RowBox[{"{", 
+       RowBox[{"0.2954090065663376`", ",", "0.5867749801790176`"}], "}"}],
+      StripOnInput->False,
+      FontColor->RGBColor[0, 0.7, 0]]},
+    {
+     ItemBox[
+      StyleBox["\<\"{\\!\\(\\*SuperscriptBox[\\(R\\), \
+\\(2\\)]\\),\\!\\(\\*SuperscriptBox[OverscriptBox[\\(R\\), \\(~\\)], \\(2\\)]\
+\\)}\\n{\\!\\(\\*SuperscriptBox[\\(R\\), \
+\\(2\\)]\\)%,\\!\\(\\*SuperscriptBox[OverscriptBox[\\(R\\), \\(~\\)], \
+\\(2\\)]\\)%}\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     StyleBox["\<\"\\!\\(\\*FormBox[RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.9821478852057773`\\\", \\\",\\\", \\\"0.980047636406457`\\\"}], \
+\\\"}\\\"}], TraditionalForm]\\)\\n\\!\\(\\*FormBox[RowBox[{\\\"{\\\", \
+RowBox[{\\\"86.63881936570624`\\\", \\\",\\\", \\\"85.87471642991086`\\\"}], \
+\\\"}\\\"}], TraditionalForm]\\)\"\>",
+      StripOnInput->False,
+      FontColor->RGBColor[1, 0.5, 0]]},
+    {
+     ItemBox[
+      StyleBox["\<\"correlations\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     TagBox[GridBox[{
+        {"\<\"\"\>", 
+         ItemBox["c",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["b",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["a",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], "\<\"\"\>"},
+        {"c", "0.9999999999999998`", 
+         RowBox[{"-", "0.920129516643842`"}], 
+         "0.829790397743385`", "\<\"\\!\\(\\*FormBox[\\\"c\\\", \
+TraditionalForm]\\)\"\>"},
+        {"b", 
+         RowBox[{"-", "0.9201295166438422`"}], "0.9999999999999999`", 
+         RowBox[{
+         "-", "0.9758299460549905`"}], "\<\"\\!\\(\\*FormBox[\\\"b\\\", \
+TraditionalForm]\\)\"\>"},
+        {"a", "0.829790397743385`", 
+         RowBox[{"-", "0.9758299460549904`"}], 
+         "1.`", "\<\"\\!\\(\\*FormBox[\\\"a\\\", TraditionalForm]\\)\"\>"},
+        {"\<\"\"\>", 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"c\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"b\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"a\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], "\<\"\"\>"}
+       },
+       AutoDelete->False,
+       GridBoxBackground->{"Columns" -> {
+           GrayLevel[0.7], 
+           GrayLevel[1], 
+           GrayLevel[1], 
+           GrayLevel[1], 
+           GrayLevel[0.7]}, "Rows" -> {{None}}},
+       GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Grid"]},
+    {
+     ItemBox[
+      StyleBox["\<\"covariances\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     TagBox[GridBox[{
+        {"\<\"\"\>", 
+         ItemBox["c",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["b",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["a",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], "\<\"\"\>"},
+        {"c", "0.031438552276311406`", 
+         RowBox[{"-", "0.021922753830052627`"}], 
+         "0.0032760983065111492`", "\<\"\\!\\(\\*FormBox[\\\"c\\\", \
+TraditionalForm]\\)\"\>"},
+        {"b", 
+         RowBox[{"-", "0.021922753830052634`"}], "0.018056341102595044`", 
+         RowBox[{
+         "-", 
+          "0.0029197540372257855`"}], "\<\"\\!\\(\\*FormBox[\\\"b\\\", \
+TraditionalForm]\\)\"\>"},
+        {"a", "0.0032760983065111497`", 
+         RowBox[{"-", "0.0029197540372257855`"}], 
+         "0.0004958091095076977`", "\<\"\\!\\(\\*FormBox[\\\"a\\\", \
+TraditionalForm]\\)\"\>"},
+        {"\<\"\"\>", 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"c\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"b\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], 
+         ItemBox["\<\"\\!\\(\\*FormBox[\\\"a\\\", TraditionalForm]\\)\"\>",
+          Background->GrayLevel[0.7],
+          StripOnInput->False], "\<\"\"\>"}
+       },
+       AutoDelete->False,
+       GridBoxBackground->{"Columns" -> {
+           GrayLevel[0.7], 
+           GrayLevel[1], 
+           GrayLevel[1], 
+           GrayLevel[1], 
+           GrayLevel[0.7]}, "Rows" -> {{None}}},
+       GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+       GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+      "Grid"]},
+    {
+     ItemBox[
+      StyleBox["\<\"residuals\"\>",
+       StripOnInput->False,
+       FontColor->GrayLevel[1]],
+      Background->GrayLevel[0.4],
+      StripOnInput->False], 
+     GraphicsBox[{{}, {{}, {}, 
+        {RGBColor[0.368417, 0.506779, 0.709798], PointSize[
+         0.019444444444444445`], AbsoluteThickness[1.6], 
+         LineBox[CompressedData["
+1:eJxTTMoPSmViYGAQAWIQDQEf7MPmnXt81PqCPVTAgUvhl8Jl4Yf7IVwOhwsN
+p30TGw5B5QUcBFJ9F4ds2AOVF3Fo4Ljru8fqNlRewkEhfe1/lh3noXwZhwSP
+JZE7zzyC8hUcGBbvXrHT8CBUv5JDw4ylzJvunobyVRwYnpy0+Z3aD1Wv5iDh
+nO9zUv0KlK/hwGBxLlP+dSKUr+XAILHp3Qb5I1C+jsMBkf0bt929BTVPz+HA
+XP3YSypboXwDB4a7fBfj2GD2GTocyLya3/Idpt7I4UKW/hRD9mtQvrFDw4/V
+LEHb10LNN3FguPCbPX7SbHsAEk9chg==
+          "]]}}, {}, {}, {{}, {}}},
+      AspectRatio->NCache[
+        Rational[1, 5], 0.2],
+      Axes->{True, True},
+      AxesLabel->{None, None},
+      AxesOrigin->{0, 0},
+      DisplayFunction->Identity,
+      Frame->{{False, False}, {False, False}},
+      FrameLabel->{{None, None}, {None, None}},
+      FrameTicks->{{False, False}, {False, False}},
+      GridLines->{None, None},
+      GridLinesStyle->Directive[
+        GrayLevel[0.5, 0.4]],
+      ImagePadding->1,
+      ImageSize->250,
+      Method->{"CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+             Part[#, 1]], 
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+             Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 1, 2][#]& )[
+             Part[#, 1]], 
+            (Part[{{Identity, Identity}, {Identity, Identity}}, 2, 2][#]& )[
+             Part[#, 2]]}& )}},
+      PlotRange->{{0, 21}, {-0.5874907255949999, 0.5874907255949999}},
+      PlotRangeClipping->True,
+      PlotRangePadding->{{0, 0}, {0, 0}},
+      Ticks->{{}, {}}]}
+   },
+   AutoDelete->False,
+   GridBoxBackground->{"Columns" -> {{None}}, "Rows" -> {
+       GrayLevel[1], 
+       GrayLevel[0.85], 
+       GrayLevel[1], 
+       GrayLevel[0.85], 
+       GrayLevel[1], 
+       GrayLevel[0.85], 
+       GrayLevel[1], 
+       GrayLevel[0.85]}},
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",ExpressionUUID->"0813df07-89f2-4937-9a54-8c1c32a5410a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["In Reihenfolge :", "Subsubsection",ExpressionUUID->"9ff0f2e4-5279-4fbb-8c3a-2427ec43c2c2"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+regression: Als erstes sehen wir hier die Farbige Linie. Diese zeigt euch an, \
+welche Farbe die Regression im Plot hat. \[LineSeparator]Desweiteren findet \
+ihr daneben noch eine Beschreibung. M\[ODoubleDot]glichkeiten \
+daf\[UDoubleDot]r sind: {polynomial linear, nonlinear, adaptive nonlinear, \
+single linear, multi-combination linear}.\[LineSeparator]Diese Beschreibungen \
+geben euch an, was der Befehl im \[OpenCurlyDoubleQuote]inneren\
+\[CloseCurlyDoubleQuote] mit euren Fit-Modell angestellt hat. Wie ihr ja \
+wissen solltet, kann eine Regression linear oder nichtlinear ablaufen.\
+\[LineSeparator]Dabei gilt, dass linear immer besser ist als nichtlinear, da \
+hier die Gefahr der nicht-Konvergenz nicht besteht. FitPlot versucht also nun \
+euer angegebenes Fitmodell zu analysieren.\[LineSeparator]Wenn eure Gleichung \
+ohne gro\[SZ]e \[CapitalADoubleDot]nderungen als Polynom dargstellt werden \
+kann, dass einem linearen Fit gen\[UDoubleDot]gt, wird eure Funktion im \
+inneren danach umgestellt und die jeweilig \
+n\[ODoubleDot]tigen\[LineSeparator]Funktionen und Parameter extrahiert und \
+linear regressiert. Das wird dargstellt mit \[OpenCurlyDoubleQuote]polynomial \
+linear\[CloseCurlyDoubleQuote]\[LineSeparator]single linear und \
+multi-combination linear sind Namen f\[UDoubleDot]r Gleichungen die als \
+lineares Fitmodell aber nicht als Polynom dargestellt werden \
+k\[ODoubleDot]nnen. Hierbei werden aber scheinbar offensichtliche\
+\[LineSeparator]Vereinfachungen NICHT gemacht also wenn ihr unbedingt linear \
+fitten wollt, m\[UDoubleDot]sst ihr eure Gleichung selbstst\[ADoubleDot]ndig \
+linearisieren.\[LineSeparator]nonlinear ist demnach einfach die Option bei \
+der kein lineares Fitmodell extrahiert werden konnte und es wird nichtlinear \
+regressiert. adaptive nonlinear benutzt den AdaptiveNonlinearModelFit dieses \
+Packages um eine Konvergenz wahrscheinlicher zu machen.\
+\>", "Subitem",ExpressionUUID->"30eeadab-d911-4616-896e-68446f3ab5ed"],
+
+Cell["\<\
+equation: wie man sich denken kann, wird hier nochmal das Fitmodell \
+dargstellt (nicht vereinfacht). Wenn hier eine Liste mit zwei Gleichungen \
+angegeben wird, dann weil ein Parameter umbenannt wurde (weiteres dazu sp\
+\[ADoubleDot]ter).\
+\>", "Subitem",ExpressionUUID->"3e7507d2-17fe-4f28-bc7c-dfed3381e545"],
+
+Cell["\<\
+parameters: Hier wird die Parameter-Tabelle dargstellt. Hier bekommt ihr \
+euren internen Variablennamen, die Absch\[ADoubleDot]tzung des Wertes, der \
+Unsicherheit, den statistischen P-Wert und den Darstellungsname der Variable.\
+\[LineSeparator]Der P-Wert ist bei statistisch signifikanten Werten als \
+Faustregel unter 0.05. Sollte ein Parameter das nicht erf\[UDoubleDot]llen, \
+wird die Zeile in Rot dargstellt.\
+\>", "Subitem",ExpressionUUID->"97439fca-6f8d-4d67-b604-5b3c2bd1a2f2"],
+
+Cell["\<\
+model-object: Bei jeder Regression erzeugt Mathematica ein \
+FittedModel-Objekt. Meistens unn\[ODoubleDot]tig f\[UDoubleDot]r euch aber \
+wenn ihr Zusatzinfos braucht die euch hier nicht angezeigt werden, dann \
+daraus.\
+\>", "Subitem",ExpressionUUID->"9609e0a8-9e6d-420c-b4be-10b5f752ca45"],
+
+Cell[TextData[{
+ "{\[Chi]^2/dof,\[Alpha]}: Der erste Wert der Liste ist der ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[Chi]", "2"], TraditionalForm]],ExpressionUUID->
+  "1c2f3c21-8775-4db9-89db-d842ad7c198d"],
+ "/dof Wert. Der zweite ist die zugeh\[ODoubleDot]rige \
+Irrtumswahrscheinlichkeit \[Alpha]. Die Farbe kann von gr\[UDoubleDot]n \
+(alles okay) zu orange (m\[ADoubleDot]\[SZ]ige Irrtumswahrscheinlichkeit) bis \
+rot (gro\[SZ]e Irrtumswahrscheinlichkeit) gehen."
+}], "Subitem",ExpressionUUID->"fbc424a4-7c42-4e5e-891b-118a68851adf"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    RowBox[{
+     SuperscriptBox["R", "2"], ","}]}], TraditionalForm]],ExpressionUUID->
+  "8c553b38-d79f-4fed-a7df-4f98dcff78fc"],
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    OverscriptBox["R", "_"], "2"], TraditionalForm]],ExpressionUUID->
+  "cb62d012-97eb-4ac4-a45a-a42eb0cc4a2a"],
+ "}\[LineSeparator]",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    SuperscriptBox["R", "2"]}], TraditionalForm]],ExpressionUUID->
+  "b3b5f46b-c32a-474f-9c1a-98178292ec22"],
+ "%,",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    OverscriptBox["R", "_"], "2"], TraditionalForm]],ExpressionUUID->
+  "2904aee6-c66c-401d-a34c-fd58db217d32"],
+ "%} : ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["R", "2"], TraditionalForm]],ExpressionUUID->
+  "369d164c-2f0f-4445-a0da-af01ad8beae3"],
+ " ist der normale R-Quadrat Test und ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    OverscriptBox["R", "_"], "2"], TraditionalForm]],ExpressionUUID->
+  "36ce242d-9a07-47d0-8769-7aa5b1be0792"],
+ " ist der angepasste Test. Die Prozentangaben darunter sind die prozentualen \
+Erkl\[ADoubleDot]rungen der Abweichungen zur Standardabweichung. \
+(http://people.duke.edu/~rnau/rsquared.htm)\[LineSeparator]Auch hier ist eine \
+Farbliche angabe von gr\[UDoubleDot]n zu orange bis rot ein Indikator f\
+\[UDoubleDot]r die Erkl\[ADoubleDot]rung der Standardabweichung (berechnet \
+aus den erkl\[ADoubleDot]rten Standartabweichungen des ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    OverscriptBox["R", "_"], "2"], TraditionalForm]],ExpressionUUID->
+  "1e19aaa1-9d7d-4429-a4bb-6dd9041eba47"],
+ "%)."
+}], "Subitem",ExpressionUUID->"b83a730a-1dc8-4c17-a7a9-f4f8f91c67bd"],
+
+Cell["\<\
+correlations: Korrelationsmatrix zur Absch\[ADoubleDot]tzung der Korrelationen\
+\>", "Subitem",ExpressionUUID->"c74d79e2-fe5e-41a0-a662-2bc5dc875531"],
+
+Cell["\<\
+covariances: Kovarianzmatrix f\[UDoubleDot]r die korrelierte Gau\[SZ]sche \
+Fehlerfortpflanzung\
+\>", "Subitem",ExpressionUUID->"daac05f4-b6b3-4a5b-ae92-ae26bfc7546a"],
+
+Cell["\<\
+residuals: Die Residuuen des Fits. Diese werden nur angezeigt, wenn die \
+Residual-Option auf False steht.\
+\>", "Subitem",ExpressionUUID->"efdee958-625a-4d6e-97a3-89ee7bee432b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Die Funktion versteht sich im Input auch auf meherere Datens\[ADoubleDot]tze:\
+\>", "Subsubsection",ExpressionUUID->"5fbc1546-847f-4fd3-a0a2-bc28cd3e4d64"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"data", ",", 
+     RowBox[{"data", "+", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "0.5"}], ",", "2"}], "}"}], ",", 
+        RowBox[{"Length", "[", "data", "]"}]}], "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"0.4", "*", "data"}], "-", "2", "+", 
+      RowBox[{"0.1", "*", 
+       RowBox[{"RandomReal", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+         RowBox[{"Length", "[", "data", "]"}]}], "]"}]}]}]}], "}"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"xErrors", ",", 
+     RowBox[{"0.5", "*", "xErrors"}], ",", 
+     RowBox[{"0.3", "*", "xErrors"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"0.25", "*", "yErrors"}], ",", 
+     RowBox[{"yErrors", "+", 
+      RowBox[{"0.2", "*", 
+       RowBox[{"RandomReal", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+         RowBox[{"Length", "[", "data", "]"}]}], "]"}]}]}], ",", 
+     RowBox[{"0.5", "*", "yErrors"}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", "*", 
+       RowBox[{"x", "^", "2"}]}], "+", 
+      RowBox[{"b", "*", "x"}], "+", "c"}], ",", 
+     RowBox[{
+      RowBox[{"q", "*", 
+       RowBox[{"y", "^", "2"}]}], "+", 
+      RowBox[{"w", "*", "y"}], "+", "r", "+", 
+      RowBox[{"f", "*", 
+       RowBox[{"Sin", "[", "y", "]"}]}]}], ",", 
+     RowBox[{
+      RowBox[{"a", "*", 
+       RowBox[{"w", "^", "2"}]}], "+", 
+      RowBox[{"b", "*", "w"}], "+", "c", "+", 
+      RowBox[{"Sin", "[", "w", "]"}]}]}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y", ",", "w"}], "}"}], ",", "\[IndentingNewLine]", 
+   "\"\<x-Achse\>\"", ",", "\[IndentingNewLine]", "\"\<y-Achse\>\"", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", "}"}]}], "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID\
+->"bf4e42c7-99b1-4e8e-b7a7-10751ab7820b"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Jetzt, da wir den Output und Input der Funktion verstehen, gucken wir uns \
+noch Zusatzfunktionen des Befehls an:
+Die Funktion besitzt auch noch einige Optionen\
+\>", "Subsubsection",ExpressionUUID->"7ba0bd1d-d7ae-46c5-ab2a-ce057e340a95"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Options", "[", "FitPlot", "]"}], "/.", 
+  RowBox[{
+   RowBox[{"Rule", "[", 
+    RowBox[{"a_", ",", "_"}], "]"}], "\[RuleDelayed]", "a"}]}]], "Input",Expre\
+ssionUUID->"35f6acae-1ab9-4f6b-9241-686a223bcb05"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: FunctionNames", "Subsubsection",ExpressionUUID->"95413446-8808-4dd1-a0a6-eb4d069e5234"],
+
+Cell["\<\
+Funktionsnamen lassen sich mit der Option FunctionNames \[ADoubleDot]ndern.\
+\[LineSeparator]Im folgenden Beispiel \[ADoubleDot]ndern wir die Definition \
+zu \[Omega](x)\
+\>", "Text",ExpressionUUID->"54d36d06-452f-4547-855b-c43e973d0bcf"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"FunctionNames", "\[Rule]", 
+    RowBox[{"{", "\"\<\[Omega](x)\>\"", "}"}]}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"6d0e40b9-908a-4229-979d-070c3baa3180"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: PlotRange", "Subsubsection",ExpressionUUID->"2a6cf24e-4fb3-4a12-9e42-e88d7eb88a42"],
+
+Cell["\<\
+Die Option gibt euch die M\[ODoubleDot]glichkeit eure PlotRange EXPLIZIT \
+(kein Automatic o.\[CapitalADoubleDot].) festzulegen\
+\>", "Text",ExpressionUUID->"c22fa00c-d7f3-4fb0-9809-b7c9b0986760"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "1"}], ",", "10"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "7"}], ",", "1"}], "}"}]}], "}"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->"f6c8ed4c-ba08-4d14-\
+9824-405474b9c29d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: InitialGuesses", "Subsubsection",ExpressionUUID->"d8340294-7273-4b04-8df1-7e0ebcc54b1e"],
+
+Cell["\<\
+Sollte eure Gleichung nichtlinear gefitted werden m\[UDoubleDot]ssen, kann es \
+sein, das ihr Startparameter w\[ADoubleDot]hlen m\[UDoubleDot]sst damit die \
+Funktion konvergiert.
+Ein Beispiel:\
+\>", "Text",ExpressionUUID->"32c23c8b-1a1e-409b-be0c-e1ee820d770d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"dataIG", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", 
+        RowBox[{
+         RowBox[{"2", "*", 
+          RowBox[{"Sin", "[", "x", "]"}]}], "+", 
+         RowBox[{"2", "*", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"x", "*", "2"}], "]"}]}], "+", 
+         RowBox[{"0.1", "*", 
+          RowBox[{"RandomReal", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "1"}], ",", "1"}], "}"}], "]"}]}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "8", ",", "0.2"}], "}"}]}], "]"}]}], ";"}],
+   " ", 
+  RowBox[{"(*", 
+   RowBox[{"zuf\[ADoubleDot]llige", " ", "Daten"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"dataIG", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"Sin", "[", "x", "]"}]}], "+", 
+    RowBox[{"b", "*", 
+     RowBox[{"Cos", "[", 
+      RowBox[{"c", "*", "x"}], "]"}]}]}], ",", "x"}], "]"}]}], "Input",Express\
+ionUUID->"e05370d0-3f84-418e-8523-79e1c1776f69"],
+
+Cell["\<\
+Wir sehen leicht, der Fit ist nicht ins globale Minimum konvergiert. Wenn wir \
+nun aber nur einen einzigen Parameter vorw\[ADoubleDot]hlen:\
+\>", "Text",ExpressionUUID->"24b472e7-e084-4de0-83c4-b68c9ba98fd8"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"dataIG", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"Sin", "[", "x", "]"}]}], "+", 
+    RowBox[{"b", "*", 
+     RowBox[{"Cos", "[", 
+      RowBox[{"c", "*", "x"}], "]"}]}]}], ",", "x", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"InitialGuesses", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"c", "\[Rule]", "2"}], "}"}]}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"015f03c2-78eb-40f0-8cde-c778dba7cdc1"],
+
+Cell["konvergiert die Regression super.", "Text",ExpressionUUID->"1eda2fe2-f2c8-41a1-a7c6-1ef2805595ca"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: AdaptiveNonlinearFit", "Subsubsection",ExpressionUUID->"baf69b44-e66c-4dc5-a5c8-2f431dd7503c"],
+
+Cell["\<\
+Hat man eine Funktion die nichtlinear gefittet werden muss, aber scheionbar \
+nicht konvergiert, kann man diese Option auf True stellen, um einen \
+AdaptiveNonlinearModelFit einzusetzen der versucht gute Startparameter zu w\
+\[ADoubleDot]hlen.\
+\>", "Text",ExpressionUUID->"c2e1faeb-4051-426a-9829-7f37b6e4e5de"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"adata2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "3.01"}], ",", 
+       RowBox[{"-", "33"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.6"}], ",", 
+       RowBox[{"-", "34"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "2.2"}], ",", 
+       RowBox[{"-", "33"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.8"}], ",", 
+       RowBox[{"-", "26"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.7"}], ",", 
+       RowBox[{"-", "20"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.6"}], ",", 
+       RowBox[{"-", "12"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.5"}], ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.4"}], ",", "20"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"-", "1.3"}], ",", "61"}], "}"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"wdata2", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "6.98467", ",", "14.3664", ",", "6.90228", ",", "5.30757", ",", "4.61407",
+      ",", "6.94984", ",", "14.9547", ",", "14.4406", ",", "3.68319"}], 
+    "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"adata2", ",", "wdata2", ",", 
+   RowBox[{"a", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"u", "-", "b"}], ")"}], "/", "c"}], "]"}], "-", "1"}], 
+     ")"}]}], ",", "u"}], "]"}]}], "Input",ExpressionUUID->"07dfa542-1f9e-\
+440d-9cf2-d252fa7b07e5"],
+
+Cell["\<\
+Wie erwartet, konvergiert der Fit nicht. Jetzt setzen wir die Option auf True:\
+\>", "Text",ExpressionUUID->"01a411aa-2b68-4884-a8c0-e549be74be77"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"adata2", ",", "wdata2", ",", 
+   RowBox[{"a", "*", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"u", "-", "b"}], ")"}], "/", "c"}], "]"}], "-", "1"}], 
+     ")"}]}], ",", "u", ",", "\[IndentingNewLine]", 
+   RowBox[{"AdaptiveNonlinearFit", "\[Rule]", "True"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->"c14f369c-f62e-4f90-\
+b789-aec6a0be3c21"],
+
+Cell["Und der Fit konvergiert", "Text",ExpressionUUID->"2526f4ec-00bd-440a-a1d5-fbcc4b39c238"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: Residuals", "Subsubsection",ExpressionUUID->"a773e42a-efe2-4370-af82-e0bfbc568e42"],
+
+Cell["\<\
+Der Befehl kann auf Wunsch den Fit auch mit Residuen ausgeben.\
+\>", "Text",ExpressionUUID->"c7c32086-039e-4b69-8601-1b903d724ab4"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"Residuals", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"cdfd1878-3ff2-404f-9b46-94c708c6fc32"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: ParameterNames", "Subsubsection",ExpressionUUID->"12adb731-8c67-4280-b1ea-403d8fef79c1"],
+
+Cell["\<\
+Die Parameter der Funktion k\[ODoubleDot]nnen unabh\[ADoubleDot]ngig von \
+ihren Variablennamen benannt werden.\[LineSeparator]Beispilsweise nennen wir \
+die Parameter a,b&c in \[Alpha],\[Beta]&\[Gamma] um (man achte auf Legende, \
+Equation, Parameter-Tabelle und die Matrizen):\
+\>", "Text",ExpressionUUID->"84435c3e-b2b1-4ad9-a956-95e55d747b85"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"ParameterNames", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a", "\[Rule]", "\[Alpha]"}], ",", 
+      RowBox[{"b", "\[Rule]", "\[Beta]"}], ",", 
+      RowBox[{"c", "\[Rule]", "\[Gamma]"}]}], "}"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->"822c3950-2e08-4626-\
+8161-d63cb2f4f418"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: GridLines", "Subsubsection",ExpressionUUID->"8c9af341-1ca6-47ac-82ed-b7ed6baa0021"],
+
+Cell["Wie der Standardparameter:", "Text",ExpressionUUID->"57694673-d237-4184-88ec-c820b9dfad4a"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"GridLines", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"Automatic", ",", 
+      RowBox[{"Range", "[", 
+       RowBox[{
+        RowBox[{"-", "7"}], ",", "0", ",", "0.5"}], "]"}]}], "}"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->"48592e5b-8830-41e0-\
+bd39-724883e7cc52"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: FileSave", "Subsubsection",ExpressionUUID->"173d1595-b747-4980-9cad-0a5a3615f3d8"],
+
+Cell["\<\
+FileSave tut was der Name sagt, es speichert euren Plot in eine Datei.
+Dabei versucht es erst, es in den selben Pfad zu speichern wo sich das \
+geladenen Notebook gerade befindet - geht das nicht, dann der Desktop - geht \
+das nicht, dann im standardordner (unter Windows: \
+\[OpenCurlyDoubleQuote]meine Dokumente\[CloseCurlyDoubleQuote]).\
+\[LineSeparator](Man achte auf den Text unter der Auswertebox)\
+\>", "Text",ExpressionUUID->"862b6996-49f9-4a4d-8158-057e007940d5"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"FileSave", "\[Rule]", "\"\<Test.pdf\>\""}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->"4d5a4d24-48dc-4cbd-\
+9f25-48a3e14e8c33"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: Units", "Subsubsection",ExpressionUUID->"bd4f1e5e-7e9d-4f7e-bf5a-aec08262f71e"],
+
+Cell["\<\
+In eine Legende geh\[ODoubleDot]ren, wenn m\[ODoubleDot]glich, auch Einheiten \
+hinter die Parameterabsch\[ADoubleDot]tzungen.
+Das geht mit der Units Option:\
+\>", "Text",ExpressionUUID->"648c687e-0f28-41ae-9ec9-ee79804e1fae"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"Units", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<m\!\(\*SuperscriptBox[\(\\\ \), \(2\)]\)\>\"", ",", 
+      "\"\<\[Degree]\>\"", ",", "\"\<A\>\""}], "}"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->"a9ad1e31-9b81-48ad-\
+a221-eb4e80c9ba70"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Optionen: ExtraPlots & ExtraLegends", "Subsubsection",ExpressionUUID->"d819c40f-2468-4f52-8c61-746dd71146a5"],
+
+Cell["\<\
+Manchmal will man noch weitere Plots oder grafiken in den Plot mit \
+einbringen, daf\[UDoubleDot]r ist ExtraPlots da der eine Liste an Graphics \
+\[UDoubleDot]bernimmt.\[LineSeparator]ExtraLegends f\[UDoubleDot]gt an eure \
+Legende weitere Dinge an, man beachte, dass die Legende mit einer Grid \
+formatiert wird und man die Option dementsprechend formatieren muss.\
+\[LineSeparator]man achte darauf, dass bei ExtraPlots auch immer die \
+PlotRange\[CloseCurlyQuote]s eingestellt werden.\
+\>", "Text",ExpressionUUID->"3b85a6c9-ebfd-4982-920e-798aa743e470"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"ExtraLegends", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", "\"\<Test\>\"", "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"Style", "[", 
+        RowBox[{
+         RowBox[{"Sqrt", "[", 
+          RowBox[{"x", "^", "2"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"FontSize", "\[Rule]", "15"}], ",", 
+           RowBox[{"FontColor", "\[Rule]", "Orange"}]}], "}"}]}], "]"}], 
+       "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"LineLegend", "[", 
+        RowBox[{
+         RowBox[{"{", "Red", "}"}], ",", 
+         RowBox[{"{", "\"\<BlaBlaBlabla\>\"", "}"}]}], "]"}], "}"}]}], 
+     "}"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ExtraPlots", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Sin", "[", 
+          RowBox[{"x", "*", "3"}], "]"}], "-", "4"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", "0", ",", "6"}], "}"}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", "Gray"}]}], "]"}], ",", 
+      RowBox[{"RegionPlot", "[", 
+       RowBox[{
+        RowBox[{"ImplicitRegion", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "-", "2.5"}], ")"}], "^", "2"}], "+", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"y", "+", "4"}], ")"}], "^", "2"}]}], "]"}], "<", 
+           "1.5"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "y"}], "}"}]}], "]"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0", ",", "5"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "10"}], ",", "0"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{"{", 
+        RowBox[{"Red", ",", "Dashed", ",", 
+         RowBox[{"InfiniteLine", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{"-", "6"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"5", ",", "0"}], "}"}]}], "}"}], "]"}]}], "}"}], "]"}]}],
+      "}"}]}]}], "\[IndentingNewLine]", "]"}]], "Input",ExpressionUUID->\
+"2c3de824-0262-4590-a623-06795c08e63f"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: Analyze", "Subsubsection",ExpressionUUID->"ba228bd6-6dea-42e5-b6d8-6fdac8281021"],
+
+Cell["\<\
+Der FitPlot Befehl, kann tats\[ADoubleDot]chlcih diese ganze Auswertung \
+\[UDoubleDot]berspringen aber anders als die anderen Befehle, steht diese \
+Option standardm\[ADoubleDot]\[SZ]ig auf True.
+Bei False gibt der Befehl die FittedModelObjekte und die Grafik allein zur\
+\[UDoubleDot]ck.\
+\>", "Text",ExpressionUUID->"53e606e2-d419-4323-8670-1eb3b144a795"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"data", ",", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"1", ",", 
+          RowBox[{"-", "1"}]}], "}"}], "*", "#"}], "&"}], "/@", "data"}]}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"yErrors", ",", "yErrors"}], "}"}], ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"Analyze", "\[Rule]", "False"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"14f5acd6-c2f3-431d-a47f-410f81fdc499"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Optionen: RSquaredTest & ChiSquareTest", "Subsubsection",ExpressionUUID->"f6f056e9-c13d-44e0-bd7b-f4db5032538f"],
+
+Cell[TextData[{
+ "Der ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["R", "2"], TraditionalForm]],ExpressionUUID->
+  "c392f9d9-789b-4560-a314-f5b8c5c02ed0"],
+ " Test wird sowieso nur bei linearen Regressionen angezeigt aber manchmal m\
+\[ODoubleDot]chte man z.B. den ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["\[Chi]", "2"], TraditionalForm]],ExpressionUUID->
+  "a473e463-8af6-4e56-91ee-70e2e071fcf1"],
+ "/dof Test ausschalten da man nur relative Gewichtungen hat o.\
+\[CapitalADoubleDot].\nDaf\[UDoubleDot]r gibt es die beiden Optionen \
+RSquaredTest & ChiSquareTest"
+}], "Text",ExpressionUUID->"e5a53d7b-b8b0-4be8-9975-0ffba1b88571"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"RSquaredTest", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ChiSquareTest", "\[Rule]", "False"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"50bf6676-ce21-47ab-8492-b28f1da5bafa"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Option: PlotMarkerSize", "Subsubsection",ExpressionUUID->"a8a47a58-07d6-4c1a-bfd1-e46c59c4b9e3"],
+
+Cell["\<\
+FitPlot unterst\[UDoubleDot]tzt verschiedene PlotMarker und kann deren gr\
+\[ODoubleDot]\[SZ]e ver\[ADoubleDot]ndern wenn notwendig. (Beispielsweise \
+verkleinern bei sehr vielen Punkten)
+Die normale Gr\[ODoubleDot]\[SZ]e ist 6\
+\>", "Text",ExpressionUUID->"9fda9959-56a0-43a2-8283-268d1107ec2f"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotMarkerSize", "\[Rule]", "10"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"83c67f7a-1245-47c1-be78-5b945733765d"],
+
+Cell["Oder verkleinert :", "Text",ExpressionUUID->"797504b7-ea62-4f90-b44a-e780af90eeba"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "x"}], "+", "c"}], ",", "x", ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotMarkerSize", "\[Rule]", "3"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",ExpressionUUID->"c7bf5ad5-4f26-4a25-a4b5-5271a1e2ac69"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Das I, C, K Problem", "Subsubsection",ExpressionUUID->"5532a821-259b-4c8f-99e8-2e1cbb6244cb"],
+
+Cell["\<\
+FitPlot analysiert eure Gleichungen und arbeitet intern mit ihnen dabei kann \
+es zu problemen mit drei beliebten Variablennamen kommen,
+I, C und K. Alle drei haben eine Definition innerhalb von Mathematica und k\
+\[ODoubleDot]nnen deshalb nicht so einfach benutzt werden. FitPlot erkennt \
+aber wenn ihr versucht sie zu nutzen
+und f\[UDoubleDot]hrt eine Scheinvariable ein und tr\[ADoubleDot]gt die \
+\[CapitalADoubleDot]nderungen in der ParameterNames-Option automatisch ein. \
+Das kann auf den ersten Blick allerdings komisch wirken, lasst euch davon \
+nicht erschrecken.\
+\>", "Text",ExpressionUUID->"01dd80c3-e487-4d4b-b1e8-f8179fbd6836"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"I", "*", 
+     RowBox[{"x", "^", "2"}]}], "+", 
+    RowBox[{"K", "*", "x"}], "+", "C"}], ",", "x"}], "]"}]], "Input",Expressio\
+nUUID->"06c995f7-ef18-42f3-9b21-85cb21f08575"],
+
+Cell["Oder f\[UDoubleDot]r die Fitvariable", "Text",ExpressionUUID->"4420d22d-c01b-4211-ac86-c49497c5d4ea"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", "yErrors", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"C", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "C"}], "+", "c"}], ",", "C"}], "]"}]], "Input",Expressio\
+nUUID->"64491aa8-901c-4db8-82fd-c3a5709aa539"],
+
+Cell[TextData[{
+ "Aber auch das ist nicht die L\[ODoubleDot]sung schlechthin. Die Variable I \
+kann immernoch nicht in z.B. Quadrattermen auftauchen, da Mathematica \
+automatisch ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SuperscriptBox["I", "2"], "=", 
+    RowBox[{
+     RowBox[{"-", "1"}], "  ", "macht"}]}], TraditionalForm]],ExpressionUUID->
+  "6f11a0e3-985c-4e9f-91d4-283c66f70325"],
+ ".\nUm das zu entgehen, kann das Package eingepackte Zeichenketten \
+weiterverarbeiten. \[LineSeparator]Beispielsweise f\[UDoubleDot]r I:"
+}], "Text",ExpressionUUID->"f6b07635-f548-4169-9b5c-423c262a75ce"],
+
+Cell[BoxData[
+ RowBox[{"FitPlot", "[", 
+  RowBox[{"data", ",", 
+   RowBox[{
+    RowBox[{"a", "*", 
+     RowBox[{"\"\<I\>\"", "^", "2"}]}], "+", 
+    RowBox[{"b", "*", "\"\<I\>\""}], "+", "c"}], ",", "\"\<I\>\""}], 
+  "]"}]], "Input",ExpressionUUID->"eade72d7-11bb-415e-9383-9f5199e7fa18"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1920, 1007},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 84, 0, 67, "Section",ExpressionUUID->"e402c5e4-1e01-44f6-a771-4db803306e67"],
+Cell[667, 24, 589, 9, 100, "Text",ExpressionUUID->"2e97b840-8da1-43b7-bfd4-194bd1803388"],
+Cell[1259, 35, 96, 0, 26, "Subitem",ExpressionUUID->"d24e7f09-93b0-49b9-a216-4efbd467b1ea"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1392, 40, 86, 0, 67, "Section",ExpressionUUID->"c4acb469-8b19-4699-97f3-3c82084f89c2"],
+Cell[CellGroupData[{
+Cell[1503, 44, 222, 3, 44, "Subsubsection",ExpressionUUID->"1345a082-ac57-4118-b32e-5ae2f52f588d"],
+Cell[1728, 49, 224, 7, 27, "Print",ExpressionUUID->"f6a8f418-2140-4c35-b8e3-41fde3bdd161"],
+Cell[1955, 58, 165, 3, 34, "Text",ExpressionUUID->"56809576-9d03-4efc-bd91-679017aa3be4"],
+Cell[2123, 63, 3862, 94, 238, "Input",ExpressionUUID->"8fa9e2a3-03f3-45ca-89a6-f6a7ae6228c2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6022, 162, 121, 0, 53, "Subsection",ExpressionUUID->"8f0ed924-8fd6-4cab-87d6-55c4904ad5e5"],
+Cell[CellGroupData[{
+Cell[6168, 166, 101, 0, 44, "Subsubsection",ExpressionUUID->"39b2b4ca-f7aa-4c4d-864d-3456e908dc5d"],
+Cell[6272, 168, 304, 4, 34, "Text",ExpressionUUID->"91b4d605-e63c-4c2f-a483-b521d5d45fec"],
+Cell[6579, 174, 3119, 74, 238, "Input",ExpressionUUID->"4d6e65fa-b401-4ed0-a1d4-6691de4dccf9"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9759, 255, 79, 0, 67, "Section",ExpressionUUID->"7eb38455-e089-4403-8b0c-5aa7e398b494"],
+Cell[9841, 257, 196, 3, 34, "Text",ExpressionUUID->"42d576ce-ebaf-4a32-9935-ba248ecb66eb"],
+Cell[10040, 262, 243, 5, 67, "Input",ExpressionUUID->"141dc490-18cf-46eb-b0d2-bc40d9237b5b"],
+Cell[10286, 269, 179, 3, 34, "Text",ExpressionUUID->"7d761fdd-a5f5-4e7c-a1e0-0bd6d05d078e"],
+Cell[CellGroupData[{
+Cell[10490, 276, 103, 0, 53, "Subsection",ExpressionUUID->"b897de66-80b9-4577-9b1f-bcffaa54f2a0"],
+Cell[10596, 278, 107, 1, 28, "Input",ExpressionUUID->"b7000c90-319c-40c6-b87c-8e41f446c34f"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10752, 285, 82, 0, 67, "Section",ExpressionUUID->"9cd0f225-51f7-40b2-9760-166c6c2b038d"],
+Cell[10837, 287, 147, 2, 34, "Text",ExpressionUUID->"5e65a0b4-9e2e-403f-a668-b23db6eb99ab"],
+Cell[10987, 291, 106, 1, 28, "Input",ExpressionUUID->"4ee4ff5d-fdfc-422c-bbbf-5ff61e85c1be"],
+Cell[11096, 294, 111, 1, 28, "Input",ExpressionUUID->"a9239e79-f539-4300-aeb8-cff972c5fde7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11244, 300, 88, 0, 67, "Section",ExpressionUUID->"bcee0cd1-3f02-41cb-9504-2ae0bb17ce0b"],
+Cell[11335, 302, 112, 1, 28, "Input",ExpressionUUID->"f80c63b4-0cfb-432b-bd81-c194ea8cf230"],
+Cell[11450, 305, 202, 4, 56, "Text",ExpressionUUID->"103358ec-f26c-43bf-970b-823a00f56f85"],
+Cell[11655, 311, 157, 3, 28, "Input",ExpressionUUID->"cda7f82b-27b4-49ee-99be-e0154f5a79e0"],
+Cell[11815, 316, 156, 2, 34, "Text",ExpressionUUID->"5bb8442e-7e85-4221-8ec3-f0ef85cd7644"],
+Cell[11974, 320, 259, 7, 28, "Input",ExpressionUUID->"a755f32a-7087-4a86-be92-a9ab5749d64c"],
+Cell[12236, 329, 206, 5, 28, "Input",ExpressionUUID->"6e916f3b-4832-4a36-8cd6-eb3db5773027"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12479, 339, 114, 0, 67, "Section",ExpressionUUID->"671a1073-989a-4afb-a673-9ad4fcde351d"],
+Cell[12596, 341, 113, 1, 28, "Input",ExpressionUUID->"d64c6c05-c450-4b97-a4b3-af95ee66a832"],
+Cell[12712, 344, 163, 3, 34, "Text",ExpressionUUID->"42b2a8ca-9b3a-4109-8fde-88f29995f90b"],
+Cell[12878, 349, 125, 1, 28, "Input",ExpressionUUID->"b5c4b006-cd94-437f-b000-d5103932680c"],
+Cell[13006, 352, 157, 2, 34, "Text",ExpressionUUID->"f77f1a02-8534-452b-8ccf-8e0e4e1d0547"],
+Cell[13166, 356, 224, 4, 48, "Input",ExpressionUUID->"3dc6edb2-195e-46bf-a499-0a1d30ec1a77"],
+Cell[13393, 362, 120, 1, 28, "Input",ExpressionUUID->"37930949-0098-4b76-a9fe-99eb5bef3f81"],
+Cell[13516, 365, 213, 3, 34, "Text",ExpressionUUID->"1ac87560-cd78-460e-a10d-13fbb85c6f10"],
+Cell[13732, 370, 137, 2, 28, "Input",ExpressionUUID->"ec3c9bcc-3025-4560-8671-0340d48ac0f2"],
+Cell[13872, 374, 176, 3, 28, "Input",ExpressionUUID->"7d8c739a-6c9a-4705-9469-07cab6931737"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14085, 382, 83, 0, 67, "Section",ExpressionUUID->"5a29f6ae-0fad-4798-a4a7-85b43196ffff"],
+Cell[14171, 384, 107, 1, 28, "Input",ExpressionUUID->"56f087c1-8aaa-4942-a820-9b393c20658d"],
+Cell[14281, 387, 220, 3, 34, "Text",ExpressionUUID->"1b1f1d19-3368-4951-bab9-d9b3db4d690d"],
+Cell[14504, 392, 176, 4, 28, "Input",ExpressionUUID->"a61943ee-557a-4120-b30f-7025f194b0d7"],
+Cell[14683, 398, 220, 5, 28, "Input",ExpressionUUID->"c4bc9238-e9bc-454d-aa55-d0f0c96bc31d"],
+Cell[14906, 405, 374, 6, 33, "Text",ExpressionUUID->"39e48a87-fe61-444c-a16c-8f8a8c899270"],
+Cell[15283, 413, 338, 10, 28, "Input",ExpressionUUID->"21678167-3d9a-4558-a03a-bbada5c06d9e"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15658, 428, 87, 0, 67, "Section",ExpressionUUID->"ba93ea96-7ed3-4019-a73d-6e65ba32758d"],
+Cell[15748, 430, 111, 1, 28, "Input",ExpressionUUID->"4738a933-7bbb-4926-9ebc-10d92069f02c"],
+Cell[15862, 433, 387, 7, 78, "Text",ExpressionUUID->"dcffbd44-0d63-4c9d-a442-91ef3d15ef34"],
+Cell[16252, 442, 122, 1, 28, "Input",ExpressionUUID->"47b7d5e4-9697-4e89-88ef-202ef2a84851"],
+Cell[16377, 445, 131, 0, 34, "Text",ExpressionUUID->"2d9c0929-10c1-462f-b4af-a09775aac195"],
+Cell[16511, 447, 152, 3, 28, "Input",ExpressionUUID->"135b70dc-3f0a-4dec-a2bb-c6fe03834d42"],
+Cell[16666, 452, 101, 0, 34, "Text",ExpressionUUID->"676ea6eb-16ef-4c21-aedc-dff617762580"],
+Cell[16770, 454, 172, 4, 28, "Input",ExpressionUUID->"3d6ce39c-31a2-48f9-ba05-35cb441a1bc4"],
+Cell[16945, 460, 185, 3, 34, "Text",ExpressionUUID->"17b151d8-7f7e-4d17-9f37-eade6601963e"],
+Cell[17133, 465, 149, 3, 28, "Input",ExpressionUUID->"835d4218-0369-4034-b659-763d82d30b68"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17319, 473, 115, 0, 67, "Section",ExpressionUUID->"24559985-bfd7-4d42-8b95-9b8fd1efc71c"],
+Cell[17437, 475, 116, 1, 28, "Input",ExpressionUUID->"b61f6012-7933-4042-bb5e-dcb9951266ab"],
+Cell[17556, 478, 170, 3, 34, "Text",ExpressionUUID->"2a84b30c-10fa-49e5-9e9e-ba531398b6a1"],
+Cell[17729, 483, 208, 6, 47, "DisplayFormula",ExpressionUUID->"e2c7857c-0a72-4f99-b7a3-e712cdc5b894"],
+Cell[17940, 491, 236, 6, 28, "Input",ExpressionUUID->"ab4ca28b-a229-4c71-927b-7e1828ecaa1b"],
+Cell[18179, 499, 118, 1, 28, "Input",ExpressionUUID->"8396c041-251d-4d26-8965-0bccbbd81a4a"],
+Cell[18300, 502, 181, 3, 34, "Text",ExpressionUUID->"b7b90255-6e87-4d77-88db-fdd7df27e8db"],
+Cell[18484, 507, 1820, 52, 55, "DisplayFormula",ExpressionUUID->"942f6835-d521-49ff-ab28-c11513739503"],
+Cell[20307, 561, 238, 6, 28, "Input",ExpressionUUID->"9d4388ee-4e3b-4e65-928f-7b36191b5b96"],
+Cell[20548, 569, 219, 4, 28, "Input",ExpressionUUID->"6b402f5b-10f4-4a93-91b5-17d1b31c3d05"],
+Cell[20770, 575, 156, 2, 34, "Text",ExpressionUUID->"94b0bff8-be34-49d5-94ef-6889a1de8620"],
+Cell[20929, 579, 1312, 36, 48, "Input",ExpressionUUID->"1e2e2434-f100-4ddf-8d2a-d9241de7ebc7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22278, 620, 119, 0, 67, "Section",ExpressionUUID->"bf8b068a-9c91-4d77-a37e-a1a12b897d53"],
+Cell[22400, 622, 118, 1, 28, "Input",ExpressionUUID->"c38893fb-5fc3-4967-8290-a0791f7e2b22"],
+Cell[22521, 625, 120, 1, 28, "Input",ExpressionUUID->"8a1c47c7-1b21-44d6-8b02-835d4963b817"],
+Cell[22644, 628, 543, 10, 122, "Text",ExpressionUUID->"06ba22ef-d182-49b9-bff0-980997dd55c2"],
+Cell[23190, 640, 468, 13, 48, "Input",ExpressionUUID->"8328cf74-1e90-437c-8a12-b6347b0770c9"],
+Cell[23661, 655, 234, 4, 56, "Text",ExpressionUUID->"7530fccc-a9e2-44bf-b940-c6c9bb88c28f"],
+Cell[23898, 661, 291, 8, 28, "Input",ExpressionUUID->"92df2d59-eb68-4e40-b802-f6ce59fb2044"],
+Cell[24192, 671, 128, 0, 34, "Text",ExpressionUUID->"442d7ce3-8c65-4cec-a45c-0df729cfe2b2"],
+Cell[24323, 673, 331, 9, 28, "Input",ExpressionUUID->"6c270604-6cfa-4d94-b72e-bead0b45ca0f"],
+Cell[24657, 684, 545, 11, 56, "Text",ExpressionUUID->"b2443374-bbe0-43b2-8708-eae6df121b54"],
+Cell[25205, 697, 374, 11, 28, "Input",ExpressionUUID->"5e94cfe9-924d-4f4a-8731-0a82c15a2466"],
+Cell[25582, 710, 349, 9, 58, "Text",ExpressionUUID->"63c1a40a-48ba-4aa9-8004-b13c7fc4a3b4"],
+Cell[25934, 721, 405, 12, 28, "Input",ExpressionUUID->"f9a2b6bc-d6a8-4c54-aa2b-ad8bd823e0d4"],
+Cell[26342, 735, 222, 3, 34, "Text",ExpressionUUID->"3c015316-31c6-4a8f-9576-c3378df284be"],
+Cell[26567, 740, 454, 13, 28, "Input",ExpressionUUID->"f8c9001b-14c2-40ce-9d85-737eca47bee1"],
+Cell[27024, 755, 219, 3, 34, "Text",ExpressionUUID->"207f1e48-f713-42e6-92bd-755eb561cdc8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27280, 763, 86, 0, 67, "Section",ExpressionUUID->"1f3184f4-97ae-4cc5-9298-ce5c28f25f2c"],
+Cell[27369, 765, 110, 1, 28, "Input",ExpressionUUID->"2d0232f2-d84f-490a-8c30-e9957ae3d846"],
+Cell[27482, 768, 524, 10, 56, "Text",ExpressionUUID->"a4063382-c2ee-44b0-a1d8-5565153e0a2f"],
+Cell[28009, 780, 952, 31, 159, "DisplayFormula",ExpressionUUID->"5f091bb6-7c25-46da-95d8-4ab14434ab93"],
+Cell[28964, 813, 415, 12, 28, "Input",ExpressionUUID->"ae842f25-34db-42f0-bda8-96a1a6c195a5"],
+Cell[29382, 827, 175, 3, 34, "Text",ExpressionUUID->"a40acbcf-bf92-43b8-bb44-b23aadbe1754"],
+Cell[29560, 832, 415, 12, 28, "Input",ExpressionUUID->"4580dc8b-ac9f-42d2-893d-143d0f0cf201"],
+Cell[29978, 846, 116, 0, 34, "Text",ExpressionUUID->"efad0e1b-2fbf-44f8-aad6-16af01a94e5f"],
+Cell[30097, 848, 487, 14, 28, "Input",ExpressionUUID->"caba7f9f-5446-4568-8e70-d4b5fa4a2d80"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30621, 867, 90, 0, 67, "Section",ExpressionUUID->"25d0d62f-4535-45fe-85cc-219f4175eb0f"],
+Cell[30714, 869, 114, 1, 28, "Input",ExpressionUUID->"4a615a9d-0c67-4a86-8445-dbffe5df4b4f"],
+Cell[30831, 872, 285, 4, 34, "Text",ExpressionUUID->"067e8b0b-ce50-4a38-80ac-fe962e9a2061"],
+Cell[31119, 878, 156, 3, 28, "Input",ExpressionUUID->"3e5a6501-0374-406d-9b6e-a3d9ebcb172a"],
+Cell[31278, 883, 161, 3, 28, "Input",ExpressionUUID->"f2f7ddff-1008-4c11-b93c-f166e088f0c3"],
+Cell[31442, 888, 142, 2, 34, "Text",ExpressionUUID->"0f6db2d5-9b80-439a-9c94-c94cfab0cc0b"],
+Cell[31587, 892, 386, 8, 48, "Input",ExpressionUUID->"5051584a-2c6a-4ef6-b65e-5c97e4cab2e5"],
+Cell[31976, 902, 113, 0, 34, "Text",ExpressionUUID->"4ffca522-efe4-4d55-818a-06b477be6e35"],
+Cell[32092, 904, 216, 4, 28, "Input",ExpressionUUID->"99378371-a56a-44dc-a893-9167c51b7648"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32345, 913, 90, 0, 67, "Section",ExpressionUUID->"2e79085b-28f5-4d0c-a25f-016faa5c3232"],
+Cell[32438, 915, 114, 1, 28, "Input",ExpressionUUID->"58d06513-c8df-4fe8-b609-f1a0b58036bd"],
+Cell[32555, 918, 332, 7, 33, "Text",ExpressionUUID->"200ffa88-3180-43f6-bb1e-f4c782e543df"],
+Cell[32890, 927, 251, 5, 48, "Input",ExpressionUUID->"564e8cf1-e950-4cfd-94ba-158138c3e232"],
+Cell[33144, 934, 118, 0, 34, "Text",ExpressionUUID->"72914831-8e7c-49e4-b460-82d348ea9408"],
+Cell[33265, 936, 150, 3, 28, "Input",ExpressionUUID->"ed512e64-12d6-4a60-b762-573b28c667b4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33452, 944, 98, 0, 67, "Section",ExpressionUUID->"00fff37d-608b-4eba-8366-f1af3646edd1"],
+Cell[33553, 946, 122, 1, 28, "Input",ExpressionUUID->"f6e02033-cd2b-4327-a661-b03f8a573893"],
+Cell[33678, 949, 246, 4, 56, "Text",ExpressionUUID->"ee76fbe2-4a70-49ef-8e73-e793ca051dc0"],
+Cell[33927, 955, 206, 5, 28, "Input",ExpressionUUID->"5d07a824-c846-47fd-ac63-c923e5476080"],
+Cell[34136, 962, 167, 3, 34, "Text",ExpressionUUID->"88cedea3-0afb-4525-9c1a-067dc3c0985f"],
+Cell[34306, 967, 275, 7, 48, "DisplayFormula",ExpressionUUID->"3301eb58-9d21-4c1a-88e7-efe96e21a0ca"],
+Cell[34584, 976, 363, 10, 28, "Input",ExpressionUUID->"6d91544e-5b16-49b8-9360-4c54c4d7dcd4"],
+Cell[34950, 988, 185, 3, 34, "Text",ExpressionUUID->"dd3142a5-7884-40e2-92bf-8f9cc55f281d"],
+Cell[35138, 993, 163, 4, 27, "DisplayFormula",ExpressionUUID->"1949bf6a-a34c-40bc-88d3-fd00f7f60674"],
+Cell[35304, 999, 438, 12, 28, "Input",ExpressionUUID->"0b06831c-6bb3-46a5-9892-601e3dbf0927"],
+Cell[35745, 1013, 264, 4, 34, "Text",ExpressionUUID->"325f2ebb-3f4d-4665-9282-f08509ed0658"],
+Cell[36012, 1019, 547, 16, 28, "Input",ExpressionUUID->"af921d43-41fb-4306-a66c-c208d0e57a16"],
+Cell[36562, 1037, 116, 0, 34, "Text",ExpressionUUID->"b7176dea-fb16-4a11-b5dc-858fbbe3a74d"],
+Cell[36681, 1039, 487, 13, 28, "Input",ExpressionUUID->"211d68a7-b43f-4b9c-9238-991daae83a61"],
+Cell[37171, 1054, 221, 4, 56, "Text",ExpressionUUID->"9d333027-e564-4fa9-b99d-96220665e0b1"],
+Cell[37395, 1060, 1045, 31, 67, "Input",ExpressionUUID->"c67b4850-68e9-4365-bdbb-f811c0ff152c"],
+Cell[38443, 1093, 556, 10, 122, "Text",ExpressionUUID->"ec5e77b3-8c7f-4aad-9e8a-c94002893bc3"],
+Cell[39002, 1105, 241, 6, 28, "Input",ExpressionUUID->"ca5af45a-f4ec-4701-ab7e-c46c969d34e5"],
+Cell[39246, 1113, 152, 2, 34, "Text",ExpressionUUID->"584080c1-a50a-4f85-90c4-33e242124c9b"],
+Cell[39401, 1117, 355, 10, 28, "Input",ExpressionUUID->"4f0cbd91-935c-4ba8-9130-3c61e8ad741d"],
+Cell[39759, 1129, 134, 0, 34, "Text",ExpressionUUID->"9547ec9c-7645-4119-a8d5-1d3f46309ec5"],
+Cell[39896, 1131, 356, 10, 28, "Input",ExpressionUUID->"76511c2e-3e02-4f08-8ca8-ee1c2276d5b9"],
+Cell[40255, 1143, 97, 0, 34, "Text",ExpressionUUID->"e0671b6c-8aec-4513-953e-537309119922"],
+Cell[40355, 1145, 405, 11, 28, "Input",ExpressionUUID->"d93d4456-d747-457a-a58c-d61bb84cefc7"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40797, 1161, 99, 0, 67, "Section",ExpressionUUID->"6fd93cca-41ec-4da4-a581-50437c999666"],
+Cell[40899, 1163, 123, 1, 28, "Input",ExpressionUUID->"6b1c43c4-7c37-4e06-9428-9fbc5ce93023"],
+Cell[41025, 1166, 709, 12, 100, "Text",ExpressionUUID->"8b5b0583-e378-4064-bd38-2006f6acc491"],
+Cell[CellGroupData[{
+Cell[41759, 1182, 88, 0, 44, "Subsubsection",ExpressionUUID->"38bfd814-2f13-4f5e-826f-9e636c21276d"],
+Cell[41850, 1184, 1023, 15, 100, "Text",ExpressionUUID->"b928f443-6cab-4b90-b635-4218f6c4cc4f"],
+Cell[42876, 1201, 283, 4, 34, "Text",ExpressionUUID->"bb46258e-65a0-4197-a679-1f0d7ebff306"],
+Cell[43162, 1207, 7788, 232, 162, "Input",ExpressionUUID->"1c11c5d2-fbdf-48fc-998f-e451b776d706"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50987, 1444, 134, 0, 44, "Subsubsection",ExpressionUUID->"2b7cadb6-d608-4cd0-a22b-22f3ecb8027f"],
+Cell[51124, 1446, 622, 9, 56, "Text",ExpressionUUID->"9254142d-2b2a-4431-a4f4-58fe7d9af969"],
+Cell[51749, 1457, 1613, 46, 67, "Input",ExpressionUUID->"924ef339-8976-4dce-8cc5-1478be489b79"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53399, 1508, 154, 2, 44, "Subsubsection",ExpressionUUID->"ccb662cc-5d06-484f-9276-f5ab32328872"],
+Cell[53556, 1512, 393, 6, 56, "Text",ExpressionUUID->"c3215140-8a8b-4bce-8b6e-a1f1af506b6b"],
+Cell[53952, 1520, 2074, 61, 67, "Input",ExpressionUUID->"04f824b2-b9de-4c56-a413-b6e1c1362baa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56063, 1586, 165, 2, 44, "Subsubsection",ExpressionUUID->"53c58eba-0843-4d49-a5b5-36e890fb720a"],
+Cell[56231, 1590, 332, 6, 56, "Text",ExpressionUUID->"2f419e3a-6cf2-49cf-836d-87cb40e654e8"],
+Cell[56566, 1598, 1904, 55, 67, "Input",ExpressionUUID->"87ab8bff-8e08-4b1c-943a-6ddd5973edb7"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58519, 1659, 81, 0, 67, "Section",ExpressionUUID->"7efe1af1-688a-4153-aab0-5c00e889070b"],
+Cell[58603, 1661, 105, 1, 28, "Input",ExpressionUUID->"14ba7bb7-1e96-4601-89a9-438a615eb648"],
+Cell[CellGroupData[{
+Cell[58733, 1666, 196, 4, 94, "Subsubsection",ExpressionUUID->"06f8336a-d4f9-402f-a19f-d90ca7dcb75d"],
+Cell[58932, 1672, 1402, 44, 105, "Input",ExpressionUUID->"62b89d68-5c13-4bdf-b5d2-b55af2a76543"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60371, 1721, 137, 1, 44, "Subsubsection",ExpressionUUID->"5444372c-c8f5-4862-82f2-519a55e3c0f9"],
+Cell[60511, 1724, 263, 7, 28, "Input",ExpressionUUID->"95ceabfb-b9d6-4a2c-9ad7-8e0804eb8707"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60811, 1736, 98, 0, 44, "Subsubsection",ExpressionUUID->"4cdf1711-00cd-4042-93ba-dd2aa171d585"],
+Cell[60912, 1738, 295, 7, 28, "Input",ExpressionUUID->"ae647591-53e7-446c-9b31-723e67bce519"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61244, 1750, 109, 0, 44, "Subsubsection",ExpressionUUID->"3fb5bfdd-bec2-4cdc-8f74-fe4d4668eaa2"],
+Cell[61356, 1752, 410, 10, 28, "Input",ExpressionUUID->"c1add577-4d03-4ee5-ae07-4bdd529bcfc4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61803, 1767, 212, 4, 69, "Subsubsection",ExpressionUUID->"e451c3a1-dd10-46c1-948a-e1ea8adc28b2"],
+Cell[62018, 1773, 6306, 185, 239, "Input",ExpressionUUID->"67782651-fdf1-4603-b8d5-68f3d3abf2d2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[68361, 1963, 186, 4, 69, "Subsubsection",ExpressionUUID->"95539a20-921b-4108-a4ab-0f67c4dc7f15"],
+Cell[68550, 1969, 17394, 427, 520, "Output",ExpressionUUID->"0813df07-89f2-4937-9a54-8c1c32a5410a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[85981, 2401, 96, 0, 44, "Subsubsection",ExpressionUUID->"9ff0f2e4-5279-4fbb-8c3a-2427ec43c2c2"],
+Cell[CellGroupData[{
+Cell[86102, 2405, 1983, 27, 178, "Subitem",ExpressionUUID->"30eeadab-d911-4616-896e-68446f3ab5ed"],
+Cell[88088, 2434, 321, 5, 26, "Subitem",ExpressionUUID->"3e7507d2-17fe-4f28-bc7c-dfed3381e545"],
+Cell[88412, 2441, 498, 7, 45, "Subitem",ExpressionUUID->"97439fca-6f8d-4d67-b604-5b3c2bd1a2f2"],
+Cell[88913, 2450, 301, 5, 26, "Subitem",ExpressionUUID->"9609e0a8-9e6d-420c-b4be-10b5f752ca45"],
+Cell[89217, 2457, 547, 10, 26, "Subitem",ExpressionUUID->"fbc424a4-7c42-4e5e-891b-118a68851adf"],
+Cell[89767, 2469, 1699, 47, 74, "Subitem",ExpressionUUID->"b83a730a-1dc8-4c17-a7a9-f4f8f91c67bd"],
+Cell[91469, 2518, 160, 2, 26, "Subitem",ExpressionUUID->"c74d79e2-fe5e-41a0-a662-2bc5dc875531"],
+Cell[91632, 2522, 177, 3, 26, "Subitem",ExpressionUUID->"daac05f4-b6b3-4a5b-ae92-ae26bfc7546a"],
+Cell[91812, 2527, 188, 3, 26, "Subitem",ExpressionUUID->"efdee958-625a-4d6e-97a3-89ee7bee432b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[92049, 2536, 165, 2, 44, "Subsubsection",ExpressionUUID->"5fbc1546-847f-4fd3-a0a2-bc28cd3e4d64"],
+Cell[92217, 2540, 2169, 60, 200, "Input",ExpressionUUID->"bf4e42c7-99b1-4e8e-b7a7-10751ab7820b"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94423, 2605, 248, 4, 69, "Subsubsection",ExpressionUUID->"7ba0bd1d-d7ae-46c5-ab2a-ce057e340a95"],
+Cell[94674, 2611, 241, 6, 28, "Input",ExpressionUUID->"35f6acae-1ab9-4f6b-9241-686a223bcb05"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[94952, 2622, 101, 0, 44, "Subsubsection",ExpressionUUID->"95413446-8808-4dd1-a0a6-eb4d069e5234"],
+Cell[95056, 2624, 248, 4, 56, "Text",ExpressionUUID->"54d36d06-452f-4547-855b-c43e973d0bcf"],
+Cell[95307, 2630, 421, 9, 67, "Input",ExpressionUUID->"6d0e40b9-908a-4229-979d-070c3baa3180"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[95765, 2644, 97, 0, 44, "Subsubsection",ExpressionUUID->"2a6cf24e-4fb3-4a12-9e42-e88d7eb88a42"],
+Cell[95865, 2646, 206, 3, 34, "Text",ExpressionUUID->"c22fa00c-d7f3-4fb0-9809-b7c9b0986760"],
+Cell[96074, 2651, 586, 17, 67, "Input",ExpressionUUID->"f6c8ed4c-ba08-4d14-9824-405474b9c29d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[96697, 2673, 102, 0, 44, "Subsubsection",ExpressionUUID->"d8340294-7273-4b04-8df1-7e0ebcc54b1e"],
+Cell[96802, 2675, 272, 5, 56, "Text",ExpressionUUID->"32c23c8b-1a1e-409b-be0c-e1ee820d770d"],
+Cell[97077, 2682, 1071, 33, 48, "Input",ExpressionUUID->"e05370d0-3f84-418e-8523-79e1c1776f69"],
+Cell[98151, 2717, 219, 3, 34, "Text",ExpressionUUID->"24b472e7-e084-4de0-83c4-b68c9ba98fd8"],
+Cell[98373, 2722, 483, 13, 67, "Input",ExpressionUUID->"015f03c2-78eb-40f0-8cde-c778dba7cdc1"],
+Cell[98859, 2737, 104, 0, 34, "Text",ExpressionUUID->"1eda2fe2-f2c8-41a1-a7c6-1ef2805595ca"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[99000, 2742, 108, 0, 44, "Subsubsection",ExpressionUUID->"baf69b44-e66c-4dc5-a5c8-2f431dd7503c"],
+Cell[99111, 2744, 322, 5, 34, "Text",ExpressionUUID->"c2e1faeb-4051-426a-9829-7f37b6e4e5de"],
+Cell[99436, 2751, 1680, 56, 67, "Input",ExpressionUUID->"07dfa542-1f9e-440d-9cf2-d252fa7b07e5"],
+Cell[101119, 2809, 157, 2, 34, "Text",ExpressionUUID->"01a411aa-2b68-4884-a8c0-e549be74be77"],
+Cell[101279, 2813, 483, 13, 67, "Input",ExpressionUUID->"c14f369c-f62e-4f90-b789-aec6a0be3c21"],
+Cell[101765, 2828, 94, 0, 34, "Text",ExpressionUUID->"2526f4ec-00bd-440a-a1d5-fbcc4b39c238"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[101896, 2833, 97, 0, 44, "Subsubsection",ExpressionUUID->"a773e42a-efe2-4370-af82-e0bfbc568e42"],
+Cell[101996, 2835, 141, 2, 34, "Text",ExpressionUUID->"c7c32086-039e-4b69-8601-1b903d724ab4"],
+Cell[102140, 2839, 377, 8, 67, "Input",ExpressionUUID->"cdfd1878-3ff2-404f-9b46-94c708c6fc32"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[102554, 2852, 102, 0, 44, "Subsubsection",ExpressionUUID->"12adb731-8c67-4280-b1ea-403d8fef79c1"],
+Cell[102659, 2854, 357, 5, 56, "Text",ExpressionUUID->"84435c3e-b2b1-4ad9-a956-95e55d747b85"],
+Cell[103019, 2861, 561, 14, 67, "Input",ExpressionUUID->"822c3950-2e08-4626-8161-d63cb2f4f418"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[103617, 2880, 97, 0, 44, "Subsubsection",ExpressionUUID->"8c9af341-1ca6-47ac-82ed-b7ed6baa0021"],
+Cell[103717, 2882, 97, 0, 34, "Text",ExpressionUUID->"57694673-d237-4184-88ec-c820b9dfad4a"],
+Cell[103817, 2884, 535, 14, 67, "Input",ExpressionUUID->"48592e5b-8830-41e0-bd39-724883e7cc52"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[104389, 2903, 96, 0, 44, "Subsubsection",ExpressionUUID->"173d1595-b747-4980-9cad-0a5a3615f3d8"],
+Cell[104488, 2905, 482, 7, 78, "Text",ExpressionUUID->"862b6996-49f9-4a4d-8158-057e007940d5"],
+Cell[104973, 2914, 390, 9, 67, "Input",ExpressionUUID->"4d5a4d24-48dc-4cbd-9f25-48a3e14e8c33"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[105400, 2928, 93, 0, 44, "Subsubsection",ExpressionUUID->"bd4f1e5e-7e9d-4f7e-bf5a-aec08262f71e"],
+Cell[105496, 2930, 236, 4, 56, "Text",ExpressionUUID->"648c687e-0f28-41ae-9ec9-ee79804e1fae"],
+Cell[105735, 2936, 517, 13, 78, "Input",ExpressionUUID->"a9ad1e31-9b81-48ad-a221-eb4e80c9ba70"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[106289, 2954, 115, 0, 44, "Subsubsection",ExpressionUUID->"d819c40f-2468-4f52-8c61-746dd71146a5"],
+Cell[106407, 2956, 565, 8, 78, "Text",ExpressionUUID->"3b85a6c9-ebfd-4982-920e-798aa743e470"],
+Cell[106975, 2966, 2601, 74, 86, "Input",ExpressionUUID->"2c3de824-0262-4590-a623-06795c08e63f"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[109613, 3045, 95, 0, 44, "Subsubsection",ExpressionUUID->"ba228bd6-6dea-42e5-b6d8-6fdac8281021"],
+Cell[109711, 3047, 368, 6, 56, "Text",ExpressionUUID->"53e606e2-d419-4323-8670-1eb3b144a795"],
+Cell[110082, 3055, 650, 19, 67, "Input",ExpressionUUID->"14f5acd6-c2f3-431d-a47f-410f81fdc499"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[110769, 3079, 118, 0, 44, "Subsubsection",ExpressionUUID->"f6f056e9-c13d-44e0-bd7b-f4db5032538f"],
+Cell[110890, 3081, 640, 15, 56, "Text",ExpressionUUID->"e5a53d7b-b8b0-4be8-9975-0ffba1b88571"],
+Cell[111533, 3098, 460, 9, 86, "Input",ExpressionUUID->"50bf6676-ce21-47ab-8492-b28f1da5bafa"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[112030, 3112, 102, 0, 44, "Subsubsection",ExpressionUUID->"a8a47a58-07d6-4c1a-bfd1-e46c59c4b9e3"],
+Cell[112135, 3114, 306, 5, 56, "Text",ExpressionUUID->"9fda9959-56a0-43a2-8283-268d1107ec2f"],
+Cell[112444, 3121, 380, 8, 67, "Input",ExpressionUUID->"83c67f7a-1245-47c1-be78-5b945733765d"],
+Cell[112827, 3131, 89, 0, 34, "Text",ExpressionUUID->"797504b7-ea62-4f90-b44a-e780af90eeba"],
+Cell[112919, 3133, 379, 8, 67, "Input",ExpressionUUID->"c7bf5ad5-4f26-4a25-a4b5-5271a1e2ac69"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[113335, 3146, 99, 0, 44, "Subsubsection",ExpressionUUID->"5532a821-259b-4c8f-99e8-2e1cbb6244cb"],
+Cell[113437, 3148, 653, 10, 78, "Text",ExpressionUUID->"01dd80c3-e487-4d4b-b1e8-f8179fbd6836"],
+Cell[114093, 3160, 279, 7, 28, "Input",ExpressionUUID->"06c995f7-ef18-42f3-9b21-85cb21f08575"],
+Cell[114375, 3169, 107, 0, 34, "Text",ExpressionUUID->"4420d22d-c01b-4211-ac86-c49497c5d4ea"],
+Cell[114485, 3171, 279, 7, 28, "Input",ExpressionUUID->"64491aa8-901c-4db8-82fd-c3a5709aa539"],
+Cell[114767, 3180, 597, 13, 78, "Text",ExpressionUUID->"f6b07635-f548-4169-9b5c-423c262a75ce"],
+Cell[115367, 3195, 288, 7, 28, "Input",ExpressionUUID->"eade72d7-11bb-415e-9383-9f5199e7fa18"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
