@@ -1,0 +1,316 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11803,        307]
+NotebookOptionsPosition[      8190,        236]
+NotebookOutlinePosition[     11046,        297]
+CellTagsIndexPosition[     11003,        294]
+WindowTitle->FitPlot
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["H U P P PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[Cell[
+    BoxData[
+     ActionMenuBox[
+      FrameBox[
+       InterpretationBox[Cell[TextData[{
+         "URL",
+         StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+          StripOnInput->False]
+        }]],
+        TextCell[
+         Row[{"URL", 
+           Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+       StripOnInput->False], {"\<\"HUPP/ref/FitPlot\"\>":>
+      None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell["HUPP/ref/FitPlot"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+      Delimiter, "\<\"Copy web URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell[
+             BoxData[
+              MakeBoxes[
+               Hyperlink[
+               "http://reference.wolfram.com/language/HUPP/ref/FitPlot.html"],
+                StandardForm]], "Input", TextClipboardType -> "PlainText"]}, 
+           Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; 
+       Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+        NotebookLocate[{
+          URL[
+           StringJoin[
+            If[
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$11874], 
+             "http://reference.wolfram.com/system-modeler/", 
+             "http://reference.wolfram.com/language/"], "HUPP/ref/FitPlot", 
+            ".html"]], None}]}]},
+      Appearance->None,
+      MenuAppearance->Automatic,
+      MenuStyle->"URLMenu"]],
+     LineSpacing->{1.4, 0}]], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[TextData[{
+ Cell["FitPlot", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["xErrors", "TI"], ",", 
+        StyleBox["yErrors", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"], ",", 
+        StyleBox["xLabel", "TI"], ",", 
+        StyleBox["yLabel", "TI"], ",", 
+        StyleBox["legendPosition", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs weighted equation-fits on data according to \
+the variables and plots the result with labels and legends. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs equation-fits on data according to the \
+variables and plots the result. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["yErrors", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs weighted equation-fits on data according to \
+the variables and plots the result. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["xErrors", "TI"], ",", 
+        StyleBox["yErrors", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs weighted equation-fits on data according to \
+the variables and plots the result. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"], ",", 
+        StyleBox["xLabel", "TI"], ",", 
+        StyleBox["yLabel", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs equation-fits on data according to the \
+variables and plots the result with labels. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"], ",", 
+        StyleBox["xLabel", "TI"], ",", 
+        StyleBox["yLabel", "TI"], ",", 
+        StyleBox["legendPosition", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs equation-fits on data according to the \
+variables and plots the result with labels and legends. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"FitPlot", "[", 
+       RowBox[{
+        StyleBox["data", "TI"], ",", 
+        StyleBox["yErrors", "TI"], ",", 
+        StyleBox["equations", "TI"], ",", 
+        StyleBox["variables", "TI"], ",", 
+        StyleBox["xLabel", "TI"], ",", 
+        StyleBox["yLabel", "TI"], ",", 
+        StyleBox["legendPosition", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]performs weighted equation-fits on data according to \
+the variables and plots the result with labels and legends."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, None, None, None, None, {None}}, 
+   "RowsIndexed" -> {}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["PlotRange",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/PlotRange"], 
+    RowBox[{"{", "}"}], Cell["\<\
+PlotRange is an option for graphics functions that specifies what range of \
+coordinates to include in a plot. \
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["GridLines",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/GridLines"], 
+    ButtonBox["None",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/None"], Cell["\<\
+GridLines is an option for two-dimensional graphics functions that specifies \
+grid lines. \
+\>", "TableText"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {None, {None}}, 
+   "RowsIndexed" -> {}},
+ GridBoxDividers->{"Rows" -> {{True, True, True}}}}]
+}, Closed]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"FitPlot",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "Mathematica", ButtonData -> "paclet:HUPP/guide/HUPP", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2019, 1, 13, 0, 38, 22.0292606}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
+    "HUPP Package", "status" -> "None", "summary" -> 
+    "FitPlot[data, xErrors, yErrors, equations, variables, xLabel, yLabel, \\ \
+legendPosition] performs weighted equation-fits on data according to the \
+variables and plots the result with labels and legends. FitPlot[data, \
+equations, variables] performs equation-fits on data according to the \
+variables and plots the result. FitPlot[data, yErrors, equations, variables] \
+performs weighted equation-fits on data according to the variables and plots \
+the result. FitPlot[data, xErrors, yErrors, equations, variables] performs \
+weighted equation-fits on data according to the variables and plots the \
+result. FitPlot[data, equations, variables, xLabel, yLabel] performs \
+equation-fits on data according to the variables and plots the result with \
+labels. FitPlot[data, equations, variables, xLabel, yLabel, legendPosition] \
+performs equation-fits on data according to the variables and plots the \
+result with labels and legends. FitPlot[data, yErrors, equations, variables, \
+xLabel, yLabel, \\ legendPosition] performs weighted equation-fits on data \
+according to the variables and plots the result with labels and legends.", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "FitPlot", 
+    "titlemodifier" -> "", "windowtitle" -> "FitPlot", "type" -> "Symbol", 
+    "uri" -> "HUPP/ref/FitPlot"}},
+CellContext->"Global`",
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "11.3 for Microsoft Windows (64-bit) (March 6, 2018)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[579, 21, 2276, 54, 70, "AnchorBarGrid",ExpressionUUID->"cea18908-7827-4556-a6d9-551cf7b8df72",
+ CellID->1],
+Cell[2858, 77, 164, 6, 70, "ObjectNameGrid",ExpressionUUID->"fc70a41b-6ada-4637-a518-2a991183bedc"],
+Cell[3025, 85, 3507, 93, 70, "Usage",ExpressionUUID->"e3a774a3-6a62-4fb4-a27e-83c53c4172f9"],
+Cell[CellGroupData[{
+Cell[6557, 182, 621, 19, 70, "NotesSection",ExpressionUUID->"6fee6f9d-303f-4795-8c8d-568f45e5b241",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[7181, 203, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"bc88df26-6845-4456-84a9-5476b29a0ee4"],
+Cell[7215, 205, 53, 0, 70, "Notes",ExpressionUUID->"c5d9fa7d-e9cb-408b-8a5f-74e36fad0841"],
+Cell[7271, 207, 877, 24, 70, "3ColumnTableMod",ExpressionUUID->"0967663a-279c-4317-973b-f2a7202441dd"]
+}, Closed]],
+Cell[8163, 234, 23, 0, 70, "FooterCell",ExpressionUUID->"7c33ac76-afba-46ab-b806-3bbb133e4b10"]
+}
+]
+*)
+
+(* End of internal cache information *)

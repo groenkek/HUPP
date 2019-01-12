@@ -1,0 +1,293 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10319,        284]
+NotebookOptionsPosition[      7450,        223]
+NotebookOutlinePosition[      9665,        275]
+CellTagsIndexPosition[      9622,        272]
+WindowTitle->CalculateMeasurement
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["H U P P PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[Cell[
+    BoxData[
+     ActionMenuBox[
+      FrameBox[
+       InterpretationBox[Cell[TextData[{
+         "URL",
+         StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+          StripOnInput->False]
+        }]],
+        TextCell[
+         Row[{"URL", 
+           Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+       StripOnInput->False], {"\<\"HUPP/ref/CalculateMeasurement\"\>":>
+      None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell["HUPP/ref/CalculateMeasurement"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+      Delimiter, "\<\"Copy web URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell[
+             BoxData[
+              MakeBoxes[
+               Hyperlink[
+               "http://reference.wolfram.com/language/HUPP/ref/\
+CalculateMeasurement.html"], StandardForm]], "Input", TextClipboardType -> 
+             "PlainText"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; 
+       Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+        NotebookLocate[{
+          URL[
+           StringJoin[
+            If[
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$8892], 
+             "http://reference.wolfram.com/system-modeler/", 
+             "http://reference.wolfram.com/language/"], 
+            "HUPP/ref/CalculateMeasurement", ".html"]], None}]}]},
+      Appearance->None,
+      MenuAppearance->Automatic,
+      MenuStyle->"URLMenu"]],
+     LineSpacing->{1.4, 0}]], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[TextData[{
+ Cell["CalculateMeasurement", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"CalculateMeasurement", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["v", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          SubscriptBox[
+           StyleBox["v", "TI"], 
+           StyleBox["2", "TR"]], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["e", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          RowBox[{
+           SubscriptBox[
+            StyleBox["e", "TI"], 
+            StyleBox["2", "TR"]], "*", 
+           TemplateBox[{Cell[
+              TextData["C"]],"paclet:ref/C"},
+            "RefLink",
+            BaseStyle->{"InlineFormula"}]}], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]calculates a whole measurement with statistic \
+uncertanty. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"CalculateMeasurement", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["v", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          SubscriptBox[
+           StyleBox["v", "TI"], 
+           StyleBox["2", "TR"]], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["e", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          RowBox[{
+           SubscriptBox[
+            StyleBox["e", "TI"], 
+            StyleBox["2", "TR"]], "*", 
+           TemplateBox[{Cell[
+              TextData["C"]],"paclet:ref/C"},
+            "RefLink",
+            BaseStyle->{"InlineFormula"}]}], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}], ",", 
+        StyleBox["esys", "TI"]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]calculates a whole measurement with statistic \
+uncertanty and a systematic error. "
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"CalculateMeasurement", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["v", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          SubscriptBox[
+           StyleBox["v", "TI"], 
+           StyleBox["2", "TR"]], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          SubscriptBox[
+           StyleBox["e", "TI"], 
+           StyleBox["1", "TR"]], ",", 
+          RowBox[{
+           SubscriptBox[
+            StyleBox["e", "TI"], 
+            StyleBox["2", "TR"]], "*", 
+           TemplateBox[{Cell[
+              TextData["C"]],"paclet:ref/C"},
+            "RefLink",
+            BaseStyle->{"InlineFormula"}]}], ",", " ", 
+          StyleBox["\[Ellipsis]", "TR"]}], "}"}], ",", 
+        StyleBox["esys", "TI"], ",", 
+        RowBox[{
+         TemplateBox[{Cell[
+            TextData["Analyze"]],"paclet:HUPP/ref/Analyze"},
+          "RefLink",
+          BaseStyle->{"InlineFormula"}], "->", 
+         TemplateBox[{Cell[
+            TextData["True"]],"paclet:ref/True"},
+          "RefLink",
+          BaseStyle->{"InlineFormula"}]}]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]calculates a whole measurement with statistic \
+uncertanty, a systematic error and analyzes the result."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, {None}}, "RowsIndexed" -> {}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["The following options can be given: ", "Notes"]
+}, Closed]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"CalculateMeasurement",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "Mathematica", ButtonData -> "paclet:HUPP/guide/HUPP", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2019, 1, 13, 0, 38, 13.3085821}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
+    "HUPP Package", "status" -> "None", "summary" -> 
+    "CalculateMeasurement[{v1, v2, ...}, {e1, e2*C, ...}] calculates a whole \
+measurement with statistic uncertanty. CalculateMeasurement[{v1, v2, ...}, \
+{e1, e2*C, ...}, esys] calculates a whole measurement with statistic \
+uncertanty and a systematic error. CalculateMeasurement[{v1, v2, ...}, {e1, \
+e2*C, ...}, esys, Analyze -> True] calculates a whole measurement with \
+statistic uncertanty, a systematic error and analyzes the result.", 
+    "synonyms" -> {}, "tabletags" -> {}, "title" -> "CalculateMeasurement", 
+    "titlemodifier" -> "", "windowtitle" -> "CalculateMeasurement", "type" -> 
+    "Symbol", "uri" -> "HUPP/ref/CalculateMeasurement"}},
+CellContext->"Global`",
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "11.3 for Microsoft Windows (64-bit) (March 6, 2018)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[592, 21, 2315, 54, 70, "AnchorBarGrid",ExpressionUUID->"a3b0643a-8f63-466c-b8b2-1dcacf74eb4e",
+ CellID->1],
+Cell[2910, 77, 177, 6, 70, "ObjectNameGrid",ExpressionUUID->"5da3b667-7503-48f9-bdc8-a1730a032410"],
+Cell[3090, 85, 3582, 106, 70, "Usage",ExpressionUUID->"85194a23-527e-4ade-8a0b-cf8d57525e02"],
+Cell[CellGroupData[{
+Cell[6697, 195, 621, 19, 70, "NotesSection",ExpressionUUID->"8841c345-79eb-4e73-8d02-839367307698",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[7321, 216, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"d78f2416-721d-4020-9eb6-99b30fe40350"],
+Cell[7355, 218, 53, 0, 70, "Notes",ExpressionUUID->"ee3ed606-f654-41e4-87b4-03c4dac27bc4"]
+}, Closed]],
+Cell[7423, 221, 23, 0, 70, "FooterCell",ExpressionUUID->"9c46e28d-0290-49a8-974e-16fb0a1a0fe2"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,331 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12278,        322]
+NotebookOptionsPosition[      9556,        263]
+NotebookOutlinePosition[     11521,        312]
+CellTagsIndexPosition[     11478,        309]
+WindowTitle->AdaptiveNonlinearModelFit
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["H U P P PACKAGE SYMBOL", "PacletNameCell"], Cell[TextData[Cell[
+    BoxData[
+     ActionMenuBox[
+      FrameBox[
+       InterpretationBox[Cell[TextData[{
+         "URL",
+         StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+          StripOnInput->False]
+        }]],
+        TextCell[
+         Row[{"URL", 
+           Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+       StripOnInput->False], {"\<\"HUPP/ref/AdaptiveNonlinearModelFit\"\>":>
+      None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell["HUPP/ref/AdaptiveNonlinearModelFit"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+      Delimiter, "\<\"Copy web URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell[
+             BoxData[
+              MakeBoxes[
+               Hyperlink[
+               "http://reference.wolfram.com/language/HUPP/ref/\
+AdaptiveNonlinearModelFit.html"], StandardForm]], "Input", TextClipboardType -> 
+             "PlainText"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; 
+       Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+        NotebookLocate[{
+          URL[
+           StringJoin[
+            If[
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$7146], 
+             "http://reference.wolfram.com/system-modeler/", 
+             "http://reference.wolfram.com/language/"], 
+            "HUPP/ref/AdaptiveNonlinearModelFit", ".html"]], None}]}]},
+      Appearance->None,
+      MenuAppearance->Automatic,
+      MenuStyle->"URLMenu"]],
+     LineSpacing->{1.4, 0}]], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[TextData[{
+ Cell["AdaptiveNonlinearModelFit", "ObjectName"],
+ Cell[BoxData[
+  TemplateBox[{8},
+   "Spacer1"]]],
+ Cell[BoxData[""], "ObjectNameTranslation"]
+}], "ObjectNameGrid"],
+
+Cell[BoxData[GridBox[{
+   {"", Cell["\<\
+AdaptiveNonlinearModelFit[data,form,parameters,x]\[LineSeparator]constructs a \
+nonlinear model to fit the form to the given data while trying to choose \
+appropriate starting values.\
+\>"]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, "Rows" -> {{None}}, 
+   "RowsIndexed" -> {}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[Cell[TextData[{
+   Cell[BoxData[
+    TemplateBox[{6},
+     "Spacer1"]]],
+   "Details"
+  }], "NotesFrameText"],
+  Appearance->{Automatic, None, "Normal", Automatic},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ WholeCellGroupOpener->True,
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+
+Cell["", "SectionHeaderSpacer"],
+
+Cell["The following options can be given: ", "Notes"],
+
+Cell[BoxData[GridBox[{
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["AccuracyGoal",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/AccuracyGoal"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+AccuracyGoal is an option for various numerical operations which specifies \
+how many effective digits of accuracy should be sought in the final result. \
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["ConfidenceLevel",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/ConfidenceLevel"], 
+    RowBox[{"19", "\n", 
+     RowBox[{"--", "\n", "20"}]}], Cell["\<\
+ConfidenceLevel is an option for LinearModelFit and other fitting functions \
+that specifies the level to use in various confidence and prediction \
+intervals and bands.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["EvaluationMonitor",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/EvaluationMonitor"], 
+    ButtonBox["None",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/None"], Cell["\<\
+EvaluationMonitor is an option for various numerical computation and plotting \
+functions that gives an expression to evaluate whenever functions derived \
+from the input are evaluated numerically. \
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["Gradient",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Gradient"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+Gradient is an option for FindMinimum and related functions that specifies \
+the gradient vector to assume for the function being extremized.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["MaxIterations",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/MaxIterations"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+MaxIterations is an option that specifies the maximum number of iterations \
+that should be tried in various built-in functions and algorithms.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["Method",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Method"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+Method is an option for various algorithm-intensive functions that specifies \
+what internal methods they should use.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["PrecisionGoal",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/PrecisionGoal"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+PrecisionGoal is an option for various numerical operations which specifies \
+how many effective digits of precision should be sought in the final result. \
+\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["StepMonitor",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/StepMonitor"], 
+    ButtonBox["None",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/None"], Cell["\<\
+StepMonitor is an option for iterative numerical computation functions that \
+gives an expression to evaluate whenever a step is taken by the numerical \
+method used. \
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["Tolerance",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Tolerance"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+Tolerance is an option for various numerical options which specifies the \
+tolerance that should be allowed in computing results.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["VarianceEstimatorFunction",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/VarianceEstimatorFunction"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+VarianceEstimatorFunction is an option for LinearModelFit and \
+NonlinearModelFit which specifies the variance estimator to use.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["Weights",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Weights"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+Weights is an option for various fitting and other functions which specifies \
+weights to associate with data elements.\
+\>", "TableText"]},
+   {Cell["      ", "TableRowIcon"], 
+    ButtonBox["WorkingPrecision",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/WorkingPrecision"], 
+    ButtonBox["Automatic",
+     BaseStyle->"Link",
+     ButtonData->"paclet:ref/Automatic"], Cell["\<\
+WorkingPrecision is an option for various numerical operations that specifies \
+how many digits of precision should be maintained in internal computations. \
+\>", "TableText"]}
+  }]], "3ColumnTableMod",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {
+    None, None, None, None, None, None, None, None, None, None, None, {None}},
+    "RowsIndexed" -> {}},
+ GridBoxDividers->{
+  "Rows" -> {{
+     True, True, True, True, True, True, True, True, True, True, True, True, 
+      True}}}}]
+}, Closed]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"AdaptiveNonlinearModelFit",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "SymbolColor", "LinkTrails" -> 
+  GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "Mathematica", ButtonData -> "paclet:HUPP/guide/HUPP", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
+  None, "RootCaptions" -> "", 
+  "Metadata" -> {
+   "built" -> "{2019, 1, 13, 0, 38, 10.1697895}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
+    "HUPP Package", "status" -> "None", "summary" -> 
+    "AdaptiveNonlinearModelFit[data,form,parameters,x] constructs a nonlinear \
+model to fit the form to the given data while trying to choose appropriate \
+starting values.", "synonyms" -> {}, "tabletags" -> {}, "title" -> 
+    "AdaptiveNonlinearModelFit", "titlemodifier" -> "", "windowtitle" -> 
+    "AdaptiveNonlinearModelFit", "type" -> "Symbol", "uri" -> 
+    "HUPP/ref/AdaptiveNonlinearModelFit"}},
+CellContext->"Global`",
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "11.3 for Microsoft Windows (64-bit) (March 6, 2018)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[597, 21, 2335, 54, 70, "AnchorBarGrid",ExpressionUUID->"5796d553-8bfa-4732-b678-1f581fd19a61",
+ CellID->1],
+Cell[2935, 77, 182, 6, 70, "ObjectNameGrid",ExpressionUUID->"9fda6b88-3fe8-4f07-a8c7-db8efe9e9c4a"],
+Cell[3120, 85, 384, 10, 70, "Usage",ExpressionUUID->"d1488b1a-4a69-40d1-af7d-79708c43c2b4"],
+Cell[CellGroupData[{
+Cell[3529, 99, 621, 19, 70, "NotesSection",ExpressionUUID->"92e6cb78-d358-453c-9b00-16cfd66c5ea9",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->1],
+Cell[4153, 120, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"7a0e933c-7f98-4cf9-b21b-f41bc0727c26"],
+Cell[4187, 122, 53, 0, 70, "Notes",ExpressionUUID->"8c247b68-d788-4ebb-b910-b54832e5e927"],
+Cell[4243, 124, 5271, 134, 70, "3ColumnTableMod",ExpressionUUID->"eb5e5f03-57dc-4b72-b611-6e6709aa4214"]
+}, Closed]],
+Cell[9529, 261, 23, 0, 70, "FooterCell",ExpressionUUID->"832d4dcf-13d2-4ec7-9d92-841b7fd83ee9"]
+}
+]
+*)
+
+(* End of internal cache information *)
