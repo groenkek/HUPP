@@ -157,27 +157,77 @@ GaussianErrorPropagation[function_,{param1_Symbol,param2_?NumericQ,param3_?Numer
 GaussianErrorPropagation[function_,parameters_?(MatchQ[#,List[(_Symbol|List[_Symbol]|List[_Symbol,_?NumericQ]|List[_Symbol,_Symbol]|List[_Symbol,_?NumericQ,_?NumericQ]|List[_Symbol,_Symbol,_?NumericQ]|_FittedModel|List[_FittedModel]|List[_FittedModel,List[_Symbol..]])..]]&),opts:OptionsPattern[]] :=
     With[ {i = Unique[],j = Unique[],fitmodobj = Unique[]},
         Module[ {parametersExpanded = parameters,uncorrelatedTerms,abort = False,outValue,subValues,algebraicTerms},
-            parametersExpanded = (#/.{List[fitmodobj_FittedModel,fitmodnms:List[_Symbol..]]:>If[ MatchQ[fitmodobj["BestFitParameters"],List[_?NumericQ..]],
-                                                                                                 If[ Length[fitmodobj["BestFitParameters"]]==Length[fitmodnms],
-                                                                                                     Apply[Sequence,Transpose[{fitmodnms,fitmodobj["BestFitParameters"],fitmodobj["ParameterErrors"]}]~Join~Flatten[Table[{fitmodnms[[i]],fitmodnms[[j]],fitmodobj["CovarianceMatrix"][[i,j]]},{i,1,Length[fitmodobj["BestFitParameters"]]},{j,i+1,Length[fitmodobj["BestFitParameters"]]}],1]],
-                                                                                                     Message[GaussianErrorPropagation::lincount,fitmodnms,fitmodobj];
-                                                                                                     abort = True;
-                                                                                                 ],
-                                                                                                 Message[GaussianErrorPropagation::nlininlin,fitmodobj];
-                                                                                                 abort = True;
-                                                                                                 fitmodobj
-                                                                                             ]}&)/@parametersExpanded;
-            parametersExpanded = (#/.{List[fitmodobjl_FittedModel]:>fitmodobjl,fitmodobjl_FittedModel:>(
-            If[ MatchQ[fitmodobjl["BestFitParameters"],List[Rule[_Symbol,_?NumericQ]..]],
-                Apply[Sequence,Transpose[{Apply[Sequence,Transpose[fitmodobjl["BestFitParameters"]/.Rule->List]],fitmodobjl["ParameterErrors"]}]~Join~Flatten[Table[{(fitmodobjl["BestFitParameters"]/.Rule->List)[[i,1]],(fitmodobjl["BestFitParameters"]/.Rule->List)[[j,1]],fitmodobjl["CovarianceMatrix"][[i,j]]},{i,1,Length[fitmodobjl["BestFitParameters"]]},{j,i+1,Length[fitmodobjl["BestFitParameters"]]}],1]],
-                Message[GaussianErrorPropagation::lininnlin,fitmodobjl];
-                abort = True;
-            ]
-            )}&)/@parametersExpanded;
-            If[ abort,
-                Return[]
-            ];
-            parametersExpanded = DeleteCases[parametersExpanded,Null,Infinity];
+            
+            (* substitute linearmodels by their variables *)
+            parametersExpanded =
+                (# /. 
+                    {
+                        List[fitmodobj_FittedModel,fitmodnms:List[_Symbol..]]
+                    :>
+                        If[ MatchQ[fitmodobj["BestFitParameters"],List[_?NumericQ..]],
+                            If[ Length[fitmodobj["BestFitParameters"]]==Length[fitmodnms],
+                                Apply[
+                                    Sequence,
+                                    Transpose[{fitmodnms,fitmodobj["BestFitParameters"],fitmodobj["ParameterErrors"]}]~Join~Flatten[Table[{fitmodnms[[i]],fitmodnms[[j]],fitmodobj["CovarianceMatrix"][[i,j]]},{i,1,Length[fitmodobj["BestFitParameters"]]},{j,i+1,Length[fitmodobj["BestFitParameters"]]}],1]
+                                ]
+                            ,
+                                Message[GaussianErrorPropagation::lincount,fitmodnms,fitmodobj];
+                                abort = True;
+                            ]
+                        ,
+                            Message[GaussianErrorPropagation::nlininlin,fitmodobj];
+                            abort = True;
+                            fitmodobj
+                        ]
+                    }
+                &) /@ parametersExpanded;
+                
+            (* substitute nonlinearmodels by their variables *) 
+            parametersExpanded = 
+               (# /.
+                   {
+                       List[fitmodobjl_FittedModel]:>fitmodobjl,fitmodobjl_FittedModel
+                   :>
+                       (If[
+                           MatchQ[fitmodobjl["BestFitParameters"],List[Rule[_Symbol,_?NumericQ]..]]
+                       ,
+                           Apply[
+                               Sequence
+                           ,
+                               Transpose[{Apply[Sequence,Transpose[fitmodobjl["BestFitParameters"]/.Rule->List]],fitmodobjl["ParameterErrors"]}]
+                               ~Join~
+                               Flatten[
+                                   Table[
+                                       {
+                                           (fitmodobjl["BestFitParameters"]/.Rule->List)[[i,1]]
+                                       ,
+                                           (fitmodobjl["BestFitParameters"]/.Rule->List)[[j,1]]
+                                       ,
+                                           fitmodobjl["CovarianceMatrix"][[i,j]]
+                                       }
+                                   ,
+                                       { i, 1, Length[ fitmodobjl["BestFitParameters"] ] }
+                                   ,
+                                       { j, i+1, Length[ fitmodobjl["BestFitParameters"] ] }
+                                   ]
+                               ,
+                                   1
+                               ]
+                           ]
+                       ,
+                           Message[GaussianErrorPropagation::lininnlin,fitmodobjl];
+                           abort = True;
+                       ]
+                       )
+                   }& 
+                ) /@ parametersExpanded;
+            
+            
+            If[ abort, Return[] ];
+            
+            
+            parametersExpanded = DeleteCases[parametersExpanded,Null,Infinity]; (* todo: simplify logic *)
+            
             uncorrelatedTerms = (Select[parametersExpanded,If[ Head[#]===List,
                                                                If[ Length[#]>=2,
                                                                    If[ Head[#[[2]]]===Symbol,
@@ -188,40 +238,55 @@ GaussianErrorPropagation[function_,parameters_?(MatchQ[#,List[(_Symbol|List[_Sym
                                                                ],
                                                                False
                                                            ]&][[All,1]])~Join~Select[parametersExpanded,Head[#]=!=List&];
+            
+            (* Detects doubled variable name *)
             If[ Length[uncorrelatedTerms]!=Length[DeleteDuplicates[uncorrelatedTerms]],
                 Message[GaussianErrorPropagation::mulsymb,ToString[Select[Gather[uncorrelatedTerms],Length[#]>1&][[All,1]]]];
                 Return[];
             ];
-            outValue = With[ {propagationParameterRules = (#[[1]]->#[[2]])&/@Select[parametersExpanded,If[ Length[#]>=2,
+            
+            (* Error Propation *)
+            outValue =
+                With[ 
+                    { propagationParameterRules = (#[[1]]->#[[2]])& /@ Select[parametersExpanded,If[ Length[#]>=2,
                                                                                                            NumericQ[#[[2]]],
                                                                                                            False
-                                                                                                       ]&]},
-                           {
-                           function/.propagationParameterRules,
-                           Sqrt[
-                           Total[
-                           subValues = Table[
-                           If[ Head[parametersExpanded[[i]]]===Symbol,
-                               (((D[function,parametersExpanded[[i]]])/.propagationParameterRules)*C[parametersExpanded[[i]]])^2,
-                               If[ Length[parametersExpanded[[i]]]==3,
-                                   If[ NumericQ[parametersExpanded[[i,2]]],
-                                       (((D[function,parametersExpanded[[i,1]]])/.propagationParameterRules)*parametersExpanded[[i,3]])^2,
-                                       ((2*D[function,parametersExpanded[[i,1]]]*D[function,parametersExpanded[[i,2]]])/.propagationParameterRules)*parametersExpanded[[i,3]]
-                                   ],
-                                   If[ Length[parametersExpanded[[i]]]==2,
-                                       If[ NumericQ[parametersExpanded[[i,2]]],
-                                           (((D[function,parametersExpanded[[i,1]]])/.propagationParameterRules)*C[parametersExpanded[[i,1]]])^2,
-                                           (((2*D[function,parametersExpanded[[i,1]]]*D[function,parametersExpanded[[i,2]]])/.propagationParameterRules)*C[parametersExpanded[[i,1]],parametersExpanded[[i,2]]])
-                                       ],
-                                       (((D[function,parametersExpanded[[i,1]]])/.propagationParameterRules)*C[parametersExpanded[[i,1]]])^2
-                                   ]
-                               ]
-                           ]
-                           ,{i,1,Length[parametersExpanded]}]
-                           ]
-                           ]
-                           }
-                       ];
+                                                                                                       ]&]
+                    }
+                ,
+                    {
+                        function/.propagationParameterRules,
+                        Sqrt[
+                            Total[
+                            subValues = Table[
+                                If[ Head[parametersExpanded[[i]]]===Symbol,
+                                   (((D[function,parametersExpanded[[i]]])/.propagationParameterRules)*C[parametersExpanded[[i]]])^2
+                                ,
+                                    If[ Length[parametersExpanded[[i]]]==3,
+                                        If[ NumericQ[parametersExpanded[[i,2]]],
+                                           (((D[function,parametersExpanded[[i,1]]])/.propagationParameterRules)*parametersExpanded[[i,3]])^2
+                                        ,
+                                           ( (2*D[function,parametersExpanded[[i,1]]]*D[function,parametersExpanded[[i,2]]]) /. propagationParameterRules) * parametersExpanded[[i,3]]
+                                        ]
+                                    ,
+                                        If[ Length[parametersExpanded[[i]]]==2,
+                                            If[ NumericQ[parametersExpanded[[i,2]]],
+                                            (((D[function,parametersExpanded[[i,1]]])/.propagationParameterRules)*C[parametersExpanded[[i,1]]])^2,
+                                            (((2*D[function,parametersExpanded[[i,1]]]*D[function,parametersExpanded[[i,2]]])/.propagationParameterRules)*C[parametersExpanded[[i,1]],parametersExpanded[[i,2]]])
+                                            ]
+                                        ,
+                                            (((D[function,parametersExpanded[[i,1]]])/.propagationParameterRules)*C[parametersExpanded[[i,1]]])^2
+                                        ]
+                                    ]
+                                ]
+                            ,
+                                {i,1,Length[parametersExpanded]}]
+                            ]
+                        ]
+                    }
+                ];
+                
+            (* Analyze Table Start*)
             If[ TrueQ[OptionValue[Analyze]],
                 algebraicTerms = Table[
                 If[ Head[parametersExpanded[[i]]]===Symbol,
@@ -254,6 +319,8 @@ GaussianErrorPropagation[function_,parameters_?(MatchQ[#,List[(_Symbol|List[_Sym
                 },Frame->All,Background->{None,{LightGray,White,LightGray}}
                 ]]
             ];
+            (* Analyze Table End *)
+            
             If[ NumericQ[outValue[[2]]],
                 Return@{outValue[[1]],Abs[outValue[[2]]]},
                 Return@outValue
@@ -539,6 +606,7 @@ FitPlot[data_List,xErrors_List,yErrors_List,equations_,variables_,xLabel_String,
     internFitPlot[data,xErrors,yErrors,equations,variables,xLabel,yLabel,{},opts]
 FitPlot[data_List,xErrors_List,yErrors_List,equations_,variables_,xLabel_String,yLabel_String,legendPosition:(_?(#==Null&)|_List),opts:OptionsPattern[]] :=
     internFitPlot[data,xErrors,yErrors,equations,variables,xLabel,yLabel,legendPosition,opts]
+    
 internFitPlot[data_List,xErrors_List,yErrors_List,equations_,variables_,xLabel_String,yLabel_String,legendPosition:(_?(#==Null&)|_List),opts:OptionsPattern[]] :=
     With[ {i = Unique[],j = Unique[]},
         Module[ {abort,pointList,equationList,variableList,coefficientsList,coefficientNames,coefficientStringNames,fitHelpData,count,fits,fitTypes,linearFunctions,basePlot,errorPlots,residualsPlot,plotRange,residualRange,dashingList,xErrorList,yErrorList,legend,legendPos,outObject,functionStrings,InitialGuessesData,InitialCoefficients,unitList,infoGrid,paramNames,saveDir,systemInfo,ePlots,eLegends,subParameter,rsquareTestList,chisquareTestList,stringMatches,choosenPlotMarker,choosenPlotMarkerSize,adaptiveFit},

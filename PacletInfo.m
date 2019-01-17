@@ -4,8 +4,8 @@
 
 Paclet[
     Name -> "HUPP",
-    Version -> "0.0.1",
-    MathematicaVersion -> "11+",
+    Version -> "0.0.2",
+    MathematicaVersion -> "11.3+",
     Extensions -> 
         {
             {"Documentation", Language -> "English"}, 
