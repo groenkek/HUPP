@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7592,        195]
+NotebookDataLength[      7591,        195]
 NotebookOptionsPosition[      4616,        132]
-NotebookOutlinePosition[      6940,        186]
-CellTagsIndexPosition[      6897,        183]
+NotebookOutlinePosition[      6939,        186]
+CellTagsIndexPosition[      6896,        183]
 WindowTitle->CalculateMeasurementHU
 WindowFrame->Normal*)
 
@@ -60,7 +60,7 @@ CalculateMeasurementHU.html"], StandardForm]], "Input", TextClipboardType ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$8383], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$9445], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "HUPP/ref/CalculateMeasurementHU", ".html"]], None}]}]},
@@ -145,7 +145,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 11.7366507}", 
+   "built" -> "{2019, 1, 25, 7, 21, 0.0445152}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -185,18 +185,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[594, 21, 2323, 54, 70, "AnchorBarGrid",ExpressionUUID->"8a831a9f-7806-4cb9-8808-c511d332d013",
+Cell[594, 21, 2323, 54, 70, "AnchorBarGrid",ExpressionUUID->"98493e13-961c-4783-8706-e2ae7f34609b",
  CellID->1],
-Cell[2920, 77, 179, 6, 70, "ObjectNameGrid",ExpressionUUID->"0dbe4b88-d51b-4ad9-9437-7221e0a6c61c"],
+Cell[2920, 77, 179, 6, 70, "ObjectNameGrid",ExpressionUUID->"7cc0df6b-18da-42dd-9cd1-2b7b42f1d8f5"],
 Cell[3102, 85, 736, 15, 70, "Usage",ExpressionUUID->"ad4a259f-a01e-4b48-a697-0158d2538763"],
 Cell[CellGroupData[{
-Cell[3863, 104, 621, 19, 70, "NotesSection",ExpressionUUID->"b1e66e3e-bfd0-42bd-86a5-eabc5b7426de",
+Cell[3863, 104, 621, 19, 70, "NotesSection",ExpressionUUID->"4058b1c8-266c-44ea-a6fc-ca48cb0cb115",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[4487, 125, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"420a90a9-33ab-4170-9c3d-796300b9ef66"],
+Cell[4487, 125, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"0ecb65eb-48ac-4695-922a-dac1ae6363b5"],
 Cell[4521, 127, 53, 0, 70, "Notes",ExpressionUUID->"9b7291b2-c21b-4f3b-8b49-88044545a2ba"]
 }, Closed]],
-Cell[4589, 130, 23, 0, 70, "FooterCell",ExpressionUUID->"fffa274f-d1bf-4811-9363-a32d95549e3e"]
+Cell[4589, 130, 23, 0, 70, "FooterCell",ExpressionUUID->"e1c3f682-9900-4116-ad6a-f2484aa6424b"]
 }
 ]
 *)

@@ -11,7 +11,7 @@ NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
 NotebookDataLength[      5614,        150]
-NotebookOptionsPosition[      3507,        100]
+NotebookOptionsPosition[      3508,        100]
 NotebookOutlinePosition[      5352,        148]
 CellTagsIndexPosition[      5309,        145]
 WindowTitle->ConfidenceInterval
@@ -60,7 +60,7 @@ ConfidenceInterval.html"], StandardForm]], "Input", TextClipboardType ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$9852], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$10912], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "HUPP/ref/ConfidenceInterval", ".html"]], None}]}]},
@@ -113,7 +113,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 16.0278515}", 
+   "built" -> "{2019, 1, 25, 7, 21, 3.6225692}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -147,11 +147,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[590, 21, 2307, 54, 70, "AnchorBarGrid",ExpressionUUID->"918fbf70-3ce8-40f5-bb6a-fca3b1c8adf4",
+Cell[590, 21, 2308, 54, 70, "AnchorBarGrid",ExpressionUUID->"45318f66-714d-4cd0-85f0-898042718e7b",
  CellID->1],
-Cell[2900, 77, 175, 6, 70, "ObjectNameGrid",ExpressionUUID->"8bd180f5-fc42-4a3d-89d5-77beb077eed2"],
-Cell[3078, 85, 399, 11, 70, "Usage",ExpressionUUID->"b941e80a-17a2-4b36-b0ef-8747dfda5211"],
-Cell[3480, 98, 23, 0, 70, "FooterCell",ExpressionUUID->"42db5eb2-cd77-4c9a-b71b-60fe35270443"]
+Cell[2901, 77, 175, 6, 70, "ObjectNameGrid",ExpressionUUID->"f20c29a2-b833-42a1-a1e2-3f1bf896ee9a"],
+Cell[3079, 85, 399, 11, 70, "Usage",ExpressionUUID->"b941e80a-17a2-4b36-b0ef-8747dfda5211"],
+Cell[3481, 98, 23, 0, 70, "FooterCell",ExpressionUUID->"70702aef-bab6-45ca-8c56-0aba6acda81d"]
 }
 ]
 *)

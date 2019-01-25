@@ -60,7 +60,7 @@ Cell[BoxData[GridBox[{
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$12856], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$13916], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], "HUPP/ref/HUPPHelp", 
             ".html"]], None}]}]},
@@ -112,7 +112,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 24.6831140}", 
+   "built" -> "{2019, 1, 25, 7, 21, 11.2455179}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -145,11 +145,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[580, 21, 2267, 54, 70, "AnchorBarGrid",ExpressionUUID->"a99d2679-549c-4139-8eec-110fa822a04f",
+Cell[580, 21, 2267, 54, 70, "AnchorBarGrid",ExpressionUUID->"b2e046f1-3d58-49df-88be-b67b1aee9991",
  CellID->1],
-Cell[2850, 77, 165, 6, 70, "ObjectNameGrid",ExpressionUUID->"f161c025-47fa-4fd8-a58b-3ebdbf412bd5"],
+Cell[2850, 77, 165, 6, 70, "ObjectNameGrid",ExpressionUUID->"98cec081-99ba-4318-a111-3db2f845a364"],
 Cell[3018, 85, 347, 10, 70, "Usage",ExpressionUUID->"b7bf1683-b0dc-4057-9550-a427e77ab3c6"],
-Cell[3368, 97, 23, 0, 70, "FooterCell",ExpressionUUID->"f7f2ac34-726b-47f9-8855-c52e4ad1c3bf"]
+Cell[3368, 97, 23, 0, 70, "FooterCell",ExpressionUUID->"05db4ff3-62e0-499b-a1b3-97db82915242"]
 }
 ]
 *)

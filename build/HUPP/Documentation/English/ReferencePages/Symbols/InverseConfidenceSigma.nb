@@ -60,7 +60,7 @@ InverseConfidenceSigma.html"], StandardForm]], "Input", TextClipboardType ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$13332], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14392], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "HUPP/ref/InverseConfidenceSigma", ".html"]], None}]}]},
@@ -114,7 +114,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 25.8895423}", 
+   "built" -> "{2019, 1, 25, 7, 21, 12.3286422}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -148,11 +148,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[594, 21, 2324, 54, 70, "AnchorBarGrid",ExpressionUUID->"3eaaee2a-565d-4b4b-abf9-969e1545c05d",
+Cell[594, 21, 2324, 54, 70, "AnchorBarGrid",ExpressionUUID->"9a928346-5d96-430e-89ad-adddd09de70c",
  CellID->1],
-Cell[2921, 77, 179, 6, 70, "ObjectNameGrid",ExpressionUUID->"ff4e16af-1804-419d-b303-194b097c30f1"],
+Cell[2921, 77, 179, 6, 70, "ObjectNameGrid",ExpressionUUID->"8c3ded62-f2dc-4751-9759-154612c479ac"],
 Cell[3103, 85, 415, 12, 70, "Usage",ExpressionUUID->"598eebdf-b8e9-46e0-b646-f8e7f8914b50"],
-Cell[3521, 99, 23, 0, 70, "FooterCell",ExpressionUUID->"8730a9e0-e219-48e2-a22d-ab9b18dae1df"]
+Cell[3521, 99, 23, 0, 70, "FooterCell",ExpressionUUID->"71abfc7a-d0b1-43a6-86af-e068ec5bf7a1"]
 }
 ]
 *)

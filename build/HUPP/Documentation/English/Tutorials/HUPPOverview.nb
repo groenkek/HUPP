@@ -1,0 +1,291 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10232,        282]
+NotebookOptionsPosition[      6025,        202]
+NotebookOutlinePosition[      8234,        259]
+CellTagsIndexPosition[      8191,        256]
+WindowTitle->HUPP Overview
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[GridBox[{
+   {Cell["H U P P PACKAGE OVERVIEW", "PacletNameCell"], Cell[TextData[Cell[
+    BoxData[
+     ActionMenuBox[
+      FrameBox[
+       InterpretationBox[Cell[TextData[{
+         "URL",
+         StyleBox[" \[FilledDownTriangle]", "AnchorBarArrow",
+          StripOnInput->False]
+        }]],
+        TextCell[
+         Row[{"URL", 
+           Style[" \[FilledDownTriangle]", "AnchorBarArrow"]}]]],
+       StripOnInput->False], {"\<\"HUPP/tutorial/HUPPOverview\"\>":>
+      None, "\<\"Copy Wolfram Documentation Center URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell["HUPP/tutorial/HUPPOverview"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+      Delimiter, "\<\"Copy web URL\"\>":>
+      Module[{DocumentationSearch`Private`nb$}, 
+       DocumentationSearch`Private`nb$ = NotebookPut[
+          Notebook[{
+            Cell[
+             BoxData[
+              MakeBoxes[
+               Hyperlink[
+               "http://reference.wolfram.com/language/HUPP/tutorial/\
+HUPPOverview.html"], StandardForm]], "Input", TextClipboardType -> 
+             "PlainText"]}, Visible -> False]]; 
+       SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+       FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+       NotebookClose[DocumentationSearch`Private`nb$]; 
+       Null], "\<\"Go to web URL\"\>":>FrontEndExecute[{
+        NotebookLocate[{
+          URL[
+           StringJoin[
+            If[
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$16786], 
+             "http://reference.wolfram.com/system-modeler/", 
+             "http://reference.wolfram.com/language/"], 
+            "HUPP/tutorial/HUPPOverview", ".html"]], None}]}]},
+      Appearance->None,
+      MenuAppearance->Automatic,
+      MenuStyle->"URLMenu"]],
+     LineSpacing->{1.4, 0}]], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ GridBoxOptions->{GridBoxItemSize->{"Columns" -> {
+     Scaled[0.65], {
+      Scaled[0.34]}}, "ColumnsIndexed" -> {}, "Rows" -> {{1.}}, 
+   "RowsIndexed" -> {}}},
+ CellID->1],
+
+Cell[CellGroupData[{
+
+Cell["HUPP Overview", "TOCDocumentTitle"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["Old Tutorial"]],"paclet:HUPP/tutorial/Old Tutorial#509267359"},
+  "RefLink",
+  BaseStyle->"TOCChapter"]], "TOCChapter"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["ReferencePages/Symbols"]],
+   "paclet:HUPP/ref/AdaptiveNonlinearModelFit"},
+  "RefLink",
+  BaseStyle->"TOCChapter"]], "TOCChapter"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["AdaptiveNonlinearModelFit"]],
+   "paclet:HUPP/ref/AdaptiveNonlinearModelFit"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["CalculateMeasurement"]],"paclet:HUPP/ref/CalculateMeasurement"},
+  
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["CalculateMeasurementHU"]],
+   "paclet:HUPP/ref/CalculateMeasurementHU"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["ConfidenceInterval"]],"paclet:HUPP/ref/ConfidenceInterval"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["ConfidenceIntervalHU"]],"paclet:HUPP/ref/ConfidenceIntervalHU"},
+  
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["ConfidenceSigma"]],"paclet:HUPP/ref/ConfidenceSigma"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["ErrorMean"]],"paclet:HUPP/ref/ErrorMean"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["ErrorProbability"]],"paclet:HUPP/ref/ErrorProbability"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["FitPlot"]],"paclet:HUPP/ref/FitPlot"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["GaussianErrorPropagation"]],
+   "paclet:HUPP/ref/GaussianErrorPropagation"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["HUPPHelp"]],"paclet:HUPP/ref/HUPPHelp"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["InverseConfidenceSigma"]],
+   "paclet:HUPP/ref/InverseConfidenceSigma"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["PythagoreanSum"]],"paclet:HUPP/ref/PythagoreanSum"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["RoundedErrorForm"]],"paclet:HUPP/ref/RoundedErrorForm"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["StudentTValue"]],"paclet:HUPP/ref/StudentTValue"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"],
+
+Cell[BoxData[
+ TemplateBox[{Cell[
+    TextData["WeightedMean"]],"paclet:HUPP/ref/WeightedMean"},
+  "RefLink",
+  BaseStyle->"TOCSection"]], "TOCSection"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"HUPP Overview",
+TaggingRules->{
+ "ModificationHighlight" -> False, "ColorType" -> "TutorialColor", 
+  "LinkTrails" -> GridBox[{{
+      RowBox[{
+        ButtonBox[
+        "Mathematica", ButtonData -> "paclet:HUPP/guide/HUPP", 
+         BaseStyle -> {"Link", "DockedLinkTrail"}]}]}}, ColumnAlignments -> 
+    Left], "ExampleCounter" -> 1, "NeedPlatMsgIn" -> None, "RootCaptions" -> 
+  "", "Metadata" -> {
+   "built" -> "{2019, 1, 25, 7, 21, 17.5968110}", 
+    "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
+    "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
+     "label" -> "H U P P Package Overview", "language" -> "en", "paclet" -> 
+    "HUPP Package", "status" -> "None", "summary" -> 
+    "Old Tutorial ReferencePages/Symbols", "synonyms" -> {}, "tabletags" -> 
+    DocumentationBuild`Make`Private`tabletaggingrules$16735, "title" -> 
+    "HUPP Overview", "titlemodifier" -> "", "windowtitle" -> "HUPP Overview", 
+    "type" -> "Overview", "uri" -> "HUPP/tutorial/HUPPOverview"}},
+FrontEndVersion->"11.3 for Microsoft Windows (64-bit) (March 6, 2018)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> Notebook], 
+   Cell[
+    StyleData["Output"], CellContext -> Notebook], 
+   Cell[
+    StyleData["TOCSubsubsection"], 
+    CellGroupingRules -> {"SectionGrouping", 69}], 
+   Cell[
+    StyleData["TutorialMoreAboutSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["RelatedTutorialsSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}], 
+   Cell[
+    StyleData["TutorialRelatedLinksSection"], 
+    CellGroupingRules -> {"SectionGrouping", 30}]}, Visible -> False, 
+  FrontEndVersion -> "11.3 for Microsoft Windows (64-bit) (March 6, 2018)", 
+  StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[585, 21, 2306, 54, 70, "AnchorBarGrid",ExpressionUUID->"ff5b496c-dda4-438b-998b-945d3c1236de",
+ CellID->1],
+Cell[CellGroupData[{
+Cell[2916, 79, 41, 0, 70, "TOCDocumentTitle",ExpressionUUID->"88e49ee0-b39d-40ed-801b-605cad4413e8"],
+Cell[2960, 81, 167, 4, 70, "TOCChapter",ExpressionUUID->"5d2d291d-42ec-4938-94a1-a2819b3ef366"],
+Cell[CellGroupData[{
+Cell[3152, 89, 179, 5, 70, "TOCChapter",ExpressionUUID->"e4ea670f-229a-4ea9-a301-938a19bd33b2"],
+Cell[3334, 96, 182, 5, 70, "TOCSection",ExpressionUUID->"0dfcabca-2d44-4aec-8f83-c293e9c55932"],
+Cell[3519, 103, 171, 5, 70, "TOCSection",ExpressionUUID->"da644c93-770f-4759-9e9d-fb20982ab975"],
+Cell[3693, 110, 176, 5, 70, "TOCSection",ExpressionUUID->"bb74d8c0-83e5-4dbc-b0b0-9a27fa775e41"],
+Cell[3872, 117, 164, 4, 70, "TOCSection",ExpressionUUID->"b96e680a-e752-440f-b4a1-aef7f8b108a1"],
+Cell[4039, 123, 171, 5, 70, "TOCSection",ExpressionUUID->"41f9fcb4-6039-4f9f-812c-4fa1a84a9e71"],
+Cell[4213, 130, 158, 4, 70, "TOCSection",ExpressionUUID->"62a675fd-725b-4186-9258-9816a4a3337e"],
+Cell[4374, 136, 146, 4, 70, "TOCSection",ExpressionUUID->"5ed48090-3156-44f5-9e5e-ae4e6b260ded"],
+Cell[4523, 142, 160, 4, 70, "TOCSection",ExpressionUUID->"77621891-679f-4a75-9df4-689b0787b9a5"],
+Cell[4686, 148, 142, 4, 70, "TOCSection",ExpressionUUID->"a624f767-9fcb-4869-8a07-d5e3ec2160b1"],
+Cell[4831, 154, 180, 5, 70, "TOCSection",ExpressionUUID->"9592ecec-e37a-4dd1-9a08-22a7c268a77f"],
+Cell[5014, 161, 144, 4, 70, "TOCSection",ExpressionUUID->"fe647c5c-4f23-45fa-a78d-76b2bc293540"],
+Cell[5161, 167, 176, 5, 70, "TOCSection",ExpressionUUID->"4fddb809-6cd8-43df-92e9-22a59bc59fd8"],
+Cell[5340, 174, 156, 4, 70, "TOCSection",ExpressionUUID->"8a0a54e9-a6a5-4dcb-af47-a719925e5a23"],
+Cell[5499, 180, 160, 4, 70, "TOCSection",ExpressionUUID->"cc6de87c-5e4e-48ce-8fee-e6a32098e3d3"],
+Cell[5662, 186, 154, 4, 70, "TOCSection",ExpressionUUID->"4b218b7d-48ad-4902-b5fa-bb64b8e937f3"],
+Cell[5819, 192, 152, 4, 70, "TOCSection",ExpressionUUID->"672ab324-222c-429f-aa7b-c3253487b38b"]
+}, Open  ]]
+}, Open  ]],
+Cell[5998, 200, 23, 0, 70, "FooterCell",ExpressionUUID->"2cd2e801-08d7-4d36-ab16-729cde00e954"]
+}
+]
+*)
+
+(* End of internal cache information *)

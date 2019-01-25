@@ -60,7 +60,7 @@ AdaptiveNonlinearModelFit.html"], StandardForm]], "Input", TextClipboardType ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$7146], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$8459], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "HUPP/ref/AdaptiveNonlinearModelFit", ".html"]], None}]}]},
@@ -276,7 +276,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 10.1697895}", 
+   "built" -> "{2019, 1, 25, 7, 20, 57.7369936}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -311,19 +311,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[597, 21, 2335, 54, 70, "AnchorBarGrid",ExpressionUUID->"5796d553-8bfa-4732-b678-1f581fd19a61",
+Cell[597, 21, 2335, 54, 70, "AnchorBarGrid",ExpressionUUID->"64586de0-a393-412b-bf6e-f2435d475197",
  CellID->1],
-Cell[2935, 77, 182, 6, 70, "ObjectNameGrid",ExpressionUUID->"9fda6b88-3fe8-4f07-a8c7-db8efe9e9c4a"],
+Cell[2935, 77, 182, 6, 70, "ObjectNameGrid",ExpressionUUID->"5cf95da9-5e73-4f20-98e2-a15a010f048a"],
 Cell[3120, 85, 384, 10, 70, "Usage",ExpressionUUID->"d1488b1a-4a69-40d1-af7d-79708c43c2b4"],
 Cell[CellGroupData[{
-Cell[3529, 99, 621, 19, 70, "NotesSection",ExpressionUUID->"92e6cb78-d358-453c-9b00-16cfd66c5ea9",
+Cell[3529, 99, 621, 19, 70, "NotesSection",ExpressionUUID->"95914226-1295-4003-abce-f43e061d907e",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[4153, 120, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"7a0e933c-7f98-4cf9-b21b-f41bc0727c26"],
+Cell[4153, 120, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"a00f337c-54a9-408d-b3ab-41122ef04e9e"],
 Cell[4187, 122, 53, 0, 70, "Notes",ExpressionUUID->"8c247b68-d788-4ebb-b910-b54832e5e927"],
 Cell[4243, 124, 5271, 134, 70, "3ColumnTableMod",ExpressionUUID->"eb5e5f03-57dc-4b72-b611-6e6709aa4214"]
 }, Closed]],
-Cell[9529, 261, 23, 0, 70, "FooterCell",ExpressionUUID->"832d4dcf-13d2-4ec7-9d92-841b7fd83ee9"]
+Cell[9529, 261, 23, 0, 70, "FooterCell",ExpressionUUID->"5b3c5087-9fae-4926-9675-d0fe0778bf40"]
 }
 ]
 *)

@@ -60,7 +60,7 @@ RoundedErrorForm.html"], StandardForm]], "Input", TextClipboardType ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14293], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$15353], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "HUPP/ref/RoundedErrorForm", ".html"]], None}]}]},
@@ -145,7 +145,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 28.4481191}", 
+   "built" -> "{2019, 1, 25, 7, 21, 14.5851521}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -179,18 +179,18 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[588, 21, 2300, 54, 70, "AnchorBarGrid",ExpressionUUID->"8c0d3775-46d7-40ff-8735-ba17ed36761d",
+Cell[588, 21, 2300, 54, 70, "AnchorBarGrid",ExpressionUUID->"92d0226c-9e2a-4596-b125-c41ab0e99ca6",
  CellID->1],
-Cell[2891, 77, 173, 6, 70, "ObjectNameGrid",ExpressionUUID->"1a86261c-e039-448c-b03e-cc2a43d584d9"],
+Cell[2891, 77, 173, 6, 70, "ObjectNameGrid",ExpressionUUID->"b8c49187-5796-4840-828a-7d644015ef06"],
 Cell[3067, 85, 502, 15, 70, "Usage",ExpressionUUID->"2c4ef592-103f-40cd-b4f2-47b7295943c9"],
 Cell[CellGroupData[{
-Cell[3594, 104, 621, 19, 70, "NotesSection",ExpressionUUID->"e6ac5514-18c6-4cdd-bc26-d49266a7840b",
+Cell[3594, 104, 621, 19, 70, "NotesSection",ExpressionUUID->"4e936ad3-65c1-44be-abfb-613aaf0971cd",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[4218, 125, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"66ea3714-fc0e-4e9d-8019-f83527243fec"],
+Cell[4218, 125, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"9e8ef504-22fd-4b1a-98e5-1d0804509532"],
 Cell[4252, 127, 53, 0, 70, "Notes",ExpressionUUID->"962a23ed-69df-4beb-8d93-5dba6a89c808"]
 }, Closed]],
-Cell[4320, 130, 23, 0, 70, "FooterCell",ExpressionUUID->"1f85c601-19de-4c60-af79-f577ce1a0250"]
+Cell[4320, 130, 23, 0, 70, "FooterCell",ExpressionUUID->"0b553053-7b17-4889-bdba-fb7237315ecd"]
 }
 ]
 *)

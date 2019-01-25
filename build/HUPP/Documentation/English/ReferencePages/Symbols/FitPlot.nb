@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     11803,        307]
+NotebookDataLength[     11802,        307]
 NotebookOptionsPosition[      8190,        236]
-NotebookOutlinePosition[     11046,        297]
-CellTagsIndexPosition[     11003,        294]
+NotebookOutlinePosition[     11045,        297]
+CellTagsIndexPosition[     11002,        294]
 WindowTitle->FitPlot
 WindowFrame->Normal*)
 
@@ -60,7 +60,7 @@ Cell[BoxData[GridBox[{
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$11874], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$12934], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], "HUPP/ref/FitPlot", 
             ".html"]], None}]}]},
@@ -249,7 +249,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 22.0292606}", 
+   "built" -> "{2019, 1, 25, 7, 21, 8.8409752}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -296,19 +296,19 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[579, 21, 2276, 54, 70, "AnchorBarGrid",ExpressionUUID->"cea18908-7827-4556-a6d9-551cf7b8df72",
+Cell[579, 21, 2276, 54, 70, "AnchorBarGrid",ExpressionUUID->"00a29fdb-edb6-49f2-99ca-7ef83f90f613",
  CellID->1],
-Cell[2858, 77, 164, 6, 70, "ObjectNameGrid",ExpressionUUID->"fc70a41b-6ada-4637-a518-2a991183bedc"],
+Cell[2858, 77, 164, 6, 70, "ObjectNameGrid",ExpressionUUID->"6e58d191-fe8b-4005-9e2d-38489654f497"],
 Cell[3025, 85, 3507, 93, 70, "Usage",ExpressionUUID->"e3a774a3-6a62-4fb4-a27e-83c53c4172f9"],
 Cell[CellGroupData[{
-Cell[6557, 182, 621, 19, 70, "NotesSection",ExpressionUUID->"6fee6f9d-303f-4795-8c8d-568f45e5b241",
+Cell[6557, 182, 621, 19, 70, "NotesSection",ExpressionUUID->"469b48a7-7474-4b7c-90a2-1af1b7df669c",
  CellGroupingRules->{"SectionGrouping", 50},
  CellID->1],
-Cell[7181, 203, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"bc88df26-6845-4456-84a9-5476b29a0ee4"],
+Cell[7181, 203, 31, 0, 70, "SectionHeaderSpacer",ExpressionUUID->"92716a48-cd07-498d-9f0e-07a5af798a7a"],
 Cell[7215, 205, 53, 0, 70, "Notes",ExpressionUUID->"c5d9fa7d-e9cb-408b-8a5f-74e36fad0841"],
 Cell[7271, 207, 877, 24, 70, "3ColumnTableMod",ExpressionUUID->"0967663a-279c-4317-973b-f2a7202441dd"]
 }, Closed]],
-Cell[8163, 234, 23, 0, 70, "FooterCell",ExpressionUUID->"7c33ac76-afba-46ab-b806-3bbb133e4b10"]
+Cell[8163, 234, 23, 0, 70, "FooterCell",ExpressionUUID->"7a24a974-3a2b-4ef8-9b35-53c6083e8de2"]
 }
 ]
 *)

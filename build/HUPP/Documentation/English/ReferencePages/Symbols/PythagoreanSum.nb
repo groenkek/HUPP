@@ -60,7 +60,7 @@ html"], StandardForm]], "Input", TextClipboardType -> "PlainText"]}, Visible ->
           URL[
            StringJoin[
             If[
-             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$13808], 
+             TrueQ[DocumentationBuild`Make`Private`wsmlinkQ$14868], 
              "http://reference.wolfram.com/system-modeler/", 
              "http://reference.wolfram.com/language/"], 
             "HUPP/ref/PythagoreanSum", ".html"]], None}]}]},
@@ -113,7 +113,7 @@ TaggingRules->{
     Left], "HasOptions" -> False, "ExampleCounter" -> 1, "NeedPlatMsgIn" -> 
   None, "RootCaptions" -> "", 
   "Metadata" -> {
-   "built" -> "{2019, 1, 13, 0, 38, 27.1014666}", 
+   "built" -> "{2019, 1, 25, 7, 21, 13.4288908}", 
     "history" -> {"XX", "", "", ""}, "context" -> "HUPP`", "keywords" -> {}, 
     "specialkeywords" -> {}, "tutorialcollectionlinks" -> {}, "index" -> True,
      "label" -> "H U P P Package Symbol", "language" -> "en", "paclet" -> 
@@ -146,11 +146,11 @@ CellTagsIndex->{}
 *)
 (*NotebookFileOutline
 Notebook[{
-Cell[586, 21, 2291, 54, 70, "AnchorBarGrid",ExpressionUUID->"5db5e33a-f39a-42ec-92c5-8470ec3ddddc",
+Cell[586, 21, 2291, 54, 70, "AnchorBarGrid",ExpressionUUID->"4d7373c8-67d0-4c84-8900-f315d677fcd6",
  CellID->1],
-Cell[2880, 77, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"6c65f278-e76d-4500-a137-d14b9766bcc3"],
+Cell[2880, 77, 171, 6, 70, "ObjectNameGrid",ExpressionUUID->"93db4bb5-39cf-4053-b1c6-0c73504f9d0b"],
 Cell[3054, 85, 397, 11, 70, "Usage",ExpressionUUID->"19d771ba-9a39-4784-8d31-2fdb3d9ef17b"],
-Cell[3454, 98, 23, 0, 70, "FooterCell",ExpressionUUID->"90c48e19-a375-4ca3-b6b5-61514764982c"]
+Cell[3454, 98, 23, 0, 70, "FooterCell",ExpressionUUID->"beb68588-a559-4936-a159-cc64b2f4f210"]
 }
 ]
 *)
